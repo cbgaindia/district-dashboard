@@ -8,14 +8,9 @@ const HomeHeader = ({ constList }) => {
     <Header>
       <div className="container">
         <h1 className="gradient-amazon">
-          Explore Constituency-wise Fiscal Information for Schemes
+          Explore District-wise Fiscal Information for Schemes
         </h1>
         <SelectorWrapper>
-          <ConsSelector
-            consData={constList?.lok}
-            trending={lokTrending}
-            sabha="lok"
-          />
           <ConsSelector
             consData={constList?.vidhan}
             trending={vidhanTrending}
@@ -52,4 +47,5 @@ const SelectorWrapper = styled.div`
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
+  place-items: center;
 `;

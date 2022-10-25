@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-
+import { Button } from '@opub-cdl/design-system';
 const Banner = ({ details }) => {
   return (
     <BannerWrapper
@@ -9,10 +9,21 @@ const Banner = ({ details }) => {
     >
       <div className="banner__content">
         <h2 className="gradient-amazon">{details.heading}</h2>
-        <div>{details.content}</div>
+        <div className="gradient1-amazon">{details.content}</div>
+        <Button
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            background: 'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
+            color: 'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
+          }}
+          
+        >
+          Open District Factsheet
+        </Button>
       </div>
       <figure>
-        <Image src={details.image} width={608} height={208} alt="" />
+         <Image src={'/Vector.svg'} width={130} height={120} alt="" /> 
       </figure>
     </BannerWrapper>
   );
@@ -22,11 +33,16 @@ export default Banner;
 
 export const BannerWrapper = styled.section`
   isolation: isolate;
-  padding: 40px 40px 48px;
+  padding: 40px 60px 48px;
   border-radius: 4px;
   position: relative;
   background-color: var(--color-background-lighter);
   filter: drop-shadow(var(--box-shadow-1));
+  margin-top:30px;
+
+  .gradient1-amazon {
+    margin-bottom:20px;
+  }
 
   .banner__content {
     width: clamp(250px, 100%, 720px);
@@ -44,8 +60,8 @@ export const BannerWrapper = styled.section`
 
   figure {
     position: absolute;
-    right: 0;
-    top: 0;
+    right: 55px;
+    top: 55px;
     z-index: -1;
 
     @media (max-width: 720px) {

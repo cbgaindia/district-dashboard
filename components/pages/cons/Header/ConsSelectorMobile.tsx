@@ -47,7 +47,7 @@ const ConsSelectorMobile = () => {
             modalHandler={() => setIsOpen(!isOpen)}
           >
             <Header>
-              <h1 id="modal-head">Change Constituency</h1>
+              <h1 id="modal-head">Change District</h1>
 
               <Button
                 icon={<Cross />}

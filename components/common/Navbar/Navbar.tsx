@@ -6,6 +6,7 @@ import MobileNav from './MobileNav';
 import { IconDropdown, ArrowTail } from 'components/icons';
 import styled from 'styled-components';
 import { submenuHover, submenuClick } from './navbar.helper';
+import { Button } from '@opub-cdl/design-system';
 
 const Nav = ({ data }) => {
   const router = useRouter();
@@ -33,7 +34,7 @@ const Nav = ({ data }) => {
                     height={46}
                   ></Image>
                 ) : (
-                  <h1>{data.site || 'Constituency Dashboard'}</h1>
+                  <h1>{data.site || 'District Dashboard'}</h1>
                 )}
               </a>
             </Link>
@@ -113,6 +114,24 @@ const Nav = ({ data }) => {
                     </li>
                   );
                 })}
+              <Navitem
+                aria-haspopup="true"
+                aria-expanded="false"
+                as="button"
+              >
+                <Button
+                  css={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    color:'white',
+                    background:'#DE7992',
+                    
+                  }}
+                  variant={'link'}
+                >
+                  District Factsheet
+                </Button>
+              </Navitem>
             </ul>
           </Navlinks>
         </div>
@@ -181,6 +200,7 @@ const Navlinks = styled.nav`
   > ul {
     display: flex;
     gap: 1rem;
+    align-items: center;
   }
 
   .has-submenu {

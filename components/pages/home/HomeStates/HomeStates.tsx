@@ -4,13 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { states } from 'data/home';
 import { HomeTitle } from 'styles/GlobalStyles';
+import { Banner } from 'components/layouts';
 
 const HomeStates = () => {
+  const details = {
+    color: '#B6E0FF',
+    heading: 'District Factsheet',
+    content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
+    
+  }
   return (
     <Wrapper>
       <div className="container">
         <HomeTitle className="gradient-maple">Explore via states</HomeTitle>
-        <h2>Navigate to your Constituency via State</h2>
+        <h2>Navigate to your District via State</h2>
         <StateList>
           {states.map((item, index) => (
             <li key={`state-${index}`}>
@@ -29,6 +36,8 @@ const HomeStates = () => {
             </li>
           ))}
         </StateList>
+        
+        <Banner details={details}/>
       </div>
     </Wrapper>
   );

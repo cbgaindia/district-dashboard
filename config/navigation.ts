@@ -1,5 +1,5 @@
 export const navList = {
-  site: 'Constituency Dashboard',
+  site: 'District Dashboard',
   logo: '',
   links: [
     {
