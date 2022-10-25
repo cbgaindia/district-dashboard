@@ -117,7 +117,7 @@ const ReactSelectElement = styled(Select)<Props>`
       border: var(--border-1);
       font-weight: 600;
       background-color: ${(props) =>
-        props.isLight ? '#ebf0ee' : props.isDark ? '#cdd1cf' : 'white'};
+        props.isLight ? 'rgb(238, 246, 253)' : props.isDark ? '#cdd1cf' : 'white'};
     }
 
     &__value-container {
