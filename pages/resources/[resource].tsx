@@ -10,7 +10,7 @@ const Seo = dynamic(() => import('components/common/Seo/Seo'), {
 
 const Resource = ({ data }) => {
   const seo = {
-    title: `${data.title} | Resources - Constituency Dashboard`,
+    title: `${data.title} | Resources - District Dashboard`,
     description: 'Co-created by CBGA and CivicDataLab',
   };
 

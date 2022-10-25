@@ -40,19 +40,7 @@ const ConsSelector: React.FC<{
 
   return (
     <Wrapper>
-      <Header>
-        {sabha == 'lok' ? (
-          <GradientLokSabha width={64} />
-        ) : (
-          <GradientVidhanSabha width={64} />
-        )}
-        <div>
-          <h2>{`${sabha} Sabha Constituency`}</h2>
-          <span>{`Explore ${
-            consCount ? consCount : '.......'
-          } ${sabha} Sabha Constituencies`}</span>
-        </div>
-      </Header>
+      
 
       <ConsMenu>
         <Combobox
@@ -74,9 +62,7 @@ const ConsSelector: React.FC<{
             options={constituenies}
             isClearable
             isDisabled={isLoading}
-            placeholder={`${
-              sabha === 'lok' ? 'Lok' : 'Vidhan'
-            } Sabha Constituency`}
+            placeholder={`Select from the given districts`}
             onChange={(e: any) => setSelectedCons(e?.value)}
             noOptionsMessage={() => 'Please select a state'}
             isDark
@@ -89,7 +75,7 @@ const ConsSelector: React.FC<{
                 : null
             }
             onClick={
-              !selectedCons ? () => alert('Select a constituency') : null
+              !selectedCons ? () => alert('Select a district') : null
             }
           >
             Explore

@@ -157,7 +157,7 @@ const ConsPage: React.FC<Props> = ({
   const seo = {
     title: `${capitalize(cons_name)} . ${capitalize(
       state
-    )} - Constituency Dashboard`,
+    )} - District Dashboard`,
     description: `Explore scheme-wise fiscal information at the level of Lok Sabha and Vidhan Sabha constituencies in the state of ${state}`,
   };
 

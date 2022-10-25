@@ -47,7 +47,7 @@ const ConsSelectorModal = () => {
 
           <StyledDialogContent>
             <StyledDialogTitle>
-              Select Constituency
+              Select District
               <StyledDialogClose asChild>
                 <button>
                   Close

@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { HomeHeader } from 'components/pages/home';
 import { GetStaticProps } from 'next';
 import { fetchJSON } from 'utils/fetch';
+import { Banner } from 'components/layouts';
 
 const HomeStates = dynamic(
   () => import('components/pages/home/HomeStates/HomeStates'),
@@ -17,7 +18,7 @@ const Seo = dynamic(() => import('components/common/Seo/Seo'), {
 
 export default function Home({ constList }) {
   const seo = {
-    title: 'Welcome - Constituency Dashboard',
+    title: 'Welcome - District Dashboard',
     description:
       'A unique, one-of-its-kind dashboard that opens up constituency-wise fiscal information for several centrally sponsored and central sector schemes.',
   };
