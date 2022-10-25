@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import styled from 'styled-components';
 import ConsSelectorMobile from './ConsSelectorMobile';
+import { Button } from '@opub-cdl/design-system';
 
 const ConsSelectorModal = dynamic(() => import('./ConsSelectorModal'), {
   ssr: false,
@@ -25,9 +26,8 @@ const Header = ({ queryData }) => {
         )}
 
         <ConsDetails>
-          <SabhaName>{`${
-            queryData.sabha === 'lok' ? 'Lok' : 'Vidhan'
-          } Sabha contituency`}</SabhaName>
+          <SabhaName>{`${queryData.sabha === 'lok' ? 'Lok' : 'Vidhan'
+            } Sabha contituency`}</SabhaName>
           <div>
             <h1 className="gradient-maple">{queryData.cons_name}</h1>
             <StateName>
@@ -47,7 +47,19 @@ const Header = ({ queryData }) => {
           </div>
         </ConsDetails>
       </Meta>
-      <Share title={queryData.cons_name + ' page'} />
+      <HeaderLinks>
+        <Button
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            color: 'var(--color-primary)',
+          }}
+          variant={'outline'}
+        >
+          Open Factsheet
+        </Button>
+        <Share title={queryData.cons_name + ' page'} />
+      </HeaderLinks>
     </Wrapper>
   );
 };
@@ -143,4 +155,9 @@ const SabhaName = styled.span`
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1.7;
+`;
+
+const HeaderLinks = styled.div`
+  display: flex;
+  gap: 15px;
 `;
