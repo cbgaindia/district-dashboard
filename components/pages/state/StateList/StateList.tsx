@@ -116,7 +116,7 @@ const StateList = ({ data }) => {
 
   return (
     <Wrapper id="stateListWrapper">
-      <h2>Explore Constituencies</h2>
+      <h2>Explore Districts </h2>
       <Toolbar
         value={selectedSabha}
         data={stateData}

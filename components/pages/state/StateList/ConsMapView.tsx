@@ -20,7 +20,7 @@ function generateMapData(obj) {
 const ConsMapView = ({ meta, consData }) => {
   const router = useRouter();
   const { data, isLoading } = swrFetch(
-    `/assets/maps/${meta.sabha}/${meta.state}.json`
+    `/assets/maps/district/${meta.state}.json`
   );
 
   return isLoading ? (
