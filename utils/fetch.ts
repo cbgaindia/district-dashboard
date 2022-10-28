@@ -34,6 +34,31 @@ export async function fetchJSON(schemeType, key = null) {
   return jsonData;
 }
 
+export async function updatedFetchQuery(query, value) {
+  const queryRes = await fetch(
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=${query}:"${value}" AND organization:district-dashboard AND private:false`
+  ).then((res) => res.json());
+
+  return queryRes.result.results;
+}
+
+// requires a schemeType to fetch the JSON file from
+export async function updatedFetchJSON(schemeType, key = null) {
+  // get JSON URL
+  const jsonUrl = await updatedFetchQuery('schemeType', schemeType)
+    .then((res) => res[0].resources.filter((e) => e.format == 'JSON')[0].url)
+    .catch((e) => console.error(e));
+
+  // fetch JSON data
+  const jsonData = await fetch(jsonUrl)
+    .then((res) => res.json())
+    .catch((e) => console.error(e));
+
+  // if key is provided, send only that data
+  if (key) return jsonData[key];
+  return jsonData;
+}
+
 export async function fetchSheets(link, aoa = true) {
   const result = [];
   await fetch(link)
