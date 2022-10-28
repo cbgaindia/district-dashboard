@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/actions/Button';
 import { Combobox } from 'components/actions/Combobox';
-import { GradientLokSabha, GradientVidhanSabha } from 'components/icons';
 import { capitalize } from 'utils/helper';
 
 const ConsSelector: React.FC<{
@@ -30,11 +29,11 @@ const ConsSelector: React.FC<{
     }
   }, [consData]);
 
-  const constituenies = React.useMemo(() => {
+  const districts = React.useMemo(() => {
     if (selectedState)
       return Object.values(consData[selectedState]).map((item: any) => ({
-        value: item.constituency_code,
-        label: item.constituency,
+        value: item.district_code_census,
+        label: item.district,
       }));
   }, [selectedState]);
 
@@ -58,8 +57,8 @@ const ConsSelector: React.FC<{
         />
         <div>
           <Combobox
-            key={JSON.stringify(constituenies)}
-            options={constituenies}
+            key={JSON.stringify(districts)}
+            options={districts}
             isClearable
             isDisabled={isLoading}
             placeholder={`Select from the given districts`}

@@ -2,7 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { HomeHeader } from 'components/pages/home';
 import { GetStaticProps } from 'next';
-import { fetchJSON } from 'utils/fetch';
+import { fetchJSON , updatedFetchJSON } from 'utils/fetch';
 import { Banner } from 'components/layouts';
 
 const HomeStates = dynamic(
@@ -35,7 +35,7 @@ export default function Home({ constList }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const jsonData = await fetchJSON('Cons Info');
+  const jsonData = await updatedFetchJSON('all districts');
 
   return {
     props: {
