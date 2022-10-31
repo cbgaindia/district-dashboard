@@ -8,9 +8,9 @@ import { Info } from 'components/icons';
 function generateMapData(obj) {
   const mapObj = [...obj].map((item) => {
     return {
-      mapName: item.constituency,
+      mapName: item.district,
       value: '1',
-      name: item.constituency_code,
+      name: item.district_code_census,
     };
   });
 

@@ -18,27 +18,27 @@ const StateList = ({ data }) => {
   const [stateData, setStateData] = React.useState<any>([]);
   const [formattedData, setFormattedData] = React.useState<any>([]);
   const [lokData, setLokData] = React.useState<any>([]);
-  const [vidhanData, setVidhanData] = React.useState<any>([]);
-  const [selectedSabha, setSelectedSabha] = React.useState<any>('vidhan');
+//  const [vidhanData, setVidhanData] = React.useState<any>([]);
+  const [selectedSabha, setSelectedSabha] = React.useState<any>('lok');
   const size = useWindowSize();
 
   React.useEffect(() => {
     // first sort the object, then group them by first character.
-    const formattedVidhan = groupListByAlphabets(
-      sortArrayOfObj(data.vidhan, 'constituency'),
-      'constituency'
-    );
-    setVidhanData(formattedVidhan);
+    // const formattedVidhan = groupListByAlphabets(
+    //   sortArrayOfObj(data.vidhan, 'constituency'),
+    //   'constituency'
+    // );
+    // setVidhanData(formattedVidhan);
 
     const formattedLok = groupListByAlphabets(
-      sortArrayOfObj(data.lok, 'constituency'),
-      'constituency'
+      sortArrayOfObj(data.lok, 'district'),
+      'district'
     );
-    setLokData(formattedLok);
+     setLokData(formattedLok);
 
     setFormattedData({
       lok: formattedLok,
-      vidhan: formattedVidhan,
+    //  vidhan: data.vidhan,
     });
   }, [data]);
 
@@ -68,12 +68,12 @@ const StateList = ({ data }) => {
                       <span>{group.char}</span>
                       <ul>
                         {group.children.map((cons) => (
-                          <li key={cons.constituency_code + cons.constituency}>
+                          <li key={cons.district_code_census + cons.district}>
                             <Link
-                              href={`/${data.state}/${item.value}/${cons.constituency_code}`}
+                              href={`/${data.state}/${item.value}/${cons.district_code_census}`}
                               passHref
                             >
-                              <ConsLink>{cons.constituency}</ConsLink>
+                              <ConsLink>{cons.district}</ConsLink>
                             </Link>
                           </li>
                         ))}
@@ -86,32 +86,33 @@ const StateList = ({ data }) => {
         </ConsWrapper>
       );
     },
-    [vidhanData, lokData, selectedSabha]
+    [ lokData, selectedSabha]
   );
 
   React.useEffect(() => {
     setStateData([
-      {
-        value: 'vidhan',
-        name: 'Vidhan Sabha',
-        altName: 'Parliament Constituency',
-        icon: <VidhanSabha width="40" />,
-        content: generateConsList({ value: 'vidhan', list: vidhanData }),
-      },
+      // {
+      //   value: 'vidhan',
+      //   name: 'Vidhan Sabha',
+      //   altName: 'Parliament Constituency',
+      //   icon: <VidhanSabha width="40" />,
+      //   content: generateConsList({ value: 'vidhan', list: vidhanData }),
+      // },
       {
         value: 'lok',
-        name: 'Lok Sabha',
-        altName: 'Assembly Constituency',
+        name: 'District',
+        altName: '',
         icon: <LokSabha width="40" />,
         content: generateConsList({ value: 'lok', list: lokData }),
       },
     ]);
-  }, [lokData, vidhanData, selectedSabha]);
+  }, [lokData, selectedSabha]);
 
   function onFilterChange(arr) {
     if (selectedSabha == 'lok') {
       setLokData(arr);
-    } else setVidhanData(arr);
+    } 
+    //else setVidhanData(arr);
   }
 
   return (
@@ -120,7 +121,7 @@ const StateList = ({ data }) => {
       <Toolbar
         value={selectedSabha}
         data={stateData}
-        onValueChange={(e) => setSelectedSabha(e)}
+        //onValueChange={(e) => setSelectedSabha(e)}
       />
     </Wrapper>
   );

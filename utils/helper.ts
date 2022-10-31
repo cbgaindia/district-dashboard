@@ -165,7 +165,7 @@ export function handleArrOfObjSearch(query, list) {
   if (query.length > 0) {
     list?.forEach((obj) => {
       const filteredCons = obj.children.filter((item) =>
-        item.constituency.toLowerCase().includes(query.toLowerCase())
+        item.district.toLowerCase().includes(query.toLowerCase())
       );
       if (filteredCons.length) {
         newList.push({ char: obj.char, children: filteredCons });

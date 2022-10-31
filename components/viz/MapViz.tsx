@@ -22,7 +22,7 @@ const MapViz = ({
   const memoMap = React.useMemo(() => {
     const tempObj = { ...mapFile };
     tempObj?.features?.forEach(
-      (obj) => (obj.properties['GEO_NO'] = String(obj.properties['GEO_NO']))
+      (obj) => (obj.properties['dtcode11'] = String(obj.properties['dtcode11']))
     );
     return tempObj;
   }, [mapFile]);
@@ -108,7 +108,7 @@ const MapViz = ({
             type: 'map',
             roam: true,
             map: meta.sabha,
-            nameProperty: 'GEO_NO',
+            nameProperty: 'dtcode11',
             zoom: 1.2,
             itemStyle: {
               borderColor: '#ffffff',
