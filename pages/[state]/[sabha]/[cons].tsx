@@ -40,8 +40,8 @@ type Props = {
   schemeData: any;
   data: any;
   remarks: any;
-  updatedJsonData: any;
-  districtJson: any
+  districtJson: any;
+  district : any;
 };
 export const ConstituencyPage = React.createContext(null);
 
@@ -54,8 +54,8 @@ const ConsPage: React.FC<Props> = ({
   stateScheme,
   data,
   remarks,
-  updatedJsonData,
-  districtJson
+  districtJson,
+  district
 }) => {
   const router = useRouter();
 
@@ -71,22 +71,9 @@ const ConsPage: React.FC<Props> = ({
     [indicator, scheme]
   );
   const [view, setView] = useState('overview');
-  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps);
-  // const { constituency_name: cons_name } = data['consData'][cons];
+  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps); 
 
-  const b = updatedJsonData[state[0].toUpperCase() + state.substring(1)]
-              .find(item => item.district_code_census == cons)
-
- 
-  const cons_name = b.district;
-
-  const state_format = state[0].toUpperCase() + state.substring(1);
-  const res = districtJson.find(item => item.A == state_format && item.B == cons_name)
-
-  let districtMetaData = {};
-  for(const key in res) {
-    districtMetaData = {...districtMetaData , [districtJson[0][key]]: res[key]}
-  }
+  const cons_name = district;
 
   function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
@@ -144,7 +131,7 @@ const ConsPage: React.FC<Props> = ({
             }}
           >
             <Overview
-              stateMetadata={districtMetaData}
+              stateMetadata={districtJson}
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
@@ -224,7 +211,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   ]);
 
   const updatedJsonData: any = await updatedFetchJSON('all districts');
-  const districtJson: any = await updateDistrictMetadataFetch();
+  const state_format = queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
+
+  const district = updatedJsonData[state_format]
+                      .find(item => item.district_code_census == queryValue.cons).district;
+
+  const districtJson: any = await updateDistrictMetadataFetch(state_format,district);
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -233,7 +225,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       stateMetadata: stateMetadata,
       stateScheme,
-      updatedJsonData: updatedJsonData,
+      district : district,
       districtJson: districtJson,
       data: {
         consData: stateData['constituency_data'],
