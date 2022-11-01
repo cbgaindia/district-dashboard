@@ -8,6 +8,8 @@ import {
   stateDataFetch,
   stateMetadataFetch,
   stateSchemeFetch,
+  updateStateMetadataFetch,
+  updatedFetchJSON
 } from 'utils/fetch';
 
 import {
@@ -37,6 +39,7 @@ type Props = {
   schemeData: any;
   data: any;
   remarks: any;
+  updatedJsonData: any;
 };
 export const ConstituencyPage = React.createContext(null);
 
@@ -49,7 +52,9 @@ const ConsPage: React.FC<Props> = ({
   stateScheme,
   data,
   remarks,
+  updatedJsonData
 }) => {
+  console.log(updatedJsonData, 'Hello')
   const router = useRouter();
 
   const { state, sabha, scheme, cons, indicator }: any = router.query;
@@ -65,8 +70,13 @@ const ConsPage: React.FC<Props> = ({
   );
   const [view, setView] = useState('overview');
   const [metaReducer, dispatch] = React.useReducer(reducer, initialProps);
-  const { constituency_name: cons_name } = data['consData'][cons];
+  // const { constituency_name: cons_name } = data['consData'][cons];
 
+  const b = updatedJsonData[state[0].toUpperCase() + state.substring(1)]
+              .find(item => item.district_code_census == cons)
+
+ 
+  const cons_name = b.district;
   function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
       router.replace({
@@ -127,7 +137,7 @@ const ConsPage: React.FC<Props> = ({
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
-              remarks={remarks}
+            //remarks={remarks}
             />
           </ConstituencyPage.Provider>
         ),
@@ -196,11 +206,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
   const [stateScheme, stateMetadata, stateData, remarks] = await Promise.all([
-    stateSchemeFetch(queryValue.state.replaceAll('-', ' ')),
-    stateMetadataFetch(queryValue.state.replaceAll('-', ' ')),
+    stateSchemeFetch(queryValue.state),
+    updateStateMetadataFetch(queryValue.state),
     stateDataFetch(queryValue.state, queryValue.sabha),
     consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
   ]);
+
+  const updatedJsonData: any = await updatedFetchJSON('all districts');
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -209,11 +221,12 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       stateMetadata: stateMetadata,
       stateScheme,
+      updatedJsonData: updatedJsonData,
       data: {
         consData: stateData['constituency_data'],
         stateAvg: stateData['state_avg'],
       },
-      remarks,
+      // remarks,
     },
   };
 };
