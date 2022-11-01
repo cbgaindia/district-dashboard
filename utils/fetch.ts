@@ -133,6 +133,22 @@ export async function stateMetadataFetch(state = null) {
   return sheet[0];
 }
 
+export async function updateStateMetadataFetch(state = null) {
+  // fetch CKAN JSON
+  const data = await updatedFetchQuery('schemeType', 'State Info');
+
+  // fetch and generate XLSX Sheet - false: don't do array of array return
+  const sheet = await fetchSheets(data[0].resources[0].url, false);
+
+  if (state) {
+    const stateData = sheet[0].find(
+      (o) => o.State.toLowerCase() == state.toLowerCase()
+    );
+    return stateData;
+  }
+  return sheet[0];
+}
+
 export async function stateDataFetch(state, sabha) {
   const res: any = await fetch(
     `https://ckan.civicdatalab.in/api/3/action/package_search?fq=slug:"${state}" AND organization:state-wise-scheme-data AND private:false`

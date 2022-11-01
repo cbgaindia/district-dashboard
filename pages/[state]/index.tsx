@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GetStaticProps, GetStaticPaths } from 'next';
 import dynamic from 'next/dynamic';
 
-import { fetchJSON, stateMetadataFetch, updatedFetchJSON } from 'utils/fetch';
+import { fetchJSON, stateMetadataFetch, updatedFetchJSON, updateStateMetadataFetch } from 'utils/fetch';
 import { capitalize, getParameterCaseInsensitive } from 'utils/helper';
 import Header from 'components/pages/state/Header';
 import StateList from 'components/pages/state/StateList/StateList';
@@ -61,7 +61,7 @@ const State: React.FC<Props> = ({ pathName, constList, stateData }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const stateData = await stateMetadataFetch();
+  const stateData = await updateStateMetadataFetch();
   return {
     paths: stateData.map((obj) => ({
       params: {
@@ -77,7 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const state_val = state as string ;
   const stateNormalised = state_val.replace(/-/g, ' ');
   try {
-    const stateData = await stateMetadataFetch(stateNormalised);
+    const stateData = await updateStateMetadataFetch(stateNormalised);
 
     //const jsonData: any = await fetchJSON('Cons Info');
     const updatedJsonData: any = await updatedFetchJSON('all districts');
