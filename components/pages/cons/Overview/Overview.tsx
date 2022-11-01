@@ -6,7 +6,7 @@ import Snapshot from './Snapshot';
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
   const summaryCards = React.useMemo(() => {
     return Object.keys(stateMetadata).reduce(function (result, key) {
-      if (key != 'State' && key != 'Description') {
+      if (key != 'State' && key != 'Description' && key !='1') {
         result.push({
           text: key,
           value: stateMetadata[key],

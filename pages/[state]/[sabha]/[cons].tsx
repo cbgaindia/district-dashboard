@@ -9,7 +9,8 @@ import {
   stateMetadataFetch,
   stateSchemeFetch,
   updateStateMetadataFetch,
-  updatedFetchJSON
+  updatedFetchJSON,
+  updateDistrictMetadataFetch
 } from 'utils/fetch';
 
 import {
@@ -40,6 +41,7 @@ type Props = {
   data: any;
   remarks: any;
   updatedJsonData: any;
+  districtJson: any
 };
 export const ConstituencyPage = React.createContext(null);
 
@@ -52,9 +54,9 @@ const ConsPage: React.FC<Props> = ({
   stateScheme,
   data,
   remarks,
-  updatedJsonData
+  updatedJsonData,
+  districtJson
 }) => {
-  console.log(updatedJsonData, 'Hello')
   const router = useRouter();
 
   const { state, sabha, scheme, cons, indicator }: any = router.query;
@@ -77,6 +79,15 @@ const ConsPage: React.FC<Props> = ({
 
  
   const cons_name = b.district;
+
+  const state_format = state[0].toUpperCase() + state.substring(1);
+  const res = districtJson.find(item => item.A == state_format && item.B == cons_name)
+
+  let districtMetaData = {};
+  for(const key in res) {
+    districtMetaData = {...districtMetaData , [districtJson[0][key]]: res[key]}
+  }
+
   function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
       router.replace({
@@ -133,7 +144,7 @@ const ConsPage: React.FC<Props> = ({
             }}
           >
             <Overview
-              stateMetadata={stateMetadata}
+              stateMetadata={districtMetaData}
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
@@ -213,6 +224,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   ]);
 
   const updatedJsonData: any = await updatedFetchJSON('all districts');
+  const districtJson: any = await updateDistrictMetadataFetch();
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -222,6 +234,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       stateMetadata: stateMetadata,
       stateScheme,
       updatedJsonData: updatedJsonData,
+      districtJson: districtJson,
       data: {
         consData: stateData['constituency_data'],
         stateAvg: stateData['state_avg'],
