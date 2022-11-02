@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Summary } from 'components/pages/shared';
+import { SummaryCarousel } from 'components/pages/shared';
 import Snapshot from './Snapshot';
 
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
@@ -24,7 +24,7 @@ const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
         </div>
         {/* <p>{remarks}</p> */}
       </Main>
-      <Summary title="Demographic Highlights" cards={summaryCards} />
+      <SummaryCarousel title="Demographic Highlights" cards={summaryCards} />
       {/* <Snapshot
         queryData={queryData}
         schemeList={schemeList}
