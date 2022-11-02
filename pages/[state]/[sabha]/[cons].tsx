@@ -8,6 +8,9 @@ import {
   stateDataFetch,
   stateMetadataFetch,
   stateSchemeFetch,
+  updateStateMetadataFetch,
+  updatedFetchJSON,
+  updateDistrictMetadataFetch
 } from 'utils/fetch';
 
 import {
@@ -37,6 +40,8 @@ type Props = {
   schemeData: any;
   data: any;
   remarks: any;
+  districtJson: any;
+  district : any;
 };
 export const ConstituencyPage = React.createContext(null);
 
@@ -49,6 +54,8 @@ const ConsPage: React.FC<Props> = ({
   stateScheme,
   data,
   remarks,
+  districtJson,
+  district
 }) => {
   const router = useRouter();
 
@@ -64,8 +71,9 @@ const ConsPage: React.FC<Props> = ({
     [indicator, scheme]
   );
   const [view, setView] = useState('overview');
-  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps);
-  const { constituency_name: cons_name } = data['consData'][cons];
+  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps); 
+
+  const cons_name = district;
 
   function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
@@ -123,11 +131,11 @@ const ConsPage: React.FC<Props> = ({
             }}
           >
             <Overview
-              stateMetadata={stateMetadata}
+              stateMetadata={districtJson}
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
-              remarks={remarks}
+            //remarks={remarks}
             />
           </ConstituencyPage.Provider>
         ),
@@ -196,11 +204,19 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
   const [stateScheme, stateMetadata, stateData, remarks] = await Promise.all([
-    stateSchemeFetch(queryValue.state.replaceAll('-', ' ')),
-    stateMetadataFetch(queryValue.state.replaceAll('-', ' ')),
+    stateSchemeFetch(queryValue.state),
+    updateStateMetadataFetch(queryValue.state),
     stateDataFetch(queryValue.state, queryValue.sabha),
     consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
   ]);
+
+  const updatedJsonData: any = await updatedFetchJSON('all districts');
+  const state_format = queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
+
+  const district = updatedJsonData[state_format]
+                      .find(item => item.district_code_census == queryValue.cons).district;
+
+  const districtJson: any = await updateDistrictMetadataFetch(state_format,district);
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -209,11 +225,13 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       stateMetadata: stateMetadata,
       stateScheme,
+      district : district,
+      districtJson: districtJson,
       data: {
         consData: stateData['constituency_data'],
         stateAvg: stateData['state_avg'],
       },
-      remarks,
+      // remarks,
     },
   };
 };

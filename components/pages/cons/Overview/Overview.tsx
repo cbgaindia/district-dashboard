@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Summary } from 'components/pages/shared';
+import { SummaryCarousel } from 'components/pages/shared';
 import Snapshot from './Snapshot';
 
-const Overview = ({ stateMetadata, queryData, schemeList, data, remarks }) => {
+const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
   const summaryCards = React.useMemo(() => {
     return Object.keys(stateMetadata).reduce(function (result, key) {
-      if (key != 'State' && key != 'Description') {
+      if (key != 'State' && key != 'Description' && key !='1') {
         result.push({
           text: key,
           value: stateMetadata[key],
@@ -22,15 +22,15 @@ const Overview = ({ stateMetadata, queryData, schemeList, data, remarks }) => {
         <div>
           <h2>About {queryData.cons_name}</h2>
         </div>
-        <p>{remarks}</p>
+        {/* <p>{remarks}</p> */}
       </Main>
-      <Summary title="Demographic Highlights" cards={summaryCards.slice(4)} />
-      <Snapshot
+      <SummaryCarousel title="Demographic Highlights" cards={summaryCards} />
+      {/* <Snapshot
         queryData={queryData}
         schemeList={schemeList}
         consData={data.consData[queryData.cons].fiscal_year}
         stateAvg={data.stateAvg}
-      />
+      /> */}
     </Wrapper>
   );
 };

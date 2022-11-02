@@ -23,13 +23,14 @@ interface Props {
    * label for the carousel (a11y)
    */
   label: string;
+  current:any;
 }
 
-const Carousel = ({ children, prevBtn, nextBtn, label }: Props) => {
+const Carousel = ({ children, prevBtn, nextBtn, label, current }: Props) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const carouselRef = useRef(null);
-
+  current(currentSlide+1,children.length)
   // check if children prop is wrapped in a fragment container
   let carouselItems = children;
   if (children.type == React.Fragment) {
@@ -59,7 +60,7 @@ const Carousel = ({ children, prevBtn, nextBtn, label }: Props) => {
       duration: 800,
     },
     slideChanged(slider) {
-      setCurrentSlide(slider.track.details.rel);
+      setCurrentSlide(slider.track.details.rel);    
       var slidys = carouselRef.current.querySelectorAll('.keen-slider__slide');
       slidys.forEach(function (slidy, idx) {
         if (idx === slider.track.details.rel) {
@@ -157,5 +158,17 @@ export const CarouselWrapper = styled.div`
       opacity: 1;
       transition: var(--t);
     }
+  }
+  .carouselPrevBtn{
+    svg {
+     transform:rotate(180deg);
+     filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08));
+     margin-right:10px;
+    }
+  }
+  .carouselNextBtn{
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.08));
+    position: absolute;
+    right: 0;
   }
 `;
