@@ -3,6 +3,9 @@ import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 
+import { IconGeneralAdd } from 'components/icons/IconlAdd';
+import { IconMinimize } from 'components/icons';
+
 import {
   consDescFetch,
   stateDataFetch,
@@ -12,6 +15,12 @@ import {
   updatedFetchJSON,
   updateDistrictMetadataFetch
 } from 'utils/fetch';
+
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@opub-cdl/design-system';
 
 import {
   Overview as OverViewIcon,
@@ -41,7 +50,7 @@ type Props = {
   data: any;
   remarks: any;
   districtJson: any;
-  district : any;
+  district: any;
 };
 export const ConstituencyPage = React.createContext(null);
 
@@ -71,8 +80,9 @@ const ConsPage: React.FC<Props> = ({
     [indicator, scheme]
   );
   const [view, setView] = useState('overview');
-  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps); 
+  const [metaReducer, dispatch] = React.useReducer(reducer, initialProps);
 
+  const [open, setOpen] = React.useState(false);
   const cons_name = district;
 
   function handleToolbarSwitch(e: string, cardIndicator = null) {
@@ -176,6 +186,25 @@ const ConsPage: React.FC<Props> = ({
         <>
           <main className="container">
             <Header queryData={{ state, sabha, cons, cons_name }} />
+            
+            <EditorialWrapper>
+              <Collapsible open={open} onOpenChange={setOpen}>
+                <EditorialHeader>
+                  <span>Editorial Notes on Highlights</span>
+                  <CollapsibleTrigger aria-label="Expand scheme Editorial notes">
+                    {!open ? (
+                      <IconGeneralAdd fill="#888F8B" />
+                    ) : (
+                      <IconMinimize fill="#888F8B" />
+                    )}
+                  </CollapsibleTrigger>
+                </EditorialHeader>
+                <CollapsibleContent>
+                {/* <EditorialNotes schemeData={meta.schemeData} /> */}
+                </CollapsibleContent>
+              </Collapsible>
+            </EditorialWrapper>
+
             <Wrapper id="consPageWrapper">
               <Toolbar
                 value={view}
@@ -214,9 +243,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const state_format = queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
 
   const district = updatedJsonData[state_format]
-                      .find(item => item.district_code_census == queryValue.cons).district;
+    .find(item => item.district_code_census == queryValue.cons).district;
 
-  const districtJson: any = await updateDistrictMetadataFetch(state_format,district);
+  const districtJson: any = await updateDistrictMetadataFetch(state_format, district);
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -225,7 +254,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       stateMetadata: stateMetadata,
       stateScheme,
-      district : district,
+      district: district,
       districtJson: districtJson,
       data: {
         consData: stateData['constituency_data'],
@@ -241,4 +270,22 @@ export default ConsPage;
 const Wrapper = styled.div`
   margin-top: 32px;
   background-color: var(--color-background-light);
+`;
+const EditorialWrapper = styled.div`
+  margin-top: 20px;
+`;
+
+const EditorialHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  > span {
+    font-weight: 700;
+  }
+
+  > button {
+    color: #888f8b;
+  }
 `;
