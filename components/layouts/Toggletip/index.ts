@@ -1,2 +1,2 @@
-export { default } from './Toggletip';
-export { ToggletipWrapper } from './Toggletip';
+export { default as Toggletip } from './Toggletip';
+export { default as ToggletipWrapper } from './Toggletip';

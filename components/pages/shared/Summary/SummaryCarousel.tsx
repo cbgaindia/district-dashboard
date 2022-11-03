@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Carousel } from 'components/layouts';
 import { CarouselWrapper } from 'components/layouts/Carousel';
+import { Toggletip } from 'components/layouts/Toggletip';
+
 type Props = {
     title?: React.ReactNode;
     cards: {
@@ -13,6 +15,8 @@ type Props = {
 };
 
 const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
+
+    const data = {}
 
     const [currentSlide, setCurrentSlide] = React.useState(1);
     const [childrenLength, setChildrenLength] = React.useState(3);
@@ -85,7 +89,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
                         <li key={`summary-${index}`}>
                             <div></div>
                             <strong>{item.value}</strong>
-                            <span>{item.text}</span>
+                            <span>{item.text} &nbsp; <Toggletip data={data}/></span>
                         </li>
                     ))}
                 </ul>
@@ -94,7 +98,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
                         <li key={`summary-${index}`}>
                             <div></div>
                             <strong>{item.value}</strong>
-                            <span>{item.text}</span>
+                            <span>{item.text} &nbsp; <Toggletip data={data}/></span>
                         </li>
                     ))}
                 </ul>
@@ -103,7 +107,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
                         <li key={`summary-${index}`}>
                             <div></div>
                             <strong>{item.value}</strong>
-                            <span>{item.text}</span>
+                            <span>{item.text} &nbsp; <Toggletip data={data}/></span>
                         </li>
                     ))}
                 </ul>
@@ -157,10 +161,11 @@ const Wrapper = styled.div`
 
     strong {
       font-weight: 900;
+      display: grid;
+      place-items: center;
     }
 
     span {
-      display: block;
       font-size: 0.75rem;
       color: var(--text-light-medium);
       line-height: 1.7;
