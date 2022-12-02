@@ -75,7 +75,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { state }: any = params;
   const state_val = state as string ;
-  const stateNormalised = state_val.replace(/-/g, ' ');
+  const stateNormalised = state_val.replaceAll('-', ' ');
   try {
     const stateData = await updateStateMetadataFetch(stateNormalised);
 

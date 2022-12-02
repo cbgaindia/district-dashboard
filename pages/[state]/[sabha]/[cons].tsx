@@ -233,7 +233,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
   const [stateScheme, stateMetadata, stateData, remarks] = await Promise.all([
-    stateSchemeFetch(queryValue.state),
+    stateSchemeFetch(queryValue.state.replaceAll('-', ' ')),
     updateStateMetadataFetch(queryValue.state),
     stateDataFetch(queryValue.state, queryValue.sabha),
     consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
