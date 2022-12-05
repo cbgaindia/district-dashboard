@@ -75,18 +75,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { state }: any = params;
   const state_val = state as string ;
-  const stateNormalised = state_val.replaceAll('-', ' ');
+  const stateNormalised = state_val.replace(/-/g, ' ');
   try {
     const stateData = await updateStateMetadataFetch(stateNormalised);
 
-    //const jsonData: any = await fetchJSON('Cons Info');
+
     const updatedJsonData: any = await updatedFetchJSON('all districts');
-    
+
     const finalJSON = {
-      lok:  {[state.toLowerCase()]: updatedJsonData[state[0].toUpperCase() + state.substring(1)]},
+     
+      lok:  state == "uttar-pradesh" 
+             ?{[state.toLowerCase()]: updatedJsonData["Uttar Pradesh"]} 
+             :{[state.toLowerCase()]: updatedJsonData[state[0].toUpperCase() + state.substring(1)]},
    //   vidhan: { [state]: jsonData.vidhan[state] },
     };
-    
+
     return finalJSON
       ? {
           props: {
