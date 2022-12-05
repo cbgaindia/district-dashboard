@@ -36,7 +36,7 @@ export async function fetchJSON(schemeType, key = null) {
 
 export async function updatedFetchQuery(query, value) {
   const queryRes = await fetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=${query}:"${value}" AND organization:district-dashboard AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=${query}:"${value}" AND organization:district-dashboard AND private:false&rows=1000`
   ).then((res) => res.json());
 
   return queryRes.result.results;
@@ -142,7 +142,7 @@ export async function updateStateMetadataFetch(state = null) {
 
   if (state) {
     const stateData = sheet[0].find(
-      (o) => o.State.toLowerCase() == state.toLowerCase()
+      (o) => o.State.toLowerCase().split(" ").join("") == state.toLowerCase().split(" ").join("")
     );
     return stateData;
   }
@@ -157,10 +157,10 @@ export async function updateDistrictMetadataFetch(state=null,district = null) {
   const sheet = await fetchSheets(data[0].resources[0].url, false);
 
   if(state && district){
-    const res = sheet[0].find(item => item.A == state && item.B == district)
+    const res = sheet[0].find(item => item.state_ut_name== state && item.district_name == district )
     let districtMetaData = {};
     for(const key in res) {
-      districtMetaData = {...districtMetaData , [sheet[0][0][key]]: res[key]}
+      districtMetaData = {...districtMetaData , [key]: res[key]}
     }
     return districtMetaData;
   }

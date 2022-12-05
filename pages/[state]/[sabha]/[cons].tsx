@@ -233,14 +233,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
   const [stateScheme, stateMetadata, stateData, remarks] = await Promise.all([
-    stateSchemeFetch(queryValue.state.replaceAll('-', ' ')),
-    updateStateMetadataFetch(queryValue.state),
+    stateSchemeFetch(queryValue.state.replace(/-/g, ' ')),
+    updateStateMetadataFetch(queryValue.state.replace(/-/g, ' ')),
     stateDataFetch(queryValue.state, queryValue.sabha),
     consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
   ]);
 
   const updatedJsonData: any = await updatedFetchJSON('all districts');
-  const state_format = queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
+  const state_format = queryValue.state == "uttar-pradesh" ? "Uttar Pradesh" :queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
 
   const district = updatedJsonData[state_format]
     .find(item => item.district_code_census == queryValue.cons).district;
