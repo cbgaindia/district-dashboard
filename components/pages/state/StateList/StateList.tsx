@@ -4,10 +4,15 @@ import dynamic from 'next/dynamic';
 import styled from 'styled-components';
 import { groupListByAlphabets, sortArrayOfObj } from 'utils/helper';
 import { LokSabha, VidhanSabha } from 'components/icons';
-import { Toolbar } from 'components/layouts/Toolbar';
+//import { Toolbar } from 'components/layouts/Toolbar';
 import SearchCons from './SearchCons';
 import { useWindowSize } from 'utils/hooks';
 import { LoadingDiv } from './ConsMapView';
+
+import {
+  Tabs,
+  TabsContent,
+} from '@opub-cdl/design-system';
 
 const ConsMapView = dynamic(() => import('./ConsMapView'), {
   ssr: false,
@@ -18,7 +23,7 @@ const StateList = ({ data }) => {
   const [stateData, setStateData] = React.useState<any>([]);
   const [formattedData, setFormattedData] = React.useState<any>([]);
   const [lokData, setLokData] = React.useState<any>([]);
-//  const [vidhanData, setVidhanData] = React.useState<any>([]);
+  //  const [vidhanData, setVidhanData] = React.useState<any>([]);
   const [selectedSabha, setSelectedSabha] = React.useState<any>('lok');
   const size = useWindowSize();
 
@@ -34,11 +39,11 @@ const StateList = ({ data }) => {
       sortArrayOfObj(data.lok, 'district'),
       'district'
     );
-     setLokData(formattedLok);
+    setLokData(formattedLok);
 
     setFormattedData({
       lok: formattedLok,
-    //  vidhan: data.vidhan,
+      //  vidhan: data.vidhan,
     });
   }, [data]);
 
@@ -86,7 +91,7 @@ const StateList = ({ data }) => {
         </ConsWrapper>
       );
     },
-    [ lokData, selectedSabha]
+    [lokData, selectedSabha]
   );
 
   React.useEffect(() => {
@@ -111,18 +116,20 @@ const StateList = ({ data }) => {
   function onFilterChange(arr) {
     if (selectedSabha == 'lok') {
       setLokData(arr);
-    } 
+    }
     //else setVidhanData(arr);
   }
 
   return (
     <Wrapper id="stateListWrapper">
       <h2>Explore Districts </h2>
-      <Toolbar
-        value={selectedSabha}
-        data={stateData}
-        //onValueChange={(e) => setSelectedSabha(e)}
-      />
+      <Tabs value={selectedSabha}>
+        {stateData.map((item) => (
+          <TabsContent key={item.name} value={item.value}>
+            {item.content}
+          </TabsContent>
+        ))}
+      </Tabs>
     </Wrapper>
   );
 };
@@ -146,7 +153,7 @@ const Wrapper = styled.div`
     font-weight: 600;
     line-height: 1.24;
     font-size: 2rem;
-    margin-bottom: 32px;
+    margin-bottom: 18px;
   }
 `;
 

@@ -29,7 +29,7 @@ const Header = ({ queryData }) => {
           {/* <SabhaName>{`${queryData.sabha === 'lok' ? 'Lok' : 'Vidhan'
             } Sabha contituency`}</SabhaName> */}
           <div>
-            <h1 className="gradient-maple">{queryData.cons_name}</h1>
+            <h1>{queryData.cons_name}</h1>
             <StateName>
               <span>
                 <Link href={`/${queryData.state.toLowerCase()}`}>
@@ -115,7 +115,7 @@ const ConsDetails = styled.div`
     }
 
     span {
-      color: #4190cc;
+      color: rgba(0,0,0,.32);
       font-size: 1.2rem;
 
       /* a {
