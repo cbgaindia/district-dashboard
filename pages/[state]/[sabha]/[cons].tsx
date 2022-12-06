@@ -186,25 +186,6 @@ const ConsPage: React.FC<Props> = ({
         <>
           <main className="container">
             <Header queryData={{ state, sabha, cons, cons_name }} />
-            
-            <EditorialWrapper>
-              <Collapsible open={open} onOpenChange={setOpen}>
-                <EditorialHeader>
-                  <span>Editorial Notes on Highlights</span>
-                  <CollapsibleTrigger aria-label="Expand scheme Editorial notes">
-                    {!open ? (
-                      <IconGeneralAdd fill="#888F8B" />
-                    ) : (
-                      <IconMinimize fill="#888F8B" />
-                    )}
-                  </CollapsibleTrigger>
-                </EditorialHeader>
-                <CollapsibleContent>
-                {/* <EditorialNotes schemeData={meta.schemeData} /> */}
-                </CollapsibleContent>
-              </Collapsible>
-            </EditorialWrapper>
-
             <Wrapper id="consPageWrapper">
               <Toolbar
                 value={view}
