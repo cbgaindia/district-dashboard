@@ -49,8 +49,10 @@ const Share: React.FC<{ title: string; size?: 'default' | 'compact' }> = ({
               display: 'flex',
               alignItems: 'center',
               color: 'var(--color-primary)',
+              backgroundColor: 'rgb(238,246,253)',
+              boxShadow: 'inset 0 0 0 2px #4190CC ',    
             }}
-            variant={'outline'}
+            variant = {'subtle-link'}
           >
             Share
             <Box css={{ marginLeft: '8px', fontSize: 0 }}>
