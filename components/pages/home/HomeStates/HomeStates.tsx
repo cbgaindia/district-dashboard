@@ -16,7 +16,7 @@ const HomeStates = () => {
   return (
     <Wrapper>
       <div className="container">
-        <HomeTitle className="gradient-maple">Explore via states</HomeTitle>
+        <HomeTitle>Explore via states</HomeTitle>
         <h2>Navigate to your District via State</h2>
         <StateList>
           {states.map((item, index) => (
