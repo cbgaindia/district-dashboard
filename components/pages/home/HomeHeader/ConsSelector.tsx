@@ -70,7 +70,7 @@ const ConsSelector: React.FC<{
             kind="primary"
             href={
               selectedCons
-                ? `/${selectedState}/${sabha}/${selectedCons}`
+                ? `/${selectedState.toLowerCase()}/${sabha}/${selectedCons}`
                 : null
             }
             onClick={

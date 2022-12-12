@@ -14,7 +14,7 @@ const HomeHeader = ({ constList }) => {
           <ConsSelector
             consData={constList}
             trending={vidhanTrending}
-            sabha="vidhan"
+            sabha="lok"
           />
         </SelectorWrapper>
       </div>
