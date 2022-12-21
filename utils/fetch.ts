@@ -85,7 +85,7 @@ export async function fetchSheets(link, aoa = true) {
 }
 
 export async function stateSchemeFetch(state = null) {
-  const stateList = await fetchQuery(
+  const stateList = await updatedFetchQuery(
     'schemeType',
     'Centrally Sponsored Scheme'
   );
