@@ -4,12 +4,16 @@ import { SummaryCarousel } from 'components/pages/shared';
 import Snapshot from './Snapshot';
 
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
+
+  const twoDecimals = (num) => {
+    return (Number)(num.toString().match(/^-?\d+(?:\.\d{0,1})?/));
+  }
   const summaryCards = React.useMemo(() => {
-    return Object.keys(stateMetadata).reduce(function (result, key) {
+    return Object.keys(stateMetadata).slice(3).reduce(function (result, key) {
       if (key != 'State' && key != 'Description' && key !='1') {
         result.push({
           text: key,
-          value: stateMetadata[key],
+          value: twoDecimals(stateMetadata[key]),
         });
       }
       return result;
@@ -18,12 +22,6 @@ const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
 
   return (
     <Wrapper id="overview-wrapper">
-      <Main>
-        <div>
-          <h2>About {queryData.cons_name}</h2>
-        </div>
-        {/* <p>{remarks}</p> */}
-      </Main>
       <SummaryCarousel title="Demographic Highlights" cards={summaryCards} />
       {/* <Snapshot
         queryData={queryData}
