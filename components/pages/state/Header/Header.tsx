@@ -41,15 +41,6 @@ const Header = ({ data }) => {
           </>
         )}
       </article>
-      <Summary
-        title={
-          <SummaryTitle>
-            Summary <Separator>|</Separator>
-            <span>Financial Year 2022-23</span>
-          </SummaryTitle>
-        }
-        cards={summaryCards.slice(4)} // TODO remove slice
-      />
     </HeaderWrapper>
   );
 };
