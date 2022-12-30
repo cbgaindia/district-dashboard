@@ -4,20 +4,21 @@ import { SummaryCarousel } from 'components/pages/shared';
 import Snapshot from './Snapshot';
 
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
-
   const twoDecimals = (num) => {
-    return (Number)(num.toString().match(/^-?\d+(?:\.\d{0,1})?/));
-  }
+    return Number(num.toString().match(/^-?\d+(?:\.\d{0,1})?/));
+  };
   const summaryCards = React.useMemo(() => {
-    return Object.keys(stateMetadata).slice(3).reduce(function (result, key) {
-      if (key != 'State' && key != 'Description' && key !='1') {
-        result.push({
-          text: key,
-          value: twoDecimals(stateMetadata[key]),
-        });
-      }
-      return result;
-    }, []);
+    return Object.keys(stateMetadata)
+      .slice(3)
+      .reduce(function (result, key) {
+        if (key != 'State' && key != 'Description' && key != '1') {
+          result.push({
+            text: key,
+            value: twoDecimals(stateMetadata[key]),
+          });
+        }
+        return result;
+      }, []);
   }, [stateMetadata]); // TODO it's using state data
 
   return (
