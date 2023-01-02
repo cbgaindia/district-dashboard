@@ -61,30 +61,7 @@ const ConsSelectorMobile = () => {
             </Header>
 
             <Content>
-              <Tabs defaultValue="lok">
-                <TabsList>
-                  <SabhaSelector>
-                    <div>
-                      <TabsTrigger value="lok">
-                        <Box>{<LokSabha width={24} />}</Box> Lok Sabha
-                      </TabsTrigger>
-                      <TabsTrigger value="vidhan">
-                        <Box>{<VidhanSabha width={24} />}</Box> Vidhan Sabha
-                      </TabsTrigger>
-                    </div>
-                  </SabhaSelector>
-                </TabsList>
-                <TabsContent value="lok">
-                  <MobileStateWrapper>
-                    <StateTab data={data?.lok} sabha="lok" />
-                  </MobileStateWrapper>
-                </TabsContent>
-                <TabsContent value="vidhan">
-                  <MobileStateWrapper>
-                    <StateTab data={data?.vidhan} sabha="vidhan" />
-                  </MobileStateWrapper>
-                </TabsContent>
-              </Tabs>
+              <StateTab data={data} sabha="lok" />
             </Content>
           </Modal>
         </>

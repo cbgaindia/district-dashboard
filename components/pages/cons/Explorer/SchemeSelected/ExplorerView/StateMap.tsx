@@ -25,9 +25,7 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
     getParameterCaseInsensitive(schemeData, meta.state)[year]
   );
 
-  const { data, isLoading } = swrFetch(
-    `/assets/maps/${meta.sabha}/${meta.state}.json`
-  );
+  const { data, isLoading } = swrFetch(`/assets/maps/${meta.state}.json`);
 
   // preparing indicator data for echarts component
   useEffect(() => {

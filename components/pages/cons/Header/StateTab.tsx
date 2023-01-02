@@ -63,7 +63,7 @@ const ConstituencyList = ({ list, state, sabha }) => {
           consList.map((cons: any) => (
             <React.Fragment key={cons.district_code_lg}>
               <ConsLink
-                href={`/${state}/${sabha}/${cons.district_code_lg}`}
+                href={`/${state.toLowerCase()}/${cons.district_code_lg}`}
                 key={`${cons.district_code_lg}`}
               >
                 {cons.district}

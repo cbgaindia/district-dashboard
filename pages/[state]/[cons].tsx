@@ -78,7 +78,7 @@ const ConsPage: React.FC<Props> = ({
   function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
       router.replace({
-        pathname: `/${state}/${sabha}/${cons}`,
+        pathname: `/${state}/${cons}`,
         query: {
           scheme: showScheme(e),
           indicator: cardIndicator,
@@ -106,7 +106,7 @@ const ConsPage: React.FC<Props> = ({
     setView(tabState);
 
     router.replace({
-      pathname: `/${state}/${sabha}/${cons}`,
+      pathname: `/${state}/${cons}`,
       query: {
         scheme: showScheme(e),
         indicator,

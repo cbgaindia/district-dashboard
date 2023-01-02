@@ -68,7 +68,7 @@ const ConsSelector: React.FC<{
             kind="primary"
             href={
               selectedCons
-                ? `/${selectedState.toLowerCase()}/${sabha}/${selectedCons}`
+                ? `/${selectedState.toLowerCase()}/${selectedCons}`
                 : null
             }
             onClick={!selectedCons ? () => alert('Select a district') : null}

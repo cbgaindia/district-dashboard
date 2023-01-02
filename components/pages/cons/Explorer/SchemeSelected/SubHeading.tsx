@@ -54,7 +54,7 @@ const SubHeading = ({ meta, schemeList, queryData }) => {
           onChange={(e: any) => {
             router
               .replace({
-                pathname: `/${queryData.state}/${queryData.sabha}/${queryData.cons}`,
+                pathname: `/${queryData.state}/${queryData.cons}`,
                 query: { scheme: e.value, indicator: indicator },
               })
               .then(() => {

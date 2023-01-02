@@ -46,7 +46,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
         indicator: indicator,
       },
       '',
-      `/${queryData.state}/${queryData.sabha}/${queryData.cons}?scheme=${scheme}&indicator=${indicator}`
+      `/${queryData.state}/${queryData.cons}?scheme=${scheme}&indicator=${indicator}`
     );
   }, [indicator]);
 

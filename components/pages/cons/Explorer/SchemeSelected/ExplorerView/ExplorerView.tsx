@@ -75,7 +75,7 @@ const ExplorerView = ({ meta, dispatch }) => {
           indicator: val,
         },
         '',
-        `/${state}/${sabha}/${meta.cons}?scheme=${scheme}&indicator=${val}`
+        `/${state}/${meta.cons}?scheme=${scheme}&indicator=${val}`
       );
     }
   }
