@@ -20,16 +20,17 @@ const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
         return result;
       }, []);
   }, [stateMetadata]); // TODO it's using state data
+  console.log(data, queryData);
 
   return (
     <Wrapper id="overview-wrapper">
       <SummaryCarousel title="Demographic Highlights" cards={summaryCards} />
-      {/* <Snapshot
+      <Snapshot
         queryData={queryData}
         schemeList={schemeList}
         consData={data.consData[queryData.cons].fiscal_year}
         stateAvg={data.stateAvg}
-      /> */}
+      />
     </Wrapper>
   );
 };

@@ -142,25 +142,32 @@ export async function updateStateMetadataFetch(state = null) {
 
   if (state) {
     const stateData = sheet[0].find(
-      (o) => o.State.toLowerCase().split(" ").join("") == state.toLowerCase().split(" ").join("")
+      (o) =>
+        o.State.toLowerCase().split(' ').join('') ==
+        state.toLowerCase().split(' ').join('')
     );
     return stateData;
   }
   return sheet[0];
 }
 
-export async function updateDistrictMetadataFetch(state=null,district = null) {
+export async function updateDistrictMetadataFetch(
+  state = null,
+  district = null
+) {
   // fetch CKAN JSON
   const data = await updatedFetchQuery('schemeType', 'district info');
 
   // fetch and generate XLSX Sheet - false: don't do array of array return
   const sheet = await fetchSheets(data[0].resources[0].url, false);
 
-  if(state && district){
-    const res = sheet[0].find(item => item.state_ut_name== state && item.district_name == district )
+  if (state && district) {
+    const res = sheet[0].find(
+      (item) => item.state_ut_name == state && item.district_name == district
+    );
     let districtMetaData = {};
-    for(const key in res) {
-      districtMetaData = {...districtMetaData , [key]: res[key]}
+    for (const key in res) {
+      districtMetaData = { ...districtMetaData, [key]: res[key] };
     }
     return districtMetaData;
   }
@@ -169,7 +176,7 @@ export async function updateDistrictMetadataFetch(state=null,district = null) {
 
 export async function stateDataFetch(state, sabha) {
   const res: any = await fetch(
-    `https://ckan.civicdatalab.in/api/3/action/package_search?fq=slug:"${state}" AND organization:state-wise-scheme-data AND private:false`
+    `https://ckan.civicdatalab.in/api/3/action/package_search?fq=slug:"${state}-district-dashboard" AND organization:district-v1 AND private:false`
   )
     .then((res) => res.json())
     .then((res) => res.result.results[0])
@@ -177,10 +184,7 @@ export async function stateDataFetch(state, sabha) {
       console.error(e);
       return 0;
     });
-  const jsonUrl = res.resources.filter(
-    (e) =>
-      e.format == 'JSON' && e.name.includes(sabha == 'lok' ? '_pc' : '_ac')
-  )[0].url;
+  const jsonUrl = res.resources.filter((e) => e.format == 'JSON')[0].url;
 
   const jsonObj = await fetch(jsonUrl).then((res) => res.json());
 

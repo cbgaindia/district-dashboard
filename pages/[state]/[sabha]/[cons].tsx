@@ -1,36 +1,26 @@
-import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import dynamic from 'next/dynamic';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
-import { IconGeneralAdd } from 'components/icons/IconlAdd';
-import { IconMinimize } from 'components/icons';
 
 import {
   consDescFetch,
   stateDataFetch,
-  stateMetadataFetch,
   stateSchemeFetch,
-  updateStateMetadataFetch,
   updatedFetchJSON,
-  updateDistrictMetadataFetch
+  updateDistrictMetadataFetch,
+  updateStateMetadataFetch,
 } from 'utils/fetch';
 
 import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@opub-cdl/design-system';
-
-import {
-  Overview as OverViewIcon,
   Explorer as ExplorerIcon,
+  Overview as OverViewIcon,
 } from 'components/icons';
-import { Header } from 'components/pages/cons/Header';
 import { Toolbar } from 'components/layouts/Toolbar';
-import { capitalize } from 'utils/helper';
 import { Overview } from 'components/pages/cons';
+import { Header } from 'components/pages/cons/Header';
 import { useRouter } from 'next/router';
+import { capitalize } from 'utils/helper';
 
 const Explorer = dynamic(
   () => import('components/pages/cons/Explorer/Explorer'),
@@ -64,7 +54,7 @@ const ConsPage: React.FC<Props> = ({
   data,
   remarks,
   districtJson,
-  district
+  district,
 }) => {
   const router = useRouter();
 
@@ -145,7 +135,7 @@ const ConsPage: React.FC<Props> = ({
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
-            //remarks={remarks}
+              //remarks={remarks}
             />
           </ConstituencyPage.Provider>
         ),
@@ -213,20 +203,27 @@ export const getServerSideProps: GetServerSideProps = async ({
   const queryValue: any = query || {};
   if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
-  const [stateScheme, stateMetadata, stateData, remarks] = await Promise.all([
+  const [stateScheme, stateMetadata, stateData] = await Promise.all([
     stateSchemeFetch(queryValue.state.replace(/-/g, ' ')),
     updateStateMetadataFetch(queryValue.state.replace(/-/g, ' ')),
     stateDataFetch(queryValue.state, queryValue.sabha),
-    consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
+    // consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
   ]);
 
   const updatedJsonData: any = await updatedFetchJSON('all districts');
-  const state_format = queryValue.state == "uttar-pradesh" ? "Uttar Pradesh" :queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
+  const state_format =
+    queryValue.state == 'uttar-pradesh'
+      ? 'Uttar Pradesh'
+      : queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
 
-  const district = updatedJsonData[state_format]
-    .find(item => item.district_code_census == queryValue.cons).district;
+  const district = updatedJsonData[state_format].find(
+    (item) => item.district_code_census == queryValue.cons
+  ).district;
 
-  const districtJson: any = await updateDistrictMetadataFetch(state_format, district);
+  const districtJson: any = await updateDistrictMetadataFetch(
+    state_format,
+    district
+  );
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
@@ -238,7 +235,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       district: district,
       districtJson: districtJson,
       data: {
-        consData: stateData['constituency_data'],
+        consData: stateData['district_name_data'],
         stateAvg: stateData['state_avg'],
       },
       // remarks,
