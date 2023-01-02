@@ -55,5 +55,5 @@ export const states = [
 
 export const about = {
   video: 'inKrfwhHHic',
-  desc: 'This is a unique, one-of-its-kind dashboard that opens up a new avenue for increasing transparency and accountability in public expenditure. Through this, users can view constituency-wise fiscal information for several centrally sponsored and central sector schemes.',
+  desc: 'This is a unique, one-of-its-kind dashboard that opens up a new avenue for increasing transparency and accountability in public expenditure. Through this, users can view district-wise fiscal information for several centrally sponsored and central sector schemes.',
 };

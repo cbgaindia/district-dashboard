@@ -146,7 +146,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
                     value: getConsAvg(item.scheme_slug)
                       ? {
                           state: getStateAvg(item.scheme_slug),
-                          constituency: getConsAvg(item.scheme_slug),
+                          district: getConsAvg(item.scheme_slug),
                         }
                       : null,
                   }}

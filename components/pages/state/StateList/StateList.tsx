@@ -27,8 +27,8 @@ const StateList = ({ data }) => {
   React.useEffect(() => {
     // first sort the object, then group them by first character.
     // const formattedVidhan = groupListByAlphabets(
-    //   sortArrayOfObj(data.vidhan, 'constituency'),
-    //   'constituency'
+    //   sortArrayOfObj(data.vidhan, 'district'),
+    //   'district'
     // );
     // setVidhanData(formattedVidhan);
 

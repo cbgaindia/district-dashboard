@@ -50,7 +50,7 @@ const ConstBar = ({ meta, schemeData, showTable }) => {
         const tableRowsObj = {
           [tableHeader[0].accessor]: String(name),
         };
-        //  for each year, fill the constituency value
+        //  for each year, fill the district value
         Object.keys(yearsObj).length &&
           Object.keys(yearsObj).forEach((yearElm, index) => {
             const yearFiltered = getParameterCaseInsensitive(
@@ -84,7 +84,7 @@ const ConstBar = ({ meta, schemeData, showTable }) => {
     setSelectedCons(arr);
   }
 
-  // generate grouped constituency list based on state
+  // generate grouped district list based on state
   const constList = React.useMemo(() => {
     const consList = meta.schemeData.metadata
       ? meta.schemeData.metadata.consList
@@ -122,7 +122,7 @@ const ConstBar = ({ meta, schemeData, showTable }) => {
             isMulti
             isGrouped
             id="cons-selector"
-            placeholder="Add more constituency to compare"
+            placeholder="Add more districts to compare"
           />
         )}
         {meta.year && (

@@ -43,7 +43,7 @@ const ConsSelectorMobile = () => {
           </IconButton>
           <Modal
             isOpen={isOpen}
-            label="constituency change modal"
+            label="district change modal"
             modalHandler={() => setIsOpen(!isOpen)}
           >
             <Header>

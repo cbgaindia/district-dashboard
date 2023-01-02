@@ -20,7 +20,7 @@ export default function Home({ constList }) {
   const seo = {
     title: 'Welcome - District Dashboard',
     description:
-      'A unique, one-of-its-kind dashboard that opens up constituency-wise fiscal information for several centrally sponsored and central sector schemes.',
+      'A unique, one-of-its-kind dashboard that opens up district-wise fiscal information for several centrally sponsored and central sector schemes.',
   };
 
   return (

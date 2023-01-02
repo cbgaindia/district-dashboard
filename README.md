@@ -9,7 +9,7 @@
 <img alt="MIT License" src="https://img.shields.io/apm/l/atomic-design-ui.svg?"/>
 </a>
 </p>
-<p align="center">A unique, one-of-its-kind dashboard that opens up constituency-wise fiscal information for several centrally sponsored and central sector schemes.</p>
+<p align="center">A unique, one-of-its-kind dashboard that opens up district-wise fiscal information for several centrally sponsored and central sector schemes.</p>
 
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -17,7 +17,7 @@
   - [Styling](#styling)
   - [Backend](#backend)
   - [Pages](#pages)
-  - [Directory Structuce](#directory-structuce)
+  - [Directory Structure](#directory-structure)
   - [Data fetching](#data-fetching)
     - [Pre-fetch data in the server-side](#pre-fetch-data-in-the-server-side)
   - [ESLint](#eslint)

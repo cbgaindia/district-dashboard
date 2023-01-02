@@ -144,7 +144,7 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
 
   // const newMapItem = useCallback((e) => {
   //   if (e) {
-  //     // overriding map highlight on constituency selection
+  //     // overriding map highlight on district selection
   //     const myChart = echarts.getInstanceByDom(
   //       document.querySelector('#mapView .echarts-for-react')
   //     );
