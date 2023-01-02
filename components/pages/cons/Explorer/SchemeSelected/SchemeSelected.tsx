@@ -17,12 +17,11 @@ const SchemeSelected = ({ queryData, schemeList }) => {
   const dispatchCons = metaReducer.dispatch;
 
   const { data: schemeRes } = swrFetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${queryData.scheme}" AND organization:constituency-v3 AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${queryData.scheme}" AND organization:district-dashboard AND private:false`
   );
   const schemeObj = schemeRes?.result.results[0];
 
-  const newFetcher = () =>
-    newSchemeDataFetch(queryData.scheme, queryData.sabha, schemeObj);
+  const newFetcher = () => newSchemeDataFetch(queryData.scheme, schemeObj);
   const { data } = useSWR(
     `${queryData.state}/${queryData.scheme}/new`,
     newFetcher,
@@ -41,7 +40,7 @@ const SchemeSelected = ({ queryData, schemeList }) => {
 
   React.useEffect(() => {
     if (data) {
-      const schemeData = queryData.sabha == 'vidhan' ? data.ac : data.pc;
+      const schemeData = data;
 
       if (schemeData.data) {
         const years = Object.keys(
@@ -77,6 +76,7 @@ const SchemeSelected = ({ queryData, schemeList }) => {
     vizType: 'map',
   };
   const [reducerState, dispatch] = React.useReducer(reducer, initalState);
+  console.log(queryData.scheme, schemeObj, schemeObj?.resources[0].url, data);
 
   return (
     <>

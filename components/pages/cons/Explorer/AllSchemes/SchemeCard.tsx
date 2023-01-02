@@ -19,13 +19,15 @@ const SchemeCard = ({ data }) => {
       >
         <a>
           <figure>
-            <Image
-              src={SchemesData[data.scheme_slug].logo}
-              alt=""
-              width={88}
-              height={88}
-              className="img-contain"
-            />
+            {SchemesData[data.scheme_slug] ? (
+              <Image
+                src={SchemesData[data.scheme_slug].logo}
+                alt=""
+                width={88}
+                height={88}
+                className="img-contain"
+              />
+            ) : null}
           </figure>
           <h3>{data.scheme_name}</h3>
         </a>

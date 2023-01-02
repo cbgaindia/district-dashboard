@@ -94,6 +94,8 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
   // changing map chart values on sabha change
   useEffect(() => {
     if (data && filteredData) {
+      console.log(consData, filteredData, schemeData);
+
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
         value: filteredData[item] || 0,

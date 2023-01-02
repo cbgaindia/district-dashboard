@@ -236,135 +236,112 @@ export function generateSlug(slug) {
   return null;
 }
 
-export async function newSchemeDataFetch(id, sabha = null, schemeObj = null) {
-  const obj: any = {
-    ac: {},
-    pc: {},
-  };
+export async function newSchemeDataFetch(id, schemeObj = null) {
+  let obj: any;
   if (!id) return obj;
 
-  let slug: string;
-  let acUrl: string;
-  let pcUrl: string;
-
-  if (schemeObj) {
-    slug = schemeObj.name || '';
-  } else {
-    await newFetchQuery('slug', id).then((data) => {
-      data[0].resources.forEach((file) => {
-        if (file.name.includes('pc.xlsx')) pcUrl = file.url;
-        else if (file.name.includes('ac.xlsx')) acUrl = file.url;
-      });
-      slug = data[0].name || '';
-    });
-  }
-
-  const urlArr =
-    sabha == 'lok' ? [pcUrl] : sabha == 'vidhan' ? [acUrl] : [acUrl, pcUrl];
+  let slug = schemeObj.name || '';
+  let url = schemeObj.resources[0].url;
 
   // 'for-of' instead of forEach to wait till it finishes before returning
-  for (const url of urlArr) {
-    await fetchSheets(url).then((res) => {
-      const dataParse = res[0];
-      const metaParse = res[1];
-      // if (url.includes('pc.xlsx')) obj.pc = res;
-      // else obj.ac = res;
-      // return;
-      let metaObj: any = {};
+  await fetchSheets(url).then((res) => {
+    const dataParse = res[0];
+    const metaParse = res[1];
+    // if (url.includes('pc.xlsx')) obj.pc = res;
+    // else obj.ac = res;
+    // return;
+    let metaObj: any = {};
 
-      // Meta Data
-      metaParse.forEach((val) => {
-        if (val[0]) {
-          metaObj = {
-            ...metaObj,
-            [generateSlug(val[0])]: val[1],
-          };
-        }
-      });
-
-      // creating list of constituencies
-      const consList = {};
-      dataParse.map((item, index) => {
-        if (consList[item[0]]) {
-          if (item[3] == dataParse[index - 1][3]) return;
-          consList[item[0]].push({
-            constName: item[2],
-            constCode: item[3],
-          });
-        } else {
-          if (item[0] == 'state_ut_name') return;
-          else
-            consList[item[0]] = [
-              {
-                constName: item[2],
-                constCode: item[3],
-              },
-            ];
-        }
-      });
-
-      const tempObj: any = {};
-      tempObj.metadata = {
-        name: metaObj['scheme_name'] || '',
-        type: metaObj['scheme_type'] || '',
-        description: metaObj['scheme_description'] || '',
-        source: metaObj['data_source'] || '',
-        frequency: metaObj.frequency || '',
-        methodology: metaObj.methodology || '',
-        remarks: metaObj.frequency || '',
-        slug,
-        indicators: [],
-        consList: consList || [],
-      };
-
-      // Tabular Data
-      for (let i = 5; i < dataParse[0].length; i += 1) {
-        let fiscal_year = {};
-        const state_Obj = {};
-        for (let j = 1; j < dataParse.length; j += 1) {
-          if (!(generateSlug(dataParse[j][0]) in state_Obj)) {
-            fiscal_year = {};
-          }
-          if (dataParse[j][4]) {
-            fiscal_year[dataParse[j][4].trim()] = {
-              ...fiscal_year[dataParse[j][4].trim()],
-              [dataParse[j][3]]: Number.isNaN(parseFloat(dataParse[j][i]))
-                ? '0'
-                : parseFloat(dataParse[j][i]).toFixed(2),
-            };
-          }
-          state_Obj[generateSlug(dataParse[j][0])] = { ...fiscal_year };
-        }
-        const indicatorSlug =
-          generateSlug(metaObj[`indicator_${i - 4}_common_name`]) ||
-          generateSlug(metaObj[`indicator_${i - 4}_name`]) ||
-          '';
-
-        tempObj.metadata.indicators.push(indicatorSlug);
-
-        tempObj.data = {
-          ...tempObj.data,
-          [indicatorSlug]: {
-            state_Obj,
-            name:
-              metaObj[`indicator_${i - 4}_common_name`] ||
-              metaObj[`indicator_${i - 4}_name`] ||
-              '',
-            description:
-              metaObj[`indicator_${i - 4}_common_description`] ||
-              metaObj[`indicator_${i - 4}_description`] ||
-              '',
-            note: metaObj[`indicator_${i - 4}_note`] || '',
-            slug: indicatorSlug,
-            unit: metaObj[`indicator_${i - 4}_unit`] || '',
-          },
+    // Meta Data
+    metaParse.forEach((val) => {
+      if (val[0]) {
+        metaObj = {
+          ...metaObj,
+          [generateSlug(val[0])]: val[1],
         };
       }
-
-      if (url.includes('pc.xlsx')) obj.pc = tempObj;
-      else obj.ac = tempObj;
     });
-  }
+
+    // creating list of constituencies
+    const consList = {};
+    dataParse.map((item, index) => {
+      if (consList[item[0]]) {
+        if (item[3] == dataParse[index - 1][3]) return;
+        consList[item[0]].push({
+          constName: item[2],
+          constCode: item[3],
+        });
+      } else {
+        if (item[0] == 'state_ut_name') return;
+        else
+          consList[item[0]] = [
+            {
+              constName: item[2],
+              constCode: item[3],
+            },
+          ];
+      }
+    });
+
+    const tempObj: any = {};
+    tempObj.metadata = {
+      name: metaObj['scheme_name'] || '',
+      type: metaObj['scheme_type'] || '',
+      description: metaObj['scheme_description'] || '',
+      source: metaObj['data_source'] || '',
+      frequency: metaObj.frequency || '',
+      methodology: metaObj.methodology || '',
+      remarks: metaObj.frequency || '',
+      slug,
+      indicators: [],
+      consList: consList || [],
+    };
+
+    // Tabular Data
+    for (let i = 6; i < dataParse[0].length; i += 1) {
+      let fiscal_year = {};
+      const state_Obj = {};
+      for (let j = 1; j < dataParse.length; j += 1) {
+        if (!(generateSlug(dataParse[j][0]) in state_Obj)) {
+          fiscal_year = {};
+        }
+        if (dataParse[j][4]) {
+          fiscal_year[dataParse[j][5].trim()] = {
+            ...fiscal_year[dataParse[j][5].trim()],
+            [dataParse[j][3]]: Number.isNaN(parseFloat(dataParse[j][i]))
+              ? '0'
+              : parseFloat(dataParse[j][i]).toFixed(2),
+          };
+        }
+        state_Obj[generateSlug(dataParse[j][0])] = { ...fiscal_year };
+      }
+      const indicatorSlug =
+        generateSlug(metaObj[`indicator_${i - 5}_common_name`]) ||
+        generateSlug(metaObj[`indicator_${i - 5}_name`]) ||
+        '';
+
+      tempObj.metadata.indicators.push(indicatorSlug);
+
+      tempObj.data = {
+        ...tempObj.data,
+        [indicatorSlug]: {
+          state_Obj,
+          name:
+            metaObj[`indicator_${i - 5}_common_name`] ||
+            metaObj[`indicator_${i - 5}_name`] ||
+            '',
+          description:
+            metaObj[`indicator_${i - 5}_common_description`] ||
+            metaObj[`indicator_${i - 5}_description`] ||
+            '',
+          note: metaObj[`indicator_${i - 5}_note`] || '',
+          slug: indicatorSlug,
+          unit: metaObj[`indicator_${i - 5}_unit`] || '',
+        },
+      };
+    }
+    obj = tempObj;
+  });
   return obj;
 }
 
