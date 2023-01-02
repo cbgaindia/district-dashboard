@@ -82,7 +82,7 @@ const ExplorerView = ({ meta, dispatch }) => {
 
   const vizToggle = [
     {
-      name: `Constituency Data Explorer`,
+      name: `District Data Explorer`,
       id: 'consView',
       icon: <IconGeneralTrends width={24} />,
     },

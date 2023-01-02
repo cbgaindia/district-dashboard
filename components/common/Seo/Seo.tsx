@@ -5,9 +5,7 @@ const Seo: React.FC<{ seo?: any }> = ({ seo }) => {
   // const router = useRouter();
 
   const title =
-    seo && seo.title
-      ? seo.title
-      : 'Constituency Dashboard | Open Budgets India';
+    seo && seo.title ? seo.title : 'District Dashboard | Open Budgets India';
   const description =
     seo && seo.description
       ? seo.description
@@ -52,7 +50,7 @@ const Seo: React.FC<{ seo?: any }> = ({ seo }) => {
           content={`${url}/assets/images/constituency_home.png`}
         />
 
-        <meta name="application-name" content="Constituency Dashboard" />
+        <meta name="application-name" content="District Dashboard" />
       </Head>
       <div className="sr-only">
         <span id="maincontent">-</span>

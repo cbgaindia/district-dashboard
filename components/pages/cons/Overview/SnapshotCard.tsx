@@ -49,7 +49,7 @@ const SnapshotCard = ({
               </div>
             </div>
             <div>
-              <AverageTitle>Constituency</AverageTitle>
+              <AverageTitle>District</AverageTitle>
               <div>
                 <SplitBar val={data.value.constituency.bar} />
 

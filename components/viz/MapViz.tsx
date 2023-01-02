@@ -22,7 +22,8 @@ const MapViz = ({
   const memoMap = React.useMemo(() => {
     const tempObj = { ...mapFile };
     tempObj?.features?.forEach(
-      (obj) => (obj.properties['dtcode11'] = String(obj.properties['dtcode11']))
+      (obj) =>
+        (obj.properties['dtcode11'] = String(obj.properties['dtcode11']))
     );
     return tempObj;
   }, [mapFile]);
@@ -61,7 +62,7 @@ const MapViz = ({
                 var axisData = opt.series[0].data;
                 var table =
                   '<table style="width:100%;text-align:left"><tbody><tr>' +
-                  '<td style="width: 300px;"><strong>Constituency</strong></td>' +
+                  '<td style="width: 300px;"><strong>District</strong></td>' +
                   '<td><strong>Code</strong></td>' +
                   '<td><strong>Value</strong></td>' +
                   '</tr>';

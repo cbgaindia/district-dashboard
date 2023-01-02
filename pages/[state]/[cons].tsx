@@ -121,7 +121,7 @@ const ConsPage: React.FC<Props> = ({
       {
         value: 'overview',
         name: 'Overview',
-        altName: 'Key Highights of Constituency',
+        altName: 'Key Highights of District',
         icon: <OverViewIcon size={40} />,
         content: (
           <ConstituencyPage.Provider
@@ -143,7 +143,7 @@ const ConsPage: React.FC<Props> = ({
       {
         value: 'explorer',
         name: 'Explorer',
-        altName: 'Scheme Data of Constituency',
+        altName: 'Scheme Data of District',
         icon: <ExplorerIcon size={40} />,
         content: (
           <ConstituencyPage.Provider

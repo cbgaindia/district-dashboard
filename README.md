@@ -1,4 +1,4 @@
-<h1 align="center">Constituency Dashboard</h1>
+<h1 align="center">District Dashboard</h1>
 <h2 align="center">Part of the <a href="https://openbudgetsindia.org/">Open Budgets India</a> Project</h2>
 <br/>
 <p align="center">

@@ -47,7 +47,7 @@ const MobileNav = ({ data }) => {
                     height={46}
                   ></Image>
                 ) : (
-                  <h1>{data.site || 'Constituency Dashboard'}</h1>
+                  <h1>{data.site || 'District Dashboard'}</h1>
                 )}
               </a>
             </Link>

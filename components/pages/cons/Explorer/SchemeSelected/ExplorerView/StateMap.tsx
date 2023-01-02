@@ -106,9 +106,7 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
   // setting tabular data
   useEffect(() => {
     if (meta.allYears && schemeData) {
-      const tableHeader = [
-        { Header: 'Constituency', accessor: 'constHeader' },
-      ];
+      const tableHeader = [{ Header: 'District', accessor: 'constHeader' }];
 
       // generate headers for all years (state view)
       meta.allYears.forEach((element) =>

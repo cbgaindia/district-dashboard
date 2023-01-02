@@ -96,7 +96,7 @@ const StateList = ({ data }) => {
       // {
       //   value: 'vidhan',
       //   name: 'Vidhan Sabha',
-      //   altName: 'Parliament Constituency',
+      //   altName: 'Parliament District',
       //   icon: <VidhanSabha width="40" />,
       //   content: generateConsList({ value: 'vidhan', list: vidhanData }),
       // },

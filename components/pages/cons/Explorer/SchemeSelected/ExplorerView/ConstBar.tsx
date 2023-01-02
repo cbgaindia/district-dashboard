@@ -29,7 +29,7 @@ const ConstBar = ({ meta, schemeData, showTable }) => {
   function generateBarChart(years, constituencies) {
     const barChartHeader = ['Year'];
 
-    const tableHeader = [{ Header: 'Constituency', accessor: 'constHeader' }];
+    const tableHeader = [{ Header: 'District', accessor: 'constHeader' }];
 
     //  years object to store the values in arrays
     const yearsObj = {};
@@ -141,7 +141,7 @@ const ConstBar = ({ meta, schemeData, showTable }) => {
         {barData ? (
           <GroupBarChart
             yAxisLabel={`Value (in ${meta.unit})`}
-            xAxisLabel="Constituency"
+            xAxisLabel="District"
             theme={['#4965B2', '#ED8686', '#69BC99']}
             dataset={barData}
             stack={false}
