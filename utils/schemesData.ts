@@ -23,6 +23,7 @@ import nsap from 'public/images/schemesLogos/NSAP.png';
 import sbmg from 'public/images/schemesLogos/SBMG.png';
 import pmmvy from 'public/images/schemesLogos/PMMVY.png';
 import pmkisan from 'public/images/schemesLogos/pmkisan.jpg';
+import pmfby from 'public/assets/schemesLogos/pmfby.png';
 
 const SchemesData = {
   jjm: {
@@ -100,6 +101,12 @@ const SchemesData = {
   pmmvy: {
     logo: pmmvy,
   },
+  pmfby_rabi: {
+    logo: pmfby,
+  },
+  pmfby_kharif: {
+    logo: pmfby,
+  }
 };
 
 export default SchemesData;
