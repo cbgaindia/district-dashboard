@@ -71,6 +71,10 @@ export const HeaderWrapper = styled.div`
         display: none;
       }
     }
+
+    > section {
+      flex-grow: 1;
+    }
   }
 `;
 
