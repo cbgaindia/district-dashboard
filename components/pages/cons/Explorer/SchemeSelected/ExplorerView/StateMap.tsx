@@ -9,7 +9,7 @@ import {
 import { Menu } from 'components/actions';
 import useEffectOnChange from 'utils/hooks';
 import { Table } from 'components/data';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 
 const StateMap = ({ meta, schemeData, showTable, consList }) => {
   const [mapValues, setMapvalues] = useState([]);

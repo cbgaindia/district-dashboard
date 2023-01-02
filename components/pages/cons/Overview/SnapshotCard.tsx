@@ -2,7 +2,7 @@ import { Button, ProgressBar } from '@opub-cdl/design-system';
 import { Notice } from 'components/icons';
 import { SplitBar } from 'components/viz/SplitBar';
 import Image from 'next/image';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 import React from 'react';
 import styled from 'styled-components';
 import SchemesData from 'utils/schemesData';
@@ -20,14 +20,16 @@ const SnapshotCard = ({
     <SnapshotSchemeCard>
       <CardTitle>
         <figure>
-          <Image
-            src={SchemesData[data.scheme_slug].logo}
-            width={72}
-            height={72}
-            layout="fixed"
-            alt=""
-            className="img-cover"
-          />
+          {SchemesData[data.scheme_slug] ? (
+            <Image
+              src={SchemesData[data.scheme_slug].logo}
+              width={72}
+              height={72}
+              layout="fixed"
+              alt=""
+              className="img-cover"
+            />
+          ) : null}
         </figure>
 
         <h5>{data.scheme_name}</h5>

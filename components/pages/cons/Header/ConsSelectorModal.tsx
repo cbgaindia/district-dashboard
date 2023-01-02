@@ -17,11 +17,13 @@ import {
 } from '@opub-cdl/design-system';
 import { Cross, IconDropdown, LokSabha, VidhanSabha } from 'components/icons';
 import StateTab from './StateTab';
-import { fetchJSON } from 'utils/fetch';
+import { fetchJSON, updatedFetchJSON } from 'utils/fetch';
 import { swrFetch } from 'utils/helper';
 
 const ConsSelectorModal = () => {
-  const { data, isLoading } = swrFetch(`/constList`, fetchJSON, ['Cons Info']);
+  const { data, isLoading } = swrFetch(`/distList`, updatedFetchJSON, [
+    'all districts',
+  ]);
 
   return (
     <Wrapper>
@@ -58,27 +60,7 @@ const ConsSelectorModal = () => {
               </StyledDialogClose>
             </StyledDialogTitle>
             <Content>
-              <Tabs defaultValue="lok">
-                <TabsList>
-                  <SabhaSelector>
-                    <span>States</span>
-                    <div>
-                      <TabsTrigger value="lok">
-                        <Box>{<LokSabha width={24} />}</Box> Lok Sabha
-                      </TabsTrigger>
-                      <TabsTrigger value="vidhan">
-                        <Box>{<VidhanSabha width={24} />}</Box> Vidhan Sabha
-                      </TabsTrigger>
-                    </div>
-                  </SabhaSelector>
-                </TabsList>
-                <TabsContent value="lok">
-                  <StateTab data={data?.lok} sabha="lok" />
-                </TabsContent>
-                <TabsContent value="vidhan">
-                  <StateTab data={data?.vidhan} sabha="vidhan" />
-                </TabsContent>
-              </Tabs>
+              <StateTab data={data} sabha="lok" />
             </Content>
           </StyledDialogContent>
         </Dialog>

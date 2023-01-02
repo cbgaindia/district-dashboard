@@ -13,7 +13,7 @@ import {
 } from '@opub-cdl/design-system';
 import { IconToggleOff } from 'components/icons/IconToggleOff';
 import { LoadingDiv } from 'components/pages/state/StateList/ConsMapView';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 
 const ConstBar = dynamic(() => import('./ConstBar'), {
   ssr: false,

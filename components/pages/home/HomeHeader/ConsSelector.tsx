@@ -32,15 +32,13 @@ const ConsSelector: React.FC<{
   const districts = React.useMemo(() => {
     if (selectedState)
       return Object.values(consData[selectedState]).map((item: any) => ({
-        value: item.district_code_census,
+        value: item.district_code_lg,
         label: item.district,
       }));
   }, [selectedState]);
 
   return (
     <Wrapper>
-      
-
       <ConsMenu>
         <Combobox
           options={states}
@@ -73,9 +71,7 @@ const ConsSelector: React.FC<{
                 ? `/${selectedState.toLowerCase()}/${sabha}/${selectedCons}`
                 : null
             }
-            onClick={
-              !selectedCons ? () => alert('Select a district') : null
-            }
+            onClick={!selectedCons ? () => alert('Select a district') : null}
           >
             Explore
           </Button>

@@ -10,7 +10,7 @@ import {
 } from '@opub-cdl/design-system';
 import { IconMinimize } from 'components/icons';
 import { useRouter } from 'next/router';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 
 const SubHeading = ({ meta, schemeList, queryData }) => {
   const { metaReducer } = React.useContext(ConstituencyPage);

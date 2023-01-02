@@ -201,7 +201,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   const queryValue: any = query || {};
-  if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
+  // if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
 
   const [stateScheme, stateMetadata, stateData] = await Promise.all([
     stateSchemeFetch(queryValue.state.replace(/-/g, ' ')),
@@ -217,7 +217,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       : queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
 
   const district = updatedJsonData[state_format].find(
-    (item) => item.district_code_census == queryValue.cons
+    (item) => item.district_code_lg == queryValue.cons
   ).district;
 
   const districtJson: any = await updateDistrictMetadataFetch(

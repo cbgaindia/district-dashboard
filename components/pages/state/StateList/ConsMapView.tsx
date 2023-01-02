@@ -10,7 +10,7 @@ function generateMapData(obj) {
     return {
       mapName: item.district,
       value: '1',
-      name: item.district_code_census,
+      name: item.district_code_lg,
     };
   });
 

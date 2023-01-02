@@ -5,7 +5,7 @@ import ExplorerView from './ExplorerView';
 import { newSchemeDataFetch } from 'utils/fetch';
 import SubHeading from './SubHeading';
 import { swrFetch } from 'utils/helper';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 
 const reducer = (state: any, action: any) => {
   return { ...state, ...action };

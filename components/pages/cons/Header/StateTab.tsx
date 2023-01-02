@@ -1,20 +1,16 @@
-import styled from 'styled-components';
 import {
   Tabs,
+  TabsContent,
   TabsList,
   TabsTrigger,
-  TabsContent,
 } from '@opub-cdl/design-system';
 import { IconArrowRight } from 'components/icons';
-import {
-  groupListByAlphabets,
-  handleArrOfObjSearch,
-  sortArrayOfObj,
-} from 'utils/helper';
 import React from 'react';
+import styled from 'styled-components';
+import { handleArrOfObjSearch } from 'utils/helper';
 
 const StateTab = ({ data, sabha }) => {
-  return (
+  return data ? (
     <Wrapper>
       <Tabs defaultValue={Object.keys(data)[0]} orientation="vertical">
         <TabsList>
@@ -31,11 +27,7 @@ const StateTab = ({ data, sabha }) => {
 
         {Object.keys(data) &&
           Object.keys(data).map((item) => {
-            const sortedList = groupListByAlphabets(
-              sortArrayOfObj(data[item], 'constituency'),
-              'constituency'
-            );
-
+            const sortedList = data[item];
             return (
               <ConstituencyList
                 key={item}
@@ -47,6 +39,8 @@ const StateTab = ({ data, sabha }) => {
           })}
       </Tabs>
     </Wrapper>
+  ) : (
+    <></>
   );
 };
 
@@ -66,19 +60,14 @@ const ConstituencyList = ({ list, state, sabha }) => {
           onChange={(e) => handleSearchChange(e.target.value, list)}
         />
         {consList.length ? (
-          consList.map((group: any) => (
-            <React.Fragment key={group.char}>
-              <span>{group.char}</span>
-              <ul>
-                {group.children.map((cons) => (
-                  <ConsLink
-                    href={`/${state}/${sabha}/${cons.constituency_code}`}
-                    key={`${cons.constituency_code}`}
-                  >
-                    {cons.constituency}
-                  </ConsLink>
-                ))}
-              </ul>
+          consList.map((cons: any) => (
+            <React.Fragment key={cons.district_code_lg}>
+              <ConsLink
+                href={`/${state}/${sabha}/${cons.district_code_lg}`}
+                key={`${cons.district_code_lg}`}
+              >
+                {cons.district}
+              </ConsLink>
             </React.Fragment>
           ))
         ) : (

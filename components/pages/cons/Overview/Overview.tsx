@@ -20,7 +20,6 @@ const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
         return result;
       }, []);
   }, [stateMetadata]); // TODO it's using state data
-  console.log(data, queryData);
 
   return (
     <Wrapper id="overview-wrapper">

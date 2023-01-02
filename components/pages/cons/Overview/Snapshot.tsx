@@ -1,6 +1,6 @@
 import { Menu } from 'components/actions';
 import { Indicator, IndicatorMobile } from 'components/data';
-import { ConstituencyPage } from 'pages/[state]/[sabha]/[cons]';
+import { ConstituencyPage } from 'pages/[state]/[cons]';
 import React from 'react';
 import styled from 'styled-components';
 import { fetchIndicators, generateSlug } from 'utils/fetch';

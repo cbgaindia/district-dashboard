@@ -9,10 +9,7 @@ import SearchCons from './SearchCons';
 import { useWindowSize } from 'utils/hooks';
 import { LoadingDiv } from './ConsMapView';
 
-import {
-  Tabs,
-  TabsContent,
-} from '@opub-cdl/design-system';
+import { Tabs, TabsContent } from '@opub-cdl/design-system';
 
 const ConsMapView = dynamic(() => import('./ConsMapView'), {
   ssr: false,
@@ -73,9 +70,9 @@ const StateList = ({ data }) => {
                       <span>{group.char}</span>
                       <ul>
                         {group.children.map((cons) => (
-                          <li key={cons.district_code_census + cons.district}>
+                          <li key={cons.district_code_lg + cons.district}>
                             <Link
-                              href={`/${data.state}/${item.value}/${cons.district_code_census}`}
+                              href={`/${data.state}/${cons.district_code_lg}`}
                               passHref
                             >
                               <ConsLink>{cons.district}</ConsLink>
