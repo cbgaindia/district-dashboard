@@ -23,7 +23,7 @@ const MapViz = ({
     const tempObj = { ...mapFile };
     tempObj?.features?.forEach(
       (obj) =>
-        (obj.properties['dtcode11'] = String(obj.properties['dtcode11']))
+        (obj.properties['dist_lgd'] = String(obj.properties['dist_lgd']))
     );
     return tempObj;
   }, [mapFile]);
@@ -109,7 +109,7 @@ const MapViz = ({
             type: 'map',
             roam: true,
             map: meta.sabha,
-            nameProperty: 'dtcode11',
+            nameProperty: 'dist_lgd',
             zoom: 1.2,
             itemStyle: {
               borderColor: '#ffffff',

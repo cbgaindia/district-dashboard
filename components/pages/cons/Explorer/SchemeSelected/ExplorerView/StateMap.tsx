@@ -98,7 +98,7 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
         value: filteredData[item] || 0,
-        mapName: consData[item].district_name_name,
+        mapName: consData[item]?.district_name_name,
       }));
       setMapvalues(tempData);
     }

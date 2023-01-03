@@ -305,7 +305,7 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
         if (!(generateSlug(dataParse[j][0]) in state_Obj)) {
           fiscal_year = {};
         }
-        if (dataParse[j][4]) {
+        if (dataParse[j][3]) {
           fiscal_year[dataParse[j][5].trim()] = {
             ...fiscal_year[dataParse[j][5].trim()],
             [dataParse[j][3]]: Number.isNaN(parseFloat(dataParse[j][i]))

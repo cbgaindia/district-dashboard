@@ -76,7 +76,6 @@ const SchemeSelected = ({ queryData, schemeList }) => {
     vizType: 'map',
   };
   const [reducerState, dispatch] = React.useReducer(reducer, initalState);
-  console.log(queryData.scheme, schemeObj, schemeObj?.resources[0].url, data);
 
   return (
     <>
