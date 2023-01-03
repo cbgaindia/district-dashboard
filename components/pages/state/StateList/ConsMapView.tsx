@@ -19,9 +19,7 @@ function generateMapData(obj) {
 
 const ConsMapView = ({ meta, consData }) => {
   const router = useRouter();
-  const { data, isLoading } = swrFetch(
-    `/assets/maps/district/${meta.state}.json`
-  );
+  const { data, isLoading } = swrFetch(`/assets/maps/${meta.state}.json`);
 
   return isLoading ? (
     <LoadingDiv>Loading Map...</LoadingDiv>
@@ -31,7 +29,7 @@ const ConsMapView = ({ meta, consData }) => {
         <MapViz
           mapFile={data}
           meta={meta}
-          data={generateMapData(consData[meta.sabha])}
+          data={generateMapData(consData.lok)}
           vizIndicators={[]}
           onlyLabel
           newMapItem={(e) => {

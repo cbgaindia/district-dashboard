@@ -1,13 +1,13 @@
-import React from 'react';
-import Link from 'next/link';
+import { LokSabha } from 'components/icons';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import React from 'react';
 import styled from 'styled-components';
 import { groupListByAlphabets, sortArrayOfObj } from 'utils/helper';
-import { LokSabha, VidhanSabha } from 'components/icons';
 //import { Toolbar } from 'components/layouts/Toolbar';
-import SearchCons from './SearchCons';
 import { useWindowSize } from 'utils/hooks';
 import { LoadingDiv } from './ConsMapView';
+import SearchCons from './SearchCons';
 
 import { Tabs, TabsContent } from '@opub-cdl/design-system';
 

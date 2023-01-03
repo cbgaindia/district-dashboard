@@ -57,7 +57,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
     </svg>
   );
 
-  return (
+  return a ? (
     <Wrapper>
       <Heading>
         {title && typeof title === 'string' ? (
@@ -69,6 +69,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
           SHOWING 0{currentSlide} / 0{childrenLength}
         </CarouselIndex>
       </Heading>
+
       <Carousel
         label=" "
         nextBtn={svgIcon}
@@ -104,7 +105,7 @@ const SummaryCarousel = ({ title, cards, titleAs = 'h3' }: Props) => {
         </ul>
       </Carousel>
     </Wrapper>
-  );
+  ) : null;
 };
 
 export default SummaryCarousel;

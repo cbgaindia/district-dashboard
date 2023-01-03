@@ -1,17 +1,17 @@
+import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import dynamic from 'next/dynamic';
 
-import { Indicator, IndicatorMobile } from 'components/data/Indicator';
-import { Globe, IconGeneralTrends, IconToggleOn } from 'components/icons';
-import { SourceWrapper } from 'components/pages/cons/Source';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@opub-cdl/design-system';
+import { Indicator, IndicatorMobile } from 'components/data/Indicator';
+import { Globe, IconGeneralTrends, IconToggleOn } from 'components/icons';
 import { IconToggleOff } from 'components/icons/IconToggleOff';
+import { SourceWrapper } from 'components/pages/cons/Source';
 import { LoadingDiv } from 'components/pages/state/StateList/ConsMapView';
 import { ConstituencyPage } from 'pages/[state]/[cons]';
 
