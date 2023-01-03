@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import {
-  consDescFetch,
   stateDataFetch,
   stateSchemeFetch,
   updatedFetchJSON,
@@ -206,8 +205,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const [stateScheme, stateMetadata, stateData] = await Promise.all([
     stateSchemeFetch(queryValue.state.replace(/-/g, ' ')),
     updateStateMetadataFetch(queryValue.state.replace(/-/g, ' ')),
-    stateDataFetch(queryValue.state, queryValue.sabha),
-    // consDescFetch(queryValue.sabha, queryValue.state, queryValue.cons),
+    stateDataFetch(queryValue.state),
   ]);
 
   const updatedJsonData: any = await updatedFetchJSON('all districts');

@@ -1,24 +1,18 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
-import styled from 'styled-components';
 import {
   Box,
-  IconButton,
   Dialog,
   DialogClose,
   DialogContent,
   DialogTitle,
   DialogTrigger,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
+  IconButton,
   keyframes,
 } from '@opub-cdl/design-system';
-import { Cross, IconDropdown, LokSabha, VidhanSabha } from 'components/icons';
-import StateTab from './StateTab';
-import { fetchJSON, updatedFetchJSON } from 'utils/fetch';
+import { Cross, IconDropdown } from 'components/icons';
+import styled from 'styled-components';
+import { updatedFetchJSON } from 'utils/fetch';
 import { swrFetch } from 'utils/helper';
+import StateTab from './StateTab';
 
 const ConsSelectorModal = () => {
   const { data, isLoading } = swrFetch(`/distList`, updatedFetchJSON, [

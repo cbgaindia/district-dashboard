@@ -1,9 +1,7 @@
-import React from 'react';
-import dynamic from 'next/dynamic';
 import { HomeHeader } from 'components/pages/home';
 import { GetStaticProps } from 'next';
-import { fetchJSON , updatedFetchJSON } from 'utils/fetch';
-import { Banner } from 'components/layouts';
+import dynamic from 'next/dynamic';
+import { updatedFetchJSON } from 'utils/fetch';
 
 const HomeStates = dynamic(
   () => import('components/pages/home/HomeStates/HomeStates'),

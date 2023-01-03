@@ -1,17 +1,10 @@
+import { IconButton } from '@opub-cdl/design-system';
+import { Cross, IconDropdown } from 'components/icons';
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Box,
-  IconButton,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '@opub-cdl/design-system';
-import { Cross, IconDropdown, LokSabha, VidhanSabha } from 'components/icons';
-import StateTab from './StateTab';
-import { fetchJSON } from 'utils/fetch';
+import { updatedFetchJSON } from 'utils/fetch';
 import { swrFetch } from 'utils/helper';
+import StateTab from './StateTab';
 
 import { Button, Modal } from 'components/actions';
 import { Header } from 'components/data/MobileAlter/MobileAlterComp';
@@ -19,7 +12,9 @@ import { Header } from 'components/data/MobileAlter/MobileAlterComp';
 const ConsSelectorMobile = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const { data, isLoading } = swrFetch(`/constList`, fetchJSON, ['Cons Info']);
+  const { data, isLoading } = swrFetch(`/distList`, updatedFetchJSON, [
+    'all districts',
+  ]);
 
   return (
     <Wrapper>
