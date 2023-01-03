@@ -18,6 +18,7 @@ import {
 import { Toolbar } from 'components/layouts/Toolbar';
 import { Overview } from 'components/pages/cons';
 import { Header } from 'components/pages/cons/Header';
+import { SORTED_SCHEMES } from 'config/year';
 import { useRouter } from 'next/router';
 import { capitalize } from 'utils/helper';
 
@@ -104,7 +105,7 @@ const ConsPage: React.FC<Props> = ({
     const tabState = isTabbed(e) ? e : 'explorer';
     setView(tabState);
 
- await router.replace({
+    await router.replace({
       pathname: `/${state}/${cons}`,
       query: {
         scheme: showScheme(e),
@@ -216,7 +217,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const district = updatedJsonData[state_format].find(
     (item) => item.district_code_lg == queryValue.cons
-  ).district;
+  )?.district;
 
   const districtJson: any = await updateDistrictMetadataFetch(
     state_format,
@@ -226,10 +227,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };
 
+  const list = SORTED_SCHEMES;
+  const orderedList = list.filter((e) =>
+    stateScheme.find((elm) => elm.scheme_slug === e.scheme_slug)
+  );
+
   return {
     props: {
       stateMetadata: stateMetadata,
-      stateScheme,
+      stateScheme: orderedList,
       district: district,
       districtJson: districtJson,
       data: {
@@ -246,22 +252,4 @@ export default ConsPage;
 const Wrapper = styled.div`
   margin-top: 32px;
   background-color: var(--color-background-light);
-`;
-const EditorialWrapper = styled.div`
-  margin-top: 20px;
-`;
-
-const EditorialHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-
-  > span {
-    font-weight: 700;
-  }
-
-  > button {
-    color: #888f8b;
-  }
 `;

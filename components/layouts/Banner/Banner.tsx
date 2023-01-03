@@ -13,17 +13,18 @@ const Banner = ({ details }) => {
         <Button
           css={{
             display: 'flex',
+            color: 'White',
             alignItems: 'center',
-            background: 'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
-            color: 'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
+            background:
+              'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
+            // color: 'linear-gradient(162.85deg, #8A9BE5 0%, #212740 99.48%)',
           }}
-          
         >
-          Open District Factsheet
+          Coming Soon
         </Button>
       </div>
       <figure>
-         <Image src={'/Vector.svg'} width={130} height={120} alt="" /> 
+        <Image src={'/Vector.svg'} width={130} height={120} alt="" />
       </figure>
     </BannerWrapper>
   );
@@ -38,10 +39,10 @@ export const BannerWrapper = styled.section`
   position: relative;
   background-color: var(--color-background-lighter);
   filter: drop-shadow(var(--box-shadow-1));
-  margin-top:30px;
+  margin-top: 30px;
 
   .gradient1-amazon {
-    margin-bottom:20px;
+    margin-bottom: 20px;
   }
 
   .banner__content {

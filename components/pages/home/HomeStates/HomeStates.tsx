@@ -10,9 +10,9 @@ const HomeStates = () => {
   const details = {
     color: '#B6E0FF',
     heading: 'District Factsheet',
-    content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
-    
-  }
+    content:
+      "Detailed analysis of schemes' performance for selected districts.",
+  };
   return (
     <Wrapper>
       <div className="container">
@@ -36,8 +36,8 @@ const HomeStates = () => {
             </li>
           ))}
         </StateList>
-        
-        <Banner details={details}/>
+
+        <Banner details={details} />
       </div>
     </Wrapper>
   );
