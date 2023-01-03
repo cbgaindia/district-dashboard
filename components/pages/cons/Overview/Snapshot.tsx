@@ -22,11 +22,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
   );
 
   const { meta } = React.useContext(ConstituencyPage);
-  const [indicator, setIndicator] = React.useState(
-    meta.metaReducer.indicator
-      ? meta.metaReducer.indicator
-      : 'budget-allocation'
-  );
+  const [indicator, setIndicator] = React.useState( meta.metaReducer.indicator );
   const { scheme } = meta.metaReducer;
   const { dispatch } = meta;
 
