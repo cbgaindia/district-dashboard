@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const finalJSON = {
       lok:
         state == 'uttar-pradesh'
-          ? { [state.toLowerCase()]: updatedJsonData['Uttar Pradesh'] }
+          ? { [state.toLowerCase()]: updatedJsonData['uttar-pradesh'] }
           : {
               [state.toLowerCase()]:
                 updatedJsonData[state[0].toUpperCase() + state.substring(1)],
