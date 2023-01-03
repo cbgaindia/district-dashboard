@@ -6,6 +6,7 @@ import { newSchemeDataFetch } from 'utils/fetch';
 import SubHeading from './SubHeading';
 import { swrFetch } from 'utils/helper';
 import { ConstituencyPage } from 'pages/[state]/[cons]';
+import { DEFAULT_YEAR } from 'config/year';
 
 const reducer = (state: any, action: any) => {
   return { ...state, ...action };
@@ -45,6 +46,10 @@ const SchemeSelected = ({ queryData, schemeList }) => {
           value: item,
           label: item,
         }));
+
+        const filterYear = years.some(year => year.value === DEFAULT_YEAR)
+        const length = years.length;
+        
         dispatchCons({
           indicator: Object.keys(schemeData.data).includes(indicator)
             ? indicator
@@ -52,7 +57,7 @@ const SchemeSelected = ({ queryData, schemeList }) => {
         });
         dispatch({
           schemeData,
-          year: year || years[0].value,
+          year: year || filterYear ? DEFAULT_YEAR : years[length-1].value,
           allYears: years,
         });
       }
