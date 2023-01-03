@@ -22,15 +22,11 @@ const SchemeSelected = ({ queryData, schemeList }) => {
   const schemeObj = schemeRes?.result.results[0];
 
   const newFetcher = () => newSchemeDataFetch(queryData.scheme, schemeObj);
-  const { data } = useSWR(
-    `${queryData.state}/${queryData.scheme}/new`,
-    newFetcher,
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-    }
-  );
+  const { data } = useSWR(schemeObj, newFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   React.useEffect(() => {
     dispatch({
