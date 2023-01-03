@@ -68,6 +68,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
               slug: generateSlug(item),
               unit: elm[item].unit,
               note: elm[item].note,
+              type: elm[item].type
             });
           });
         })
@@ -120,6 +121,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
           }}
           selectedIndicator={indicator}
           data={indicatorList}
+          primary={true}
         />
         <SnapshotSchemes>
           <SnapshotSchemeTitle>
