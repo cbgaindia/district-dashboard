@@ -9,6 +9,7 @@ type Props = {
   data: any;
   titleAs?: 'h2' | 'h3' | 'h4' | 'span' | 'p';
   returnName?: false | true;
+  primary?: false | true;
 };
 
 const Indicator = ({
@@ -17,6 +18,7 @@ const Indicator = ({
   data,
   titleAs = 'h4',
   returnName = false,
+  primary
 }: Props) => {
   const indicatorRef = useRef(null);
   useEffect(() => {
@@ -35,43 +37,116 @@ const Indicator = ({
     newIndicator(elm.id || elm.value);
   }
 
-  return (
-    <IndicatorWrapper className="indicator">
-      <IndicatorTitle as={titleAs}>Indicators</IndicatorTitle>
-      <fieldset ref={indicatorRef}>
-        <legend data-html2canvas-ignore className="sr-only">
-          Choose Indicator:
-        </legend>
-        {data &&
-          data.map(
-            (item: any) =>
-              item && (
-                <Radio
-                  onClick={handleIndicatorChange}
-                  color="var(--color-amazon-300)"
-                  data-selected={
-                    selectedIndicator == (returnName ? item.name : item.slug)
-                      ? 'true'
-                      : 'false'
-                  }
-                  id={returnName ? item.name : item.slug}
-                  text={
-                    <>
-                      {item.name}
-                      <Info>
-                        <p>{item.description}</p>
-                      </Info>
-                    </>
-                  }
-                  name="indicators"
-                  key={`indicatorItem-${item.slug}`}
-                />
-              )
-          )}
-      </fieldset>
-    </IndicatorWrapper>
-  );
-};
+  const commonIndi = data.filter(item => item.type == "common")
+  const uniqueIndi = data.filter(item => item.type == "unique")
+
+  if (primary) {
+    return (
+      <IndicatorWrapper className="indicator">
+        <IndicatorTitle as={titleAs}>Indicators</IndicatorTitle>
+        <fieldset ref={indicatorRef}>
+          <legend data-html2canvas-ignore className="sr-only">
+            Choose Indicator:
+          </legend>
+          <Heading> Common Indicators </Heading>
+          {commonIndi &&
+            commonIndi.map(
+              (item: any) =>
+                item && (
+                  <Radio
+                    onClick={handleIndicatorChange}
+                    color="var(--color-amazon-300)"
+                    data-selected={
+                      selectedIndicator == (returnName ? item.name : item.slug)
+                        ? 'true'
+                        : 'false'
+                    }
+                    id={returnName ? item.name : item.slug}
+                    text={
+                      <>
+                        {item.name}
+                        <Info>
+                          <p>{item.description}</p>
+                        </Info>
+                      </>
+                    }
+                    name="indicators"
+                    key={`indicatorItem-${item.slug}`}
+                  />
+                )
+            )}
+          <HorizontalLine />
+          <Heading> Unique Indicators </Heading>
+          {uniqueIndi &&
+            uniqueIndi.map(
+              (item: any) =>
+                item && (
+                  <Radio
+                    onClick={handleIndicatorChange}
+                    color="var(--color-amazon-300)"
+                    data-selected={
+                      selectedIndicator == (returnName ? item.name : item.slug)
+                        ? 'true'
+                        : 'false'
+                    }
+                    id={returnName ? item.name : item.slug}
+                    text={
+                      <>
+                        {item.name}
+                        <Info>
+                          <p>{item.description}</p>
+                        </Info>
+                      </>
+                    }
+                    name="indicators"
+                    key={`indicatorItem-${item.slug}`}
+                  />
+                )
+            )}
+        </fieldset>
+      </IndicatorWrapper>
+    )
+  }
+
+  else {
+    return (
+      <IndicatorWrapper className="indicator">
+        <IndicatorTitle as={titleAs}>Indicators</IndicatorTitle>
+        <fieldset ref={indicatorRef}>
+          <legend data-html2canvas-ignore className="sr-only">
+            Choose Indicator:
+          </legend>
+          {data &&
+            data.map(
+              (item: any) =>
+                item && (
+                  <Radio
+                    onClick={handleIndicatorChange}
+                    color="var(--color-amazon-300)"
+                    data-selected={
+                      selectedIndicator == (returnName ? item.name : item.slug)
+                        ? 'true'
+                        : 'false'
+                    }
+                    id={returnName ? item.name : item.slug}
+                    text={
+                      <>
+                        {item.name}
+                        <Info>
+                          <p>{item.description}</p>
+                        </Info>
+                      </>
+                    }
+                    name="indicators"
+                    key={`indicatorItem-${item.slug}`}
+                  />
+                )
+            )}
+        </fieldset>
+      </IndicatorWrapper>
+    );
+  }
+}
 
 export default Indicator;
 
@@ -139,4 +214,14 @@ const IndicatorTitle = styled.h4`
   font-weight: 700;
   border-bottom: var(--border-2);
   padding-bottom: 16px;
+`;
+
+const HorizontalLine = styled.hr`
+  width:90%;
+  border-top: 1px solid grey;
+`;
+
+const Heading = styled.h5`
+  font-weight:550;
+  margin-top:10px;
 `;
