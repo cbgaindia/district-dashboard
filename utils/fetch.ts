@@ -1,5 +1,6 @@
 import { read, utils as xlsxUtil } from 'xlsx';
 import { getParameterCaseInsensitive } from './helper';
+import { DEFAULT_YEAR } from 'config/year' ;
 
 export async function fetchQuery(query, value) {
   const queryRes = await fetch(
@@ -273,4 +274,29 @@ export async function fetchIndicators() {
   );
   const json = await fetch(url).then((res) => res.json());
   return json;
+}
+
+export function yearOptions(years) {
+  const default_year = DEFAULT_YEAR;
+  let arr = [];
+  for (var data in years) {
+    arr.push(years[data].value);
+  }
+
+  const flag = arr.includes(default_year);
+
+  let new1 = [];
+
+  for (var i in arr) {
+    if (arr[i] == default_year) continue;
+    new1.push(arr[i]);
+  }
+
+  let res = [];
+  flag == true ? (res = [default_year, ...new1]) : (res = [...new1]);
+  let opt = [];
+  for (var i in res) {
+    opt.push({ value: res[i], label: res[i] });
+  }
+  return opt;
 }
