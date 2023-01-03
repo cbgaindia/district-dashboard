@@ -74,9 +74,9 @@ const ConsPage: React.FC<Props> = ({
   const [open, setOpen] = React.useState(false);
   const cons_name = district;
 
-  function handleToolbarSwitch(e: string, cardIndicator = null) {
+  async function handleToolbarSwitch(e: string, cardIndicator = null) {
     if (cardIndicator) {
-      router.replace({
+      await router.replace({
         pathname: `/${state}/${cons}`,
         query: {
           scheme: showScheme(e),
@@ -104,7 +104,7 @@ const ConsPage: React.FC<Props> = ({
     const tabState = isTabbed(e) ? e : 'explorer';
     setView(tabState);
 
-    router.replace({
+ await router.replace({
       pathname: `/${state}/${cons}`,
       query: {
         scheme: showScheme(e),
