@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ConsSelector from './ConsSelector';
-import { vidhanTrending } from 'data/home';
+import { districtTrending } from 'data/home';
 
 const HomeHeader = ({ constList }) => {
   return (
@@ -13,7 +13,7 @@ const HomeHeader = ({ constList }) => {
         <SelectorWrapper>
           <ConsSelector
             consData={constList}
-            trending={vidhanTrending}
+            trending={districtTrending}
             sabha="lok"
           />
         </SelectorWrapper>

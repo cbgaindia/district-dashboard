@@ -1,4 +1,4 @@
-export const lokTrending = [
+export const districtTrending = [
   {
     text: 'Begusarai . Bihar',
     link: '/bihar/191',

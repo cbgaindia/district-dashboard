@@ -212,7 +212,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const updatedJsonData: any = await updatedFetchJSON('all districts');
   const state_format =
     queryValue.state == 'uttar-pradesh'
-      ? 'Uttar Pradesh'
+      ? 'uttar-pradesh'
       : queryValue.state[0].toUpperCase() + queryValue.state.substring(1);
 
   const district = updatedJsonData[state_format].find(
