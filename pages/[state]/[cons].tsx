@@ -61,7 +61,7 @@ const ConsPage: React.FC<Props> = ({
 
   const initialProps = React.useMemo(
     () => ({
-      indicator: indicator || '',
+      indicator: indicator || 'budget-utilisation',
       scheme: scheme || '',
       year: '',
       consData: data['consData'],
