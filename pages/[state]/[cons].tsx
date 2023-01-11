@@ -171,7 +171,10 @@ const ConsPage: React.FC<Props> = ({
               metaReducer: { obj: metaReducer, dispatch },
             }}
           >
-            <Treasury />
+            <Treasury 
+             queryData={{ ...router.query, cons_name }}
+             schemeList={stateScheme}
+            />
           </ConstituencyPage.Provider>
         ),
       },
