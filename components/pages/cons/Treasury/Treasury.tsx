@@ -1,9 +1,9 @@
 import { TreasurySelected } from './TreasurySelected';
 
-const Treasury = ({ schemeList, queryData }) => {
+const Treasury = ({ queryData }) => {
  return (
     <>
-     <TreasurySelected schemeList={schemeList} queryData={queryData} />
+     <TreasurySelected queryData={queryData} />
     </>
  )
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useSWR from 'swr';
-//import ExplorerView from './ExplorerView';
+import ExplorerView from './ExplorerView';
 import { newSchemeDataFetch } from 'utils/fetch';
 import SubHeading from './SubHeading';
 import { swrFetch } from 'utils/helper';
@@ -12,17 +12,17 @@ const reducer = (state: any, action: any) => {
   return { ...state, ...action };
 };
 
-const TreasurySelected = ({ queryData, schemeList }) => {
+const TreasurySelected = ({ queryData }) => {
   const { metaReducer } = React.useContext(ConstituencyPage);
   const { indicator, year } = metaReducer.obj;
   const dispatchCons = metaReducer.dispatch;
 
   const { data: schemeRes } = swrFetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${queryData.scheme}" AND organization:district-dashboard AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:treasury AND organization:district-dashboard AND private:false`
   );
   const schemeObj = schemeRes?.result.results[0];
 
-  const newFetcher = () => newSchemeDataFetch(queryData.scheme, schemeObj);
+  const newFetcher = () => newSchemeDataFetch("treasury", schemeObj);
   const { data } = useSWR(schemeObj, newFetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
@@ -83,7 +83,7 @@ const TreasurySelected = ({ queryData, schemeList }) => {
       <SubHeading
         meta={reducerState}
       />
-      {/* <ExplorerWrapper>
+      <ExplorerWrapper>
         {!reducerState.schemeData ? (
           <div>Loading...</div>
         ) : (
@@ -98,7 +98,7 @@ const TreasurySelected = ({ queryData, schemeList }) => {
             />
           </>
         )}
-      </ExplorerWrapper> */}
+      </ExplorerWrapper>
     </>
   );
 };

@@ -173,7 +173,6 @@ const ConsPage: React.FC<Props> = ({
           >
             <Treasury 
              queryData={{ ...router.query, cons_name }}
-             schemeList={stateScheme}
             />
           </ConstituencyPage.Provider>
         ),
