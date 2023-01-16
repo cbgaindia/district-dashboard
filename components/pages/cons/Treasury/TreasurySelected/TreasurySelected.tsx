@@ -49,7 +49,8 @@ const TreasurySelected = ({ queryData }) => {
 
         const filterYear = years.some(year => year.value === DEFAULT_YEAR)
         const length = years.length;
-        
+        const yearFlag = years.some(yearVal => yearVal.value == year)
+
         dispatchCons({
           indicator: Object.keys(schemeData.data).includes(indicator)
             ? indicator
@@ -57,7 +58,7 @@ const TreasurySelected = ({ queryData }) => {
         });
         dispatch({
           schemeData,
-          year: year || filterYear ? DEFAULT_YEAR : years[length-1].value,
+          year: yearFlag ? year : filterYear ? DEFAULT_YEAR : years[length-1].value,
           allYears: years,
         });
       }
