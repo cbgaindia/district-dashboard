@@ -12,7 +12,7 @@ import { Table } from 'components/data';
 import { ConstituencyPage } from 'pages/[state]/[cons]';
 import { yearOptions } from 'utils/fetch'
 
-const StateMap = ({ meta, schemeData, showTable, consList }) => {
+const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   const [mapValues, setMapvalues] = useState([]);
   const [mapIndicator, setMapIndicator] = useState(undefined);
   const { state, indicator } = meta;
@@ -39,50 +39,50 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
       const binLength = Math.floor(uniq.length / 5);
       const vizIndicators = binLength
         ? [
-            {
-              max: -999999999,
-              label: `Data not avaialble`,
-              color: '#EBF0EE',
-            },
-            {
-              min: uniq[0],
-              max: uniq[binLength],
-              label: `${uniq[0]} to ${uniq[binLength + 1]}`,
-              color: '#41A8A8',
-            },
-            {
-              min: uniq[binLength + 1],
-              max: uniq[binLength * 2],
-              label: `${uniq[binLength + 1]} to ${uniq[binLength * 2]}`,
-              color: ' #368B8B',
-            },
-            {
-              min: uniq[2 * binLength + 1],
-              max: uniq[binLength * 3],
-              label: `${uniq[binLength * 2]} to ${uniq[binLength * 3]}`,
-              color: '#286767',
-            },
-            {
-              min: uniq[3 * binLength + 1],
-              max: uniq[binLength * 4],
-              label: `${uniq[binLength * 3]} to ${uniq[binLength * 4]}`,
-              color: '#1F5151',
-            },
-            {
-              min: uniq[4 * binLength + 1],
-              max: uniq[uniq.length - 1],
-              label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
-              color: ' #173B3B',
-            },
-          ]
+          {
+            max: -999999999,
+            label: `Data not avaialble`,
+            color: '#EBF0EE',
+          },
+          {
+            min: uniq[0],
+            max: uniq[binLength],
+            label: `${uniq[0]} to ${uniq[binLength + 1]}`,
+            color: '#41A8A8',
+          },
+          {
+            min: uniq[binLength + 1],
+            max: uniq[binLength * 2],
+            label: `${uniq[binLength + 1]} to ${uniq[binLength * 2]}`,
+            color: ' #368B8B',
+          },
+          {
+            min: uniq[2 * binLength + 1],
+            max: uniq[binLength * 3],
+            label: `${uniq[binLength * 2]} to ${uniq[binLength * 3]}`,
+            color: '#286767',
+          },
+          {
+            min: uniq[3 * binLength + 1],
+            max: uniq[binLength * 4],
+            label: `${uniq[binLength * 3]} to ${uniq[binLength * 4]}`,
+            color: '#1F5151',
+          },
+          {
+            min: uniq[4 * binLength + 1],
+            max: uniq[uniq.length - 1],
+            label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
+            color: ' #173B3B',
+          },
+        ]
         : [
-            {
-              min: 0,
-              max: 0,
-              label: `data not found`,
-              color: '#494D44',
-            },
-          ];
+          {
+            min: 0,
+            max: 0,
+            label: `data not found`,
+            color: '#494D44',
+          },
+        ];
       setMapIndicator(vizIndicators);
     }
   }, [filteredData, data]);
@@ -169,34 +169,43 @@ const StateMap = ({ meta, schemeData, showTable, consList }) => {
       <p>Loading Table...</p>
     )
   ) : (
-    <Wrapper>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        mapIndicator && (
-          <>
-            {meta.allYears && (
-              <YearSelector>
-                <Menu
-                  value={year}
-                  showLabel={false}
-                  options={yearOptions(meta.allYears)}
-                  heading="Financial Year:"
-                  handleChange={(e) => setYear(e)}
-                />
-              </YearSelector>
-            )}
-            <MapViz
-              mapFile={data}
-              meta={meta}
-              data={mapValues}
-              vizIndicators={mapIndicator}
+    <>
+      <Title>
+        {`${schemeName} . ${meta.indicator?.replace(
+          '-',
+          ' '
+        )} ${`${year}`} . ${meta.state}`}
+      </Title>
+
+      <Wrapper>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          mapIndicator && (
+            <>
+              {meta.allYears && (
+                <YearSelector>
+                  <Menu
+                    value={year}
+                    showLabel={false}
+                    options={yearOptions(meta.allYears)}
+                    heading="Financial Year:"
+                    handleChange={(e) => setYear(e)}
+                  />
+                </YearSelector>
+              )}
+              <MapViz
+                mapFile={data}
+                meta={meta}
+                data={mapValues}
+                vizIndicators={mapIndicator}
               // newMapItem={newMapItem}
-            />
-          </>
-        )
-      )}
-    </Wrapper>
+              />
+            </>
+          )
+        )}
+      </Wrapper>
+    </>
   );
 };
 
@@ -210,7 +219,24 @@ const Wrapper = styled.div`
 
 const YearSelector = styled.div`
   position: absolute;
-  top: 16px;
+  top: 20px;
   right: 16px;
   z-index: 10;
+`;
+
+const Title = styled.div`
+  border-radius: 2px;
+  background-color: var(--color-background-light);
+  border-bottom: 7px solid white;
+
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  padding: 8px 16px;
+  text-transform: capitalize;
+
+  @media (max-width: 480px) {
+    margin-inline: 4px;
+    padding: 6px 12px;
+  }
 `;

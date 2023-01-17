@@ -97,7 +97,7 @@ const ExplorerView = ({ meta, dispatch }) => {
     {
       id: 'consView',
       graph: filtered ? (
-        <ConstBar meta={meta} schemeData={filtered} showTable={showTable} />
+        <ConstBar meta={meta} schemeData={filtered} showTable={showTable} schemeName={schemeData.metadata?.name}/>
       ) : (
         <p>No data</p>
       ),
@@ -110,6 +110,7 @@ const ExplorerView = ({ meta, dispatch }) => {
           schemeData={filtered}
           showTable={showTable}
           consList={schemeData.metadata.consList}
+          schemeName={schemeData.metadata?.name}
         />
       ) : (
         <p>No data</p>
@@ -167,15 +168,6 @@ const ExplorerView = ({ meta, dispatch }) => {
                     </TableTab>
                   </VizHeader>
                   <div id="vizWrapperDownload">
-                    <Title>
-                      {`${
-                        schemeData.metadata?.name
-                      } . ${meta.indicator?.replace(
-                        '-',
-                        ' '
-                      )} ${`(${meta.year})`} . ${meta.state}`}
-                    </Title>
-
                     {vizItems.map((item, index) => (
                       <VizGraph key={`vizItem-${index}`} value={item.id}>
                         {item.graph}
@@ -233,7 +225,7 @@ export const VizWrapper = styled.div`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.14);
 
   ${SourceWrapper} {
-    margin-top: 16px;
+    margin-top: 50px;
     margin-inline: 24px;
     padding: 16px 0 24px;
     border-top: var(--border-2);
@@ -336,10 +328,8 @@ export const TableTab = styled.button`
 
 export const VizGraph = styled(TabsContent)`
   margin: 0 24px 0;
-  height: 620px;
-  overflow-y: auto;
-  position: relative;
-
+  height: 640px;
+  
   @media (max-width: 480px) {
     margin: 0 4px 32px;
   }
@@ -351,20 +341,3 @@ const NoData = styled.div`
   place-content: center;
 `;
 
-const Title = styled.div`
-  border-radius: 2px;
-  background-color: var(--color-background-light);
-  margin-bottom: 8px;
-  margin-inline: 24px;
-
-  font-weight: 600;
-  font-size: 0.75rem;
-  line-height: 1.7;
-  padding: 8px 16px;
-  text-transform: capitalize;
-
-  @media (max-width: 480px) {
-    margin-inline: 4px;
-    padding: 6px 12px;
-  }
-`;
