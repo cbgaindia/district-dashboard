@@ -33,6 +33,8 @@ const Seo = dynamic(() => import('components/common/Seo/Seo'), {
   ssr: false,
 });
 
+import { Treasury } from 'components/pages/cons/Treasury';
+
 type Props = {
   stateScheme: any;
   stateMetadata: any;
@@ -89,7 +91,7 @@ const ConsPage: React.FC<Props> = ({
     }
 
     function isTabbed(val: string) {
-      if (['explorer', 'overview'].includes(val)) return true;
+      if (['explorer', 'overview', 'treasury'].includes(val)) return true;
       return false;
     }
 
@@ -154,6 +156,23 @@ const ConsPage: React.FC<Props> = ({
             <Explorer
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
+            />
+          </ConstituencyPage.Provider>
+        ),
+      },
+      {
+        value: 'treasury',
+        name: 'Treasury',
+        altName: 'Treasury Data of District',
+        icon: <ExplorerIcon size={40} />,
+        content: (
+          <ConstituencyPage.Provider
+            value={{
+              metaReducer: { obj: metaReducer, dispatch },
+            }}
+          >
+            <Treasury 
+             queryData={{ ...router.query, cons_name }}
             />
           </ConstituencyPage.Provider>
         ),
