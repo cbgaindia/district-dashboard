@@ -36,7 +36,7 @@ const Header = ({ data }) => {
                 <h1 className="gradient-amazon">{data.State}</h1>
                 <Share title={data.State} />
               </div>
-              <p>{data.Description}</p>
+              {/* <p>{data.Description}</p> */}
             </Main>
           </>
         )}
