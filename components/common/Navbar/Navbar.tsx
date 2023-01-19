@@ -129,7 +129,7 @@ const Nav = ({ data }) => {
                   }}
                   variant={'link'}
                 >
-                  District Factsheet
+                  District Factsheets
                 </Button>
               </Navitem>
             </ul>

@@ -9,9 +9,9 @@ import { Banner } from 'components/layouts';
 const HomeStates = () => {
   const details = {
     color: '#B6E0FF',
-    heading: 'District Factsheet',
+    heading: 'District Factsheets',
     content:
-      "Detailed analysis of schemes' performance for selected districts.",
+      "Analysis of schemes' performance in select districts.",
   };
   return (
     <Wrapper>
