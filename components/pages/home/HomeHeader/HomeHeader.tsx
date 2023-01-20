@@ -41,11 +41,7 @@ const Header = styled.header`
 
 const SelectorWrapper = styled.div`
   margin-top: 56px;
-  gap: 40px;
   display: flex;
   flex-wrap: wrap;
-
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(450px, 100%), 1fr));
-  place-items: center;
+  justify-content: center;
 `;
