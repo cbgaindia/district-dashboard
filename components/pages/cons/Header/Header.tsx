@@ -19,15 +19,8 @@ const Header = ({ queryData }) => {
   return (
     <Wrapper>
       <Meta>
-        {queryData.sabha === 'lok' ? (
-          <GradientLokSabha width={80} />
-        ) : (
-          <GradientVidhanSabha width={80} />
-        )}
-
+        <GradientLokSabha width={80} />
         <ConsDetails>
-          {/* <SabhaName>{`${queryData.sabha === 'lok' ? 'Lok' : 'Vidhan'
-            } Sabha contituency`}</SabhaName> */}
           <div>
             <h1>{queryData.cons_name}</h1>
             <StateName>
