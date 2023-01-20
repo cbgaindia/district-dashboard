@@ -125,12 +125,12 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
             [tableHeader[0].accessor]:
               consList[capitalize(state)][index]?.constName,
           };
-
+          const constCode = consList[capitalize(state)][index]?.constCode
           Object.keys(schemeData[state]).forEach((item1, index1) => {
             tempObj[tableHeader[index1 + 1].accessor] =
-              schemeData[state][item1][index + 1];
+              schemeData[state][item1][constCode];
           });
-
+                  
           rowData.push(tempObj);
         });
       }
