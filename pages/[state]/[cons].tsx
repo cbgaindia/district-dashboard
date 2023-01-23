@@ -227,7 +227,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     updateStateMetadataFetch(queryValue.state.replace(/-/g, ' ')),
     stateDataFetch(queryValue.state),
   ]);
-
+  
   const updatedJsonData: any = await updatedFetchJSON('all districts');
   const state_format =
     queryValue.state == 'uttar-pradesh'
@@ -237,11 +237,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   const district = updatedJsonData[state_format].find(
     (item) => item.district_code_lg == queryValue.cons
   )?.district;
-
-  const districtJson: any = await updateDistrictMetadataFetch(
-    state_format,
-    district
-  );
+  
+  const districtJson: any = await updateDistrictMetadataFetch(queryValue.cons);
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
     return { notFound: true };

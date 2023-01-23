@@ -112,8 +112,7 @@ export async function updateStateMetadataFetch(state = null) {
 }
 
 export async function updateDistrictMetadataFetch(
-  state = null,
-  district = null
+  district_code_lg = null
 ) {
   // fetch CKAN JSON
   const data = await updatedFetchQuery('schemeType', 'district info');
@@ -121,9 +120,9 @@ export async function updateDistrictMetadataFetch(
   // fetch and generate XLSX Sheet - false: don't do array of array return
   const sheet = await fetchSheets(data[0].resources[0].url, false);
 
-  if (state && district) {
+  if (district_code_lg) {
     const res = sheet[0].find(
-      (item) => item.state_ut_name == state && item.district_name == district
+      (item) => item.district_code_lg == district_code_lg
     );
     let districtMetaData = {};
     for (const key in res) {
