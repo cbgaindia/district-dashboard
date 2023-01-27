@@ -4,6 +4,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import ConsSelectorMobile from './ConsSelectorMobile';
 import { Button } from '@opub-cdl/design-system';
+import { FACTSHEET_DISTRICT } from 'config/factsheet';
 
 const ConsSelectorModal = dynamic(() => import('./ConsSelectorModal'), {
   ssr: false,
@@ -16,6 +17,7 @@ const Share = dynamic(
 );
 
 const Header = ({ queryData }) => {
+  const district = FACTSHEET_DISTRICT.find(district => district.district_code_lg == queryData.cons)
   return (
     <Wrapper>
       <Meta>
@@ -41,19 +43,24 @@ const Header = ({ queryData }) => {
         </ConsDetails>
       </Meta>
       <HeaderLinks>
-        <Button
-          css={{
-            display: 'flex',
-            alignItems: 'center',
-            color: 'var(--color-primary)',
-            backgroundColor: 'rgb(238,246,253)',
-            boxShadow: 'inset 0 0 0 2px #4190CC ', 
-          }}
-
-          variant={'subtle-link'}
-        >
-          Open Factsheet
-        </Button>
+        {district ?
+          <Link href={district.link}>
+            <Button
+              css={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'var(--color-primary)',
+                backgroundColor: 'rgb(238,246,253)',
+                boxShadow: 'inset 0 0 0 2px #4190CC ',
+                textDecoration: 'none !important',
+              }}
+              variant={'subtle-link'}
+            >
+              Open Factsheet
+            </Button>
+          </Link>
+          : null
+        }
         <Share title={queryData.cons_name + ' page'} />
       </HeaderLinks>
     </Wrapper>

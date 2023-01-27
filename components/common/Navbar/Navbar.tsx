@@ -6,7 +6,7 @@ import MobileNav from './MobileNav';
 import { IconDropdown, ArrowTail } from 'components/icons';
 import styled from 'styled-components';
 import { submenuHover, submenuClick } from './navbar.helper';
-import { Button } from '@opub-cdl/design-system';
+import { Button } from 'components/actions';
 
 const Nav = ({ data }) => {
   const router = useRouter();
@@ -114,24 +114,12 @@ const Nav = ({ data }) => {
                     </li>
                   );
                 })}
-              <Navitem
-                aria-haspopup="true"
-                aria-expanded="false"
-                as="button"
-              >
                 <Button
-                  css={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color:'white',
-                    background:'#DE7992',
-                    
-                  }}
-                  variant={'link'}
+                  kind='secondary'
+                  href='http://52.212.152.131:3000/'
                 >
                   District Factsheets
                 </Button>
-              </Navitem>
             </ul>
           </Navlinks>
         </div>
@@ -146,7 +134,7 @@ export default Nav;
 export const NavbarWrapper = styled.header`
   background-color: var(--nav-bg);
   color: var(--text-dark-high);
-  padding: 13px;
+  padding: 17px;
 
   @media (max-width: 1096px) {
     display: none;
