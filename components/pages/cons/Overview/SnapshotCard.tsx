@@ -39,22 +39,32 @@ const SnapshotCard = ({
         <>
           <SnapshotSchemeBar>
             <div>
-              <AverageTitle>State Average</AverageTitle>
+              <AverageTitle>District Value</AverageTitle>
               <div>
-                <SplitBar val={data.value.state.bar} />
+                <SplitBar val={data.value.district.bar} color={"orange"} />
 
                 <AverageValue>
-                  {data.value.state.value?.toFixed(2)} Cr.
+                  {data.value.district.value?.toFixed(2)} Cr.
                 </AverageValue>
               </div>
             </div>
             <div>
-              <AverageTitle>District</AverageTitle>
+              <AverageTitle>Max</AverageTitle>
               <div>
-                <SplitBar val={data.value.district.bar} />
+                <SplitBar val={data.value.max.bar} color={"purple"}/>
 
                 <AverageValue>
-                  {data.value.district.value?.toFixed(2)} Cr.
+                  {data.value.max.value?.toFixed(2)} Cr.
+                </AverageValue>
+              </div>
+            </div>
+            <div>
+              <AverageTitle>Min</AverageTitle>
+              <div>
+                <SplitBar val={data.value.min.bar} color={"pink"}/>
+
+                <AverageValue>
+                  {data.value.min.value?.toFixed(2)} Cr.
                 </AverageValue>
               </div>
             </div>

@@ -88,6 +88,32 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
 
     return false;
   }
+
+  function getMinVal(slug) {
+    if (stateAvg[selectedYear][slug]) {
+      const { min, max} = stateAvg[selectedYear][slug][indicator];
+      const barValue = ((min) * 100) / (max - min || 1);
+      return {
+        bar: min < 0 ? -barValue : barValue,
+        value: min,
+      };
+    }
+    return false;
+  }
+
+  function getMaxVal(slug) {
+    if (stateAvg[selectedYear][slug]) {
+      const { min, max} = stateAvg[selectedYear][slug][indicator];
+      const barValue = ((max) * 100) / (max - min || 1);
+      return {
+        bar: max < 0 ? -barValue : barValue,
+        value: max,
+      };
+    }
+    return false;
+  }
+
+  
   function getConsAvg(slug) {
     if (
       consData[selectedYear][slug] &&
@@ -149,6 +175,8 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
                       ? {
                           state: getStateAvg(item.scheme_slug),
                           district: getConsAvg(item.scheme_slug),
+                          min: getMinVal(item.scheme_slug),
+                          max: getMaxVal(item.scheme_slug)
                         }
                       : null,
                   }}
