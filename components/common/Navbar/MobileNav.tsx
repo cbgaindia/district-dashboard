@@ -112,17 +112,23 @@ const MobileNav = ({ data }) => {
                     <MenuItem
                       href={navItem.link}
                       onClick={mobileNavHandler}
-                      className={`navbar__item ${
-                        router.pathname.includes(navItem.link)
+                      className={`navbar__item ${router.pathname.includes(navItem.link)
                           ? 'navbar__item--active'
                           : ''
-                      }`}
+                        }`}
                     >
                       {navItem.name}
                     </MenuItem>
                   )}
+
                 </li>
               ))}
+            <MenuItem
+              href='http://52.212.152.131:3000/'
+              className={'navbar__item--active'}
+            >
+               District Factsheets
+            </MenuItem>
           </ul>
         </MobileNavWrapper>
       </Modal>
