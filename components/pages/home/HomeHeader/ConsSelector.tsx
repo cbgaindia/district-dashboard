@@ -59,7 +59,7 @@ const ConsSelector: React.FC<{
             options={districts}
             isClearable
             isDisabled={isLoading}
-            placeholder={`Select a given district`}
+            placeholder={`Select a District`}
             onChange={(e: any) => setSelectedCons(e?.value)}
             noOptionsMessage={() => 'Please select a state'}
             isDark
