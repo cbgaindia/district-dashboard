@@ -1,21 +1,9 @@
 export const resourcesData = [
   {
-    title: 'Area Approximation',
-    slug: 'area-approximation',
-    type: 'folder',
-    icon: 'folder',
-  },
-  {
     title: 'Final Datasets',
     slug: 'datasets',
     type: 'folder',
     icon: 'folder',
-  },
-  {
-    title: 'Geo Listing',
-    slug: 'geo-listing',
-    type: 'link',
-    icon: 'xlsx',
   },
   {
     title: 'Methodology',
@@ -26,23 +14,6 @@ export const resourcesData = [
 ];
 
 export const resourcePages = {
-  'area-approximation': {
-    title: 'Area Approximation',
-    links: [
-      {
-        title: 'Block share in AC',
-        slug: 'block-share-in-ac',
-        type: 'link',
-        icon: 'xlsx',
-      },
-      {
-        title: 'District share in AC',
-        slug: 'block-share-in-pc',
-        type: 'link',
-        icon: 'xlsx',
-      },
-    ],
-  },
   datasets: {
     title: 'Datasets',
     links: [
