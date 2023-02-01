@@ -26,6 +26,7 @@ export default HomeHeader;
 
 const Header = styled.header`
   background-color: var(--color-background-light);
+  background-image: url('/assets/images/hero-bg.png');
   z-index: -1;
   padding-top: 92px;
   padding-bottom: 144px;
