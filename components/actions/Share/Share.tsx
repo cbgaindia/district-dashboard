@@ -59,7 +59,7 @@ const Share: React.FC<{ title: string; size?: 'default' | 'compact' }> = ({
             <Box css={{ marginLeft: '8px', fontSize: 0 }}>
               <ShareIcon
                 width={size === 'compact' ? '20' : '24'}
-                fill="#1D7548"
+                fill="#4190CC"
               />
             </Box>
           </Button>

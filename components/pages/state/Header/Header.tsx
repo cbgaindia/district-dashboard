@@ -3,6 +3,8 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { Share } from 'components/actions/Share';
 import { Summary } from 'components/pages/shared';
+import { Box, Button } from '@opub-cdl/design-system';
+import { ExternalLink } from 'components/icons';
 
 const Header = ({ data }) => {
   const summaryCards = React.useMemo(() => {
@@ -34,7 +36,31 @@ const Header = ({ data }) => {
             <Main>
               <div>
                 <h1 className="gradient-amazon">{data.State}</h1>
-                <Share title={data.State} />
+                <InfoButtons>
+                  <Share title={data.State} />
+                  <a
+                    href={``}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    <Button
+                      css={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        color: 'var(--color-primary)',
+                        backgroundColor: 'rgb(238,246,253)',
+                        boxShadow: 'inset 0 0 0 2px #4190CC ',
+                        textDecoration: 'none !important',
+                      }}
+                      variant={'subtle-link'}
+                    >
+                      Dataset
+                      <Box css={{ marginLeft: '8px', fontSize: 0 }}>
+                        <ExternalLink fill="#4190CC" />
+                      </Box>
+                    </Button>
+                  </a>
+                </InfoButtons>
               </div>
               {/* <p>{data.Description}</p> */}
             </Main>
@@ -111,5 +137,14 @@ const Separator = styled.span`
 
   @media (max-width: 480px) {
     display: none;
+  }
+`;
+
+const InfoButtons = styled.div`
+  display: flex;
+  gap: 20px;
+
+  a {
+    text-decoration: none !important;
   }
 `;
