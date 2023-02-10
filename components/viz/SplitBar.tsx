@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SplitBar = ({ val,color }) => {
-  function changeBar(val,color) {
+const SplitBar = ({ val }) => {
+  function changeBar(val) {
     if(val==0){
       chart.current?.style.setProperty(
         'transform',
@@ -13,9 +13,11 @@ const SplitBar = ({ val,color }) => {
       const barVal = val > 100 ? 100 : val;
       
      // chart.current?.style.setProperty('transform', `translateX(100%)`);
-      
-      chart.current?.style.setProperty('background-color', `${color == 'orange'? '#F3BD99' : color == "purple" ? '#C298E5':  '#DA9FB7'}`) 
-   
+     {
+      val > 0  
+       ? chart.current?.style.setProperty('background-color', `#33835A`) 
+       : chart.current?.style.setProperty('background-color', `#CD503D`)
+    }
       chart.current?.style.setProperty(
         'transform',
         `translateX(${Math.abs(barVal) - 100}%)`
@@ -34,7 +36,7 @@ const SplitBar = ({ val,color }) => {
   const chart: any = React.useRef();
 
   React.useEffect(() => {
-    changeBar(val,color);
+    changeBar(val);
   }, [val]);
 
   return (
