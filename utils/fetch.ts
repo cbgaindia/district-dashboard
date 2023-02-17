@@ -205,6 +205,21 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
       }
     });
 
+    const uniqueConstList = {};
+    Object.keys(consList).forEach((state) => {
+      const constArray = consList[state];
+      const uniqueSet = new Set();
+      const uniqueArray = constArray.filter((obj) => {
+        const key = obj.constCode;
+        const isNew = !uniqueSet.has(key);
+        if (isNew) {
+          uniqueSet.add(key);
+        }
+        return isNew;
+      });
+      uniqueConstList[state] = uniqueArray;
+    });
+
     const tempObj: any = {};
     tempObj.metadata = {
       name: metaObj['scheme_name'] || '',
@@ -216,7 +231,7 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
       remarks: metaObj.frequency || '',
       slug,
       indicators: [],
-      consList: consList || [],
+      consList: uniqueConstList || [],
     };
 
     // Tabular Data
