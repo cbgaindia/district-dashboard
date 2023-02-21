@@ -107,12 +107,20 @@ const DownloadViz = ({ viz, meta, tableData = {} }: Props) => {
   return (
     <Button
       onClick={() => downloadSelector(viz)}
-      variant="primary"
       size="compact"
+      css={{
+        display: 'flex',
+        alignItems: 'center',
+        color: 'var(--color-primary)',
+        backgroundColor: 'rgb(238,246,253)',
+        boxShadow: 'inset 0 0 0 2px #4190CC ',
+        textDecoration: 'none !important',
+      }}
+      variant={'subtle-link'}
     >
       {`Download ${viz == '#tableView' ? 'CSV' : 'Visualization'}`}
       <Box css={{ marginLeft: '8px', fontSize: 0 }}>
-        <Download fill="#fff" width="20" />
+        <Download fill="#4190CC" width="20" />
       </Box>
     </Button>
   );
