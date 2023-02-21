@@ -10,7 +10,9 @@ import { Menu } from 'components/actions';
 import useEffectOnChange from 'utils/hooks';
 import { Table } from 'components/data';
 import { ConstituencyPage } from 'pages/[state]/[cons]';
-import { yearOptions } from 'utils/fetch'
+import { yearOptions } from 'utils/fetch';
+import { IconGeneralAdd } from 'components/icons/IconlAdd';
+import { IconMinimize } from 'components/icons';
 
 const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   const [mapValues, setMapvalues] = useState([]);
@@ -25,6 +27,8 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   const [filteredData, setFilteredData] = useState(
     getParameterCaseInsensitive(schemeData, meta.state)[year]
   );
+
+  const [val, setVal] = React.useState(1);
 
   const { data, isLoading } = swrFetch(`/assets/maps/${meta.state}.json`);
 
@@ -194,11 +198,32 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
                   />
                 </YearSelector>
               )}
+                            <ZoomButtons>
+                <button
+                  aria-label="Increase Zoom"
+                  title="Increase Zoom"
+                  onClick={() => {
+                    setVal(Math.min(val + 0.1, 3));
+                  }}
+                >
+                  <IconGeneralAdd fill="var(--color-grey-300)" />
+                </button>
+                <button
+                  aria-label="Decrease Zoom"
+                  title="Increase Zoom"
+                  onClick={() => {
+                    setVal(Math.max(val - 0.1, 1));
+                  }}
+                >
+                  <IconMinimize fill="var(--color-grey-300)" />
+                </button>
+              </ZoomButtons>
               <MapViz
                 mapFile={data}
                 meta={meta}
                 data={mapValues}
                 vizIndicators={mapIndicator}
+                val={val}
               // newMapItem={newMapItem}
               />
             </>
@@ -238,5 +263,39 @@ const Title = styled.div`
   @media (max-width: 480px) {
     margin-inline: 4px;
     padding: 6px 12px;
+  }
+`;
+
+export const ZoomButtons = styled.div`
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  isolation: isolate;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border-radius: 2px;
+  border: 1px solid var(--color-grey-600);
+  filter: drop-shadow(var(--box-shadow-1));
+
+  button {
+    padding: 4px;
+    background-color: var(--color-white);
+    color: var(--color-grey-300);
+    transition: background-color 150ms ease;
+    line-height: 0;
+
+    &:hover {
+      background-color: var(--color-grey-600);
+    }
+
+    &:first-of-type {
+      border-radius: 2px 2px 0 0;
+    }
+    &:last-of-type {
+      border-radius: 0px 0px 2px 2px;
+    }
   }
 `;

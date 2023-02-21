@@ -17,6 +17,7 @@ const MapViz = ({
   data,
   vizIndicators,
   onlyLabel = false,
+  val
 }) => {
   const [mapOptions, setMapOptions] = useState({});
   const memoMap = React.useMemo(() => {
@@ -110,7 +111,7 @@ const MapViz = ({
             roam: true,
             map: meta.sabha,
             nameProperty: 'Dist_LGD',
-            zoom: 1.2,
+            zoom: 3,
             itemStyle: {
               borderColor: '#ffffff',
               borderWidth: 0.8,
@@ -135,7 +136,7 @@ const MapViz = ({
             },
             scaleLimit: {
               min: 1,
-              max: 1,
+              max: val,
             },
             data: data,
           },
@@ -143,7 +144,7 @@ const MapViz = ({
       };
       setMapOptions(options);
     }
-  }, [meta.selectedIndicator, data, memoMap]);
+  }, [meta.selectedIndicator, data, memoMap, val]);
 
   function handleClick(e) {
     newMapItem(e.data);

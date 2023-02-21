@@ -4,6 +4,9 @@ import { MapViz } from 'components/viz';
 import { swrFetch } from 'utils/helper';
 import styled from 'styled-components';
 import { Info } from 'components/icons';
+import { IconMinimize } from 'components/icons';
+import { IconGeneralAdd } from 'components/icons/IconlAdd';
+import { ZoomButtons } from 'components/pages/cons/Explorer/SchemeSelected/ExplorerView/StateMap';
 
 function generateMapData(obj) {
   const mapObj = [...obj].map((item) => {
@@ -20,12 +23,33 @@ function generateMapData(obj) {
 const ConsMapView = ({ meta, consData }) => {
   const router = useRouter();
   const { data, isLoading } = swrFetch(`/assets/maps/${meta.state}.json`);
+  const [val, setVal] = React.useState(1);
 
   return isLoading ? (
     <LoadingDiv>Loading Map...</LoadingDiv>
   ) : (
     <>
       <Wrapper>
+      <ZoomButtons>
+          <button
+            aria-label="Increase Zoom"
+            title="Increase Zoom"
+            onClick={() => {
+              setVal(Math.min(val + 0.1, 3));
+            }}
+          >
+            <IconGeneralAdd fill="var(--color-grey-300)" />
+          </button>
+          <button
+            aria-label="Decrease Zoom"
+            title="Increase Zoom"
+            onClick={() => {
+              setVal(Math.max(val - 0.1, 1));
+            }}
+          >
+            <IconMinimize fill="var(--color-grey-300)" />
+          </button>
+        </ZoomButtons>
         <MapViz
           mapFile={data}
           meta={meta}
@@ -35,6 +59,7 @@ const ConsMapView = ({ meta, consData }) => {
           newMapItem={(e) => {
             e ? router.push(`${meta.state}/${e.name}`) : null;
           }}
+          val = {val}
         />
       </Wrapper>
 
@@ -50,6 +75,7 @@ export default ConsMapView;
 
 const Wrapper = styled.div`
   height: 100%;
+  position: relative;
 `;
 
 export const LoadingDiv = styled.div`
