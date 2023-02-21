@@ -283,7 +283,7 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
 }
 
 export async function fetchIndicators() {
-  const url = await fetchQuery('dataType', 'IndicatorsList').then(
+  const url = await updatedFetchQuery('dataType', 'IndicatorsList').then(
     (res) => res[0].resources[0].url
   );
   const json = await fetch(url).then((res) => res.json());
