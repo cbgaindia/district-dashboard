@@ -36,10 +36,6 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
   );
 
   useEffectOnChange(() => {
-    setIndicator(meta.metaReducer.indicator);
-  }, [meta.metaReducer]);
-
-  useEffectOnChange(() => {
     window.history.replaceState(
       {
         scheme: scheme,
@@ -75,6 +71,15 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
       : [];
     return indicatorArr;
   }, [indicatorData]);
+
+
+  React.useEffect(() => {
+    if(indicatorList.some(obj => obj.slug === meta.metaReducer.indicator)){
+       setIndicator(meta.metaReducer.indicator)
+    }else {
+      setIndicator(indicatorList[0].slug)
+    }
+  }, [meta.metaReducer]);
 
   function getStateAvg(slug) {
     if (stateAvg[selectedYear][slug]) {

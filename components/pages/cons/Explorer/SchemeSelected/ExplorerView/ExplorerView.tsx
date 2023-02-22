@@ -63,6 +63,17 @@ const ExplorerView = ({ meta, dispatch }) => {
             unit: schemeData.data[val].unit,
           });
           setFiltered(filtered);
+        } 
+        else {
+          const newVal = Object.keys(schemeData.data)[0]
+          const filtered = schemeData.data[newVal]['state_Obj'];
+          dispatch({
+            unit: schemeData.data[newVal].unit,
+          });
+          setFiltered(filtered);
+          dispatchCons({
+            indicator: newVal
+          })
         }
       } else {
         dispatchCons({
