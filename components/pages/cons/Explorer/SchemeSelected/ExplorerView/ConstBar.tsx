@@ -157,7 +157,7 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
           <GroupBarChart
             yAxisLabel={`Value (in ${meta.unit})`}
             xAxisLabel="District"
-            theme={[' #E39642', '#7E71D1', '#4ABEBE' , '#DE7992']}
+            theme={['#4965B2',' #E39642', '#7E71D1', '#4ABEBE' , '#DE7992']}
             dataset={barData}
             stack={false}
             Title=""

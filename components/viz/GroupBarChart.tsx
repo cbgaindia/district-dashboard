@@ -49,7 +49,7 @@ const GroupBarChart: React.FC<BarChartProps> = ({
     }
 
     for (
-      let columnLength = 0;
+      let columnLength = 1;
       columnLength <= dataset[0]?.length - 1;
       columnLength++
     ) {
