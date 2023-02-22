@@ -1,48 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SplitBar = ({ val }) => {
-  function changeBar(val) {
-    if(val==0){
+const SplitBar = ({ val, dataVal }) => {
+  function changeBar(val, dataVal) {
+    if (val == 0) {
       chart.current?.style.setProperty(
         'transform',
         `translateX(-100%)`
       );
     }
-    else{
+    else {
       const barVal = val > 100 ? 100 : val;
-      
-     // chart.current?.style.setProperty('transform', `translateX(100%)`);
-     {
-      val > 0  
-       ? chart.current?.style.setProperty('background-color', `#33835A`) 
-       : chart.current?.style.setProperty('background-color', `#CD503D`)
-    }
+
+      {
+        dataVal > 0
+          ? chart.current?.style.setProperty('background-color', `#33835A`)
+          : chart.current?.style.setProperty('background-color', `#CD503D`)
+      }
       chart.current?.style.setProperty(
         'transform',
         `translateX(${Math.abs(barVal) - 100}%)`
       );
     }
-  //    else {
-  //     const barVal = val < -100 ? -100 : val;
-  //  //   chart.current?.style.setProperty('transform', `translateX(100%)`);
-  //     chart.current?.style.setProperty(
-  //       'transform',
-  //       `translateX(${100 - Math.abs(barVal)}%)`
-  //     );
-  //   }
+    //    else {
+    //     const barVal = val < -100 ? -100 : val;
+    //  //   chart.current?.style.setProperty('transform', `translateX(100%)`);
+    //     chart.current?.style.setProperty(
+    //       'transform',
+    //       `translateX(${100 - Math.abs(barVal)}%)`
+    //     );
+    //   }
   }
 
   const chart: any = React.useRef();
 
   React.useEffect(() => {
-    changeBar(val);
+    changeBar(val, dataVal);
   }, [val]);
 
   return (
     <Wrapper>
       <Bar>
-          <Chart ref={chart} className="chart" />   
+        <Chart ref={chart} className="chart" />
       </Bar>
     </Wrapper>
   );
