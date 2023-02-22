@@ -20,13 +20,13 @@ type Props = {
 
 const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
   const [selectedYear, setSelectedYear] = React.useState(
-    Object.keys(consData).includes(DEFAULT_YEAR) 
-    ? DEFAULT_YEAR 
-    : Object.keys(consData)[0]
+    Object.keys(consData).includes(DEFAULT_YEAR)
+      ? DEFAULT_YEAR
+      : Object.keys(consData)[0]
   );
 
   const { meta } = React.useContext(ConstituencyPage);
-  const [indicator, setIndicator] = React.useState( meta.metaReducer.indicator );
+  const [indicator, setIndicator] = React.useState(meta.metaReducer.indicator);
   const { scheme } = meta.metaReducer;
   const { dispatch } = meta;
 
@@ -61,17 +61,17 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
     const indicatorArr = [];
     !isLoading
       ? Object.values(indicatorData).forEach((elm) => {
-          Object.keys(elm).forEach((item) => {
-            indicatorArr.push({
-              name: item,
-              description: elm[item].description,
-              slug: generateSlug(item),
-              unit: elm[item].unit,
-              note: elm[item].note,
-              type: elm[item].type
-            });
+        Object.keys(elm).forEach((item) => {
+          indicatorArr.push({
+            name: item,
+            description: elm[item].description,
+            slug: generateSlug(item),
+            unit: elm[item].unit,
+            note: elm[item].note,
+            type: elm[item].type
           });
-        })
+        });
+      })
       : [];
     return indicatorArr;
   }, [indicatorData]);
@@ -91,7 +91,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
 
   function getMinVal(slug) {
     if (stateAvg[selectedYear][slug]) {
-      const { min, max} = stateAvg[selectedYear][slug][indicator];
+      const { min, max } = stateAvg[selectedYear][slug][indicator];
       const barValue = ((min) * 100) / (max - min || 1);
       return {
         bar: min < 0 ? -barValue : barValue,
@@ -103,7 +103,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
 
   function getMaxVal(slug) {
     if (stateAvg[selectedYear][slug]) {
-      const { min, max} = stateAvg[selectedYear][slug][indicator];
+      const { min, max } = stateAvg[selectedYear][slug][indicator];
       const barValue = ((max) * 100) / (max - min || 1);
       return {
         bar: max < 0 ? -barValue : barValue,
@@ -113,7 +113,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
     return false;
   }
 
-  
+
   function getConsAvg(slug) {
     if (
       consData[selectedYear][slug] &&
@@ -121,7 +121,14 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
     ) {
       const { max, min } = stateAvg[selectedYear][slug][indicator];
       const consValue = consData[selectedYear][slug][indicator];
-      const barValue = ((consValue - min) * 100) / (max - min || 1);
+      let barValue;
+      if (consValue == min) {
+        barValue = getMinVal(slug)['bar']
+      } else if (consValue == max) {
+        barValue = getMaxVal(slug)['bar']
+      } else {
+        barValue = ((consValue - min) * 100) / (max - min || 1);
+      }
       return {
         bar: consValue < 0 ? -barValue : barValue,
         value: consValue,
@@ -173,11 +180,11 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
                     ...item,
                     value: getConsAvg(item.scheme_slug)
                       ? {
-                          state: getStateAvg(item.scheme_slug),
-                          district: getConsAvg(item.scheme_slug),
-                          min: getMinVal(item.scheme_slug),
-                          max: getMaxVal(item.scheme_slug)
-                        }
+                        state: getStateAvg(item.scheme_slug),
+                        district: getConsAvg(item.scheme_slug),
+                        min: getMinVal(item.scheme_slug),
+                        max: getMaxVal(item.scheme_slug)
+                      }
                       : null,
                   }}
                 />
