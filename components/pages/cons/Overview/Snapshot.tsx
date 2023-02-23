@@ -72,13 +72,8 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
     return indicatorArr;
   }, [indicatorData]);
 
-
-  React.useEffect(() => {
-    if(indicatorList.some(obj => obj.slug === meta.metaReducer.indicator)){
-       setIndicator(meta.metaReducer.indicator)
-    }else {
-      setIndicator(indicatorList[0].slug)
-    }
+  useEffectOnChange(() => {
+    setIndicator(meta.metaReducer.indicator);
   }, [meta.metaReducer]);
 
   function getStateAvg(slug) {

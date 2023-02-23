@@ -76,6 +76,11 @@ export default ConsMapView;
 const Wrapper = styled.div`
   height: 100%;
   position: relative;
+  background-color:pink ;
+  z-index:99;
+  .echarts-for-react svg rect{
+    fill: var(--color-background-light);
+  }
 `;
 
 export const LoadingDiv = styled.div`

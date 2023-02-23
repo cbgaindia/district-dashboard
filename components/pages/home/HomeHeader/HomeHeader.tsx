@@ -30,6 +30,7 @@ const Header = styled.header`
   z-index: -1;
   padding-top: 92px;
   padding-bottom: 144px;
+  background-size: cover;
 
   h1 {
     text-align: center;
