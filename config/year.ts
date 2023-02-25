@@ -6,11 +6,11 @@ export const SORTED_SCHEMES = [
     scheme_slug: 'mgnrega',
   },
   {
-    scheme_name: 'Pradhan Mantri Awaas Yojana - Grameen (PMAY)',
+    scheme_name: 'Pradhan Mantri Awaas Yojana - Gramin (PMAY-G)',
     scheme_slug: 'pmay',
   },
   {
-    scheme_name: 'Swachh Bharat Mission-Gramin (SBMG)',
+    scheme_name: 'Swachh Bharat Mission-Gramin (SBM-G)',
     scheme_slug: 'sbmg',
   },
   {
@@ -22,7 +22,7 @@ export const SORTED_SCHEMES = [
     scheme_slug: 'mdm',
   },
   {
-    scheme_name: 'Integrated Child Development Services',
+    scheme_name: 'Integrated Child Development Services (ICDS)',
     scheme_slug: 'icds',
   },
   {
@@ -51,7 +51,7 @@ export const SORTED_SCHEMES = [
     scheme_slug: 'smsa',
   },
   {
-    scheme_name: 'Swachh Bharat Mission-Urban (SBMU)',
+    scheme_name: 'Swachh Bharat Mission-Urban (SBM-U)',
     scheme_slug: 'sbmu',
   },
 ];
