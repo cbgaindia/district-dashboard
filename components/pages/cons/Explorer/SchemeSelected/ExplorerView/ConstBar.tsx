@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { GroupBarChart } from 'components/viz';
 import { getParameterCaseInsensitive } from 'utils/helper';
 import { Table } from 'components/data';
+import { generateSlug } from 'utils/fetch';
 
 const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
   const [barData, setBarData] = React.useState([]);
@@ -57,7 +58,7 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
           Object.keys(yearsObj).forEach((yearElm, index) => {
             const yearFiltered = getParameterCaseInsensitive(
               schemeData,
-              state
+              generateSlug(state)
             )[yearElm];
             if (yearFiltered) {
               const constValue = yearFiltered[code];
