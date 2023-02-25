@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useSWR from 'swr';
-import ExplorerView from '../../Explorer/SchemeSelected/ExplorerView';
+import ExplorerView from './ExplorerView';
 import { newSchemeDataFetch } from 'utils/fetch';
 import SubHeading from './SubHeading';
 import { swrFetch } from 'utils/helper';
