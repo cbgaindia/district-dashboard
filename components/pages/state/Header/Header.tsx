@@ -39,7 +39,7 @@ const Header = ({ data }) => {
                 <InfoButtons>
                   <Share title={data.State} />
                   <a
-                    href={``}
+                    href={`https://ckan.civicdatalab.in/dataset/${data.State.replace(' ', '-')}-district-dashboard`.toLowerCase()}
                     rel="noreferrer"
                     target="_blank"
                   >
