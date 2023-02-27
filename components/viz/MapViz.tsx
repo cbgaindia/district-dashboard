@@ -17,7 +17,7 @@ const MapViz = ({
   data,
   vizIndicators,
   onlyLabel = false,
-  val
+  val,
 }) => {
   const [mapOptions, setMapOptions] = useState({});
   const memoMap = React.useMemo(() => {
@@ -42,7 +42,11 @@ const MapViz = ({
             if (params.data)
               return onlyLabel
                 ? params.data.mapName
-                : `${params.data.mapName}: ${params.data.value === Infinity ? 'NA' : params.data.value}`;
+                : `${params.data.mapName}: ${
+                    params.data.value === -9999999999999
+                      ? 'NA'
+                      : params.data.value
+                  }`;
             else return 'Data not available';
           },
         },

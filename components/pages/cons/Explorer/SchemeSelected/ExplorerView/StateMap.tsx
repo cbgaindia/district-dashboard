@@ -44,11 +44,6 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
       const vizIndicators = binLength
         ? [
             {
-              max: -999999999,
-              label: `Data not avaialble`,
-              color: '#EBF0EE',
-            },
-            {
               min: uniq[0],
               max: uniq[binLength],
               label: `${uniq[0]} to ${uniq[binLength + 1]}`,
@@ -78,10 +73,15 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
               label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
               color: ' #173B3B',
             },
+            {
+              min: -9999999999999,
+              label: `Data not avaialble`,
+              color: 'grey',
+            },
           ]
         : [
             {
-              value: Infinity,
+              min: -9999999999999,
               label: `data not found`,
               color: '#494D44',
             },
@@ -100,7 +100,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
     if (data && filteredData) {
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
-        value: filteredData[item] || Infinity,
+        value: filteredData[item] || -9999999999999,
         mapName: consData[item]?.district_name_name,
       }));
       setMapvalues(tempData);
