@@ -33,19 +33,19 @@ const icons = {
 const Card = ({ data }) => {
   
     const image_slug = {
-    "pmfby-kharif-v3": "pmfby_kharif",
-    "integrated-child-development-services-v3": "icds",
-    "mgnrega-v3": "mgnrega",
-    "mdm-v3": "mdm",
-    "nhm-v3": "nhm",
-    "national-social-assistance-programme-nsap-v3": "nsap",
-    "pmay-v3": "pmay",
-    "pmkisan-v3": "pmkisan",
-    "pradhan-mantri-matru-vandana-yojana-scheme-pmmvy-v3": "pmmvy",
-    "swachh-bharat-mission-gramin-sbmg-v3": "sbmg",
-    "smsa-v3": "smsa",
-    "pmfby-rabi-v3": "pmfby_rabi",
-    "swachh-bharat-mission-urban-sbmu-v3" : "sbmu"
+    "pradhan-mantri-fasal-bima-yojana-pmfby-kharif-district-wise": "pmfby_kharif",
+    "integrated-child-development-services-district-wise": "icds",
+    "mgnrega-district-wise": "mgnrega",
+    "mdm-district-wise": "mdm",
+    "nhm-district-wise": "nhm",
+    "nsap-district-wise": "nsap",
+    "pmayg-district-wise": "pmay",
+    "pmkisan-district-wise": "pmkisan",
+    "pmmvy-district-wise": "pmmvy",
+    "sbmg-district-wise": "sbmg",
+    "samagra-shiksha-abhiyan-smsa-district-wise-expenditure": "smsa",
+    "pradhan-mantri-fasal-bima-yojana-pmfby-rabi-district-wise": "pmfby_rabi",
+    "sbmu-district-wise" : "sbmu"
   }
 
   return (
@@ -58,7 +58,7 @@ const Card = ({ data }) => {
             <Image
               width={110}
               height={110}
-               src={data.slug.includes('v3') ? SchemesData[image_slug[data.slug]]?.logo :icons[data.icon]}
+               src={data.slug.includes('district-wise') ? SchemesData[image_slug[data.slug]]?.logo :icons[data.icon]}
               alt={`file format ${data.icon}`}
             />
           )}
