@@ -103,7 +103,7 @@ export const amazon = css`
   
     --gradient-basic : 'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%)';
     --gradient-hotPink : 'linear-gradient(162.85deg, #FA5C82 0%, #3E1C47 99.48%)';
-    --gradient-sapphire : 'linear-gradient(162.85deg, #4965B2 0%, #3E1C47 99.48%)';
+    --gradient-sapphire : linear-gradient(162.85deg, #4965B2 0%, #3E1C47 99.48%);
     --gradient-maple : linear-gradient(162.85deg, #E9B840 0%, #AA862E 99.48%);
     --gradient-amazon: linear-gradient(158.61deg, #4190CC 7.07%, #142D3F 99.52%);
   

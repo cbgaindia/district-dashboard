@@ -110,6 +110,12 @@ ul, ol {
       --gradient-bg: var(--gradient-amazon);
     }
   }
+
+  &-sapphire {
+    ${gradient} {
+      --gradient-bg: var(--gradient-sapphire);
+    }
+  }
 }
 
 .fill {
