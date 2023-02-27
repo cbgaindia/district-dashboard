@@ -62,11 +62,12 @@ const Header = ({ data }) => {
                   </a>
                 </InfoButtons>
               </div>
-              {/* <p>{data.Description}</p> */}
+              <p>{data.Description}</p>
             </Main>
           </>
         )}
       </article>
+      <Summary title="Demographic Highlights" cards={summaryCards} />
     </HeaderWrapper>
   );
 };
