@@ -4,18 +4,26 @@ import { SummaryCarousel } from 'components/pages/shared';
 import Snapshot from './Snapshot';
 
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
+
+  const formatNumeric = (num) => {
+    return parseFloat(num).toLocaleString("en-US");
+  }
+
   const twoDecimals = (num) => {
     if (typeof num !== 'number' && typeof num !== 'string') {
       console.error('Input must be number r string');
     }
     const numString = typeof num === 'number' ? num.toString() : num;
+
     const decimalIndex = numString.indexOf('.');
+
     if (decimalIndex === -1) {
-      return numString;
-    } else {
-      const truncatedDecimal = numString.slice(decimalIndex + 1, decimalIndex + 3);
-      return Number(numString.slice(0, decimalIndex + 3) + truncatedDecimal).toLocaleString(undefined, {minimumFractionDigits: 0, maximumFractionDigits: 2});
+      return formatNumeric(numString);
     }
+
+    const truncatedDecimal = numString.slice(decimalIndex + 1, decimalIndex + 3);
+
+    return formatNumeric(Number(numString.slice(0, decimalIndex + 3) + truncatedDecimal).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 }));
   };
 
   const summaryCards = React.useMemo(() => {
