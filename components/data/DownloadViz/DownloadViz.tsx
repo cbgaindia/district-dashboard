@@ -8,6 +8,8 @@ function fileName(meta) {
   // If there is no type, eg: table, don;t add it to the name
   if (meta.constituency)
     return `${meta.constituency}_${meta.state}_${meta.scheme}_${meta.indicator}`.toLowerCase();
+  else if (!meta.scheme)
+    return `${meta.state}_treasury_${meta.indicator}`.toLowerCase();
   else return `${meta.state}_${meta.scheme}_${meta.indicator}`.toLowerCase();
 }
 
