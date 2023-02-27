@@ -42,12 +42,12 @@ const MapViz = ({
             if (params.data)
               return onlyLabel
                 ? params.data.mapName
-                : `${params.data.mapName}: ${params.data.value}`;
+                : `${params.data.mapName}: ${params.data.value === Infinity ? 'NA' : params.data.value}`;
             else return 'Data not available';
           },
         },
         toolbox: {
-          show: true,
+          show: false,
           bottom: 16,
           right: 16,
           feature: {

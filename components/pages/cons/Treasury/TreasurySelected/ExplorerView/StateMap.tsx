@@ -81,8 +81,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
         ]
         : [
           {
-            min: 0,
-            max: 0,
+            value: Infinity ,
             label: `data not found`,
             color: '#494D44',
           },
@@ -112,7 +111,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
     if (data && filteredData) {      
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
-        value: filteredData[item] || 0,
+        value: filteredData[item] || Infinity,
         mapName: findConstName(item),
       }));
       setMapvalues(tempData);
