@@ -16,7 +16,7 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
   ]);
 
   selectedYears.sort((a, b) => a.value.localeCompare(b.value));
-  
+
   const [tableData, setTableData] = React.useState<any>();
 
   React.useEffect(() => {
@@ -95,7 +95,11 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
     return Object.keys(consList).map((state) => ({
       label: state,
       options: consList[state].map((item) => ({
-        value: { state: state.toLowerCase(), code: item.constCode },
+        value: {
+          state: state.toLowerCase(),
+          code: item.constCode,
+          value: item.constCode + item.constName,
+        },
         label: item.constName,
       })),
     }));
@@ -132,9 +136,14 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
             disableOptions={selectedCons.length >= 4}
             onChange={(e) => handleConstChange(e)}
             defaultValue={{
-              value: { code: meta.cons, state: meta.state },
+              value: {
+                code: meta.cons,
+                state: meta.state,
+                value: meta.cons + meta.cons_name,
+              },
               label: meta.cons_name,
             }}
+            getOptionValue={(option: any) => option.value.value}
             isMulti
             isGrouped
             id="cons-selector"
@@ -158,7 +167,7 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
           <GroupBarChart
             yAxisLabel={`Value (in ${meta.unit})`}
             xAxisLabel="District"
-            theme={['#4965B2',' #E39642', '#7E71D1', '#4ABEBE' , '#DE7992']}
+            theme={['#4965B2', ' #E39642', '#7E71D1', '#4ABEBE', '#DE7992']}
             dataset={barData}
             stack={false}
             Title=""
