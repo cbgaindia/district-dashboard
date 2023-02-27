@@ -79,14 +79,14 @@ const ExplorerView = ({ meta, dispatch }) => {
           indicator: val,
         });
       }
-      window.history.replaceState(
-        {
-          scheme: scheme,
-          indicator: val,
-        },
-        '',
-        `/${state}/${meta.cons}?scheme=${scheme}&indicator=${val}`
-      );
+      // window.history.replaceState(
+      //   {
+      //     scheme: scheme,
+      //     indicator: val,
+      //   },
+      //   '',
+      //   `/${state}/${meta.cons}?&indicator=${val}`
+      // );
     }
   }
 
@@ -186,7 +186,7 @@ const ExplorerView = ({ meta, dispatch }) => {
                   </div>
                 </Tabs>
               </div>
-              {scheme && (
+              {
                 <Source
                   currentViz={showTable ? '#tableView' : '#vizWrapperDownload'}
                   // tableData={tableData}
@@ -198,7 +198,7 @@ const ExplorerView = ({ meta, dispatch }) => {
                   }}
                   source={schemeData.metadata?.source}
                 />
-              )}
+              }
             </VizWrapper>
           </Wrapper>
         </>
