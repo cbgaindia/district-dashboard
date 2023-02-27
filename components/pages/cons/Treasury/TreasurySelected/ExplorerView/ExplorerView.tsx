@@ -43,6 +43,12 @@ const ExplorerView = ({ meta, dispatch }) => {
   const { sabha } = meta || 'lok';
 
 
+  const [tableData, setTableData] = React.useState<any>();
+
+  const handleTableDataChange = (newData: any) => {
+    setTableData(newData);
+  };
+
   useEffect(() => {
     handleNewIndicator(indicator);
   }, [indicator, schemeData, scheme]);
@@ -107,7 +113,7 @@ const ExplorerView = ({ meta, dispatch }) => {
     {
       id: 'consView',
       graph: filtered ? (
-        <ConstBar meta={meta} schemeData={filtered} showTable={showTable} schemeName={schemeData.metadata?.name}/>
+        <ConstBar meta={meta} schemeData={filtered} showTable={showTable} schemeName={schemeData.metadata?.name} onTableDataChange={handleTableDataChange}/>
       ) : (
         <p>No data</p>
       ),
@@ -121,6 +127,7 @@ const ExplorerView = ({ meta, dispatch }) => {
           showTable={showTable}
           consList={schemeData.metadata.consList}
           schemeName={schemeData.metadata?.name}
+          onTableDataChange={handleTableDataChange}
         />
       ) : (
         <p>No data</p>
@@ -189,7 +196,7 @@ const ExplorerView = ({ meta, dispatch }) => {
               {
                 <Source
                   currentViz={showTable ? '#tableView' : '#vizWrapperDownload'}
-                  // tableData={tableData}
+                  tableData={tableData ? tableData : {}}
                   meta={{
                     scheme,
                     state,

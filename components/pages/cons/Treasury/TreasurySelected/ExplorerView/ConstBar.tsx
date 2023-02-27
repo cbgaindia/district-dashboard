@@ -6,7 +6,7 @@ import { getParameterCaseInsensitive } from 'utils/helper';
 import { Table } from 'components/data';
 import { generateSlug } from 'utils/fetch';
 
-const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
+const ConstBar = ({ meta, schemeData, showTable, schemeName,onTableDataChange }) => {
   const [barData, setBarData] = React.useState([]);
   const [selectedCons, setSelectedCons] = React.useState([
     { state: meta.state, code: meta.cons, name: meta.cons_name },
@@ -77,6 +77,10 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
       header: tableHeader,
       rows: tableRows,
     });
+    updateTableData({
+      header: tableHeader,
+      rows: tableRows,
+    })
   }
   function handleConstChange(e) {
     const arr = e.map((obj) => ({
@@ -104,6 +108,11 @@ const ConstBar = ({ meta, schemeData, showTable, schemeName }) => {
   const yearList = selectedYears.map((year) => year.value);
   const consList = selectedCons.map((cons) => cons.state);
 
+  const updateTableData = (newData: any) => {
+    setTableData(newData);
+    onTableDataChange(newData);
+  };
+  
   return showTable ? (
     tableData ? (
       <Table

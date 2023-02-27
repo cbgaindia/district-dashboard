@@ -14,7 +14,7 @@ import { yearOptions } from 'utils/fetch';
 import { IconGeneralAdd } from 'components/icons/IconlAdd';
 import { IconMinimize } from 'components/icons';
 
-const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
+const StateMap = ({ meta, schemeData, showTable, consList, schemeName, onTableDataChange}) => {
   const [mapValues, setMapvalues] = useState([]);
   const [mapIndicator, setMapIndicator] = useState(undefined);
   const { state, indicator } = meta;
@@ -143,6 +143,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
       };
 
       setTableData(tableData);
+      updateTableData(tableData)
     }
   }, [schemeData]);
 
@@ -161,6 +162,11 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   //   }
   // }, []);
 
+  const updateTableData = (newData: any) => {
+    setTableData(newData);
+    onTableDataChange(newData);
+  };
+  
   return showTable ? (
     tableData ? (
       <Table
