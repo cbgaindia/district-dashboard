@@ -86,7 +86,7 @@ const TreasurySelected = ({ queryData }) => {
             <ExplorerView
               meta={{
                 ...reducerState,
-                scheme: queryData.scheme,
+
                 indicator:reducerState.indicator,
               }}
               dispatch={dispatch}
