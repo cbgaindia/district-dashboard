@@ -6,13 +6,18 @@ import Snapshot from './Snapshot';
 const Overview = ({ stateMetadata, queryData, schemeList, data }) => {
 
   const formatNumeric = (num) => {
-    return parseFloat(num).toLocaleString("en-US");
+    return parseFloat(num).toLocaleString("en-IN");
   }
 
   const twoDecimals = (num) => {
     if (typeof num !== 'number' && typeof num !== 'string') {
       console.error('Input must be number r string');
     }
+
+    if (num == 'NA') {
+      return num;
+    }
+
     const numString = typeof num === 'number' ? num.toString() : num;
 
     const decimalIndex = numString.indexOf('.');
