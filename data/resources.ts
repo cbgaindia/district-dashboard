@@ -5,12 +5,6 @@ export const resourcesData = [
     type: 'folder',
     icon: 'folder',
   },
-  {
-    title: 'Methodology',
-    slug: 'methodology',
-    type: 'link',
-    icon: 'ppt',
-  },
 ];
 
 export const resourcePages = {
