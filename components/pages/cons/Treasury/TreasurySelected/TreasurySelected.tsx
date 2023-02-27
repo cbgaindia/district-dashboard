@@ -13,9 +13,6 @@ const reducer = (state: any, action: any) => {
 };
 
 const TreasurySelected = ({ queryData }) => {
-  const { metaReducer } = React.useContext(ConstituencyPage);
-  const { indicator, year } = metaReducer.obj;
-  const dispatchCons = metaReducer.dispatch;
 
   const { data: schemeRes } = swrFetch(
     `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:treasury AND organization:district-dashboard AND private:false`
@@ -29,11 +26,28 @@ const TreasurySelected = ({ queryData }) => {
     revalidateOnReconnect: false,
   });
 
+
+  const initalState = {
+    state: queryData.state || '',
+    sabha: queryData.sabha || 'lok',
+    cons: queryData.cons || '',
+    cons_name: queryData.cons_name || '',
+    schemeName: 'Loading...',
+    schemeData: '',
+    year: '',
+    allYears: [],
+    unit: '',
+    vizType: 'map',
+    indicator: 'total-allocation'
+  };
+  const [reducerState, dispatch] = React.useReducer(reducer, initalState);
+
   React.useEffect(() => {
     dispatch({
       schemeName: schemeObj?.extras[0].value,
     });
-  }, [schemeObj]);
+  }, []);
+
 
   React.useEffect(() => {
     if (data) {
@@ -47,37 +61,17 @@ const TreasurySelected = ({ queryData }) => {
           label: item,
         }));
 
-        const filterYear = years.some(year => year.value === DEFAULT_YEAR)
-        const length = years.length;
-        const yearFlag = years.some(yearVal => yearVal.value == year)
-
-        dispatchCons({
-          indicator: Object.keys(schemeData.data).includes(indicator)
-            ? indicator
-            : Object.keys(schemeData.data)[0],
-        });
         dispatch({
+          indicator: Object.keys(schemeData.data)[0],
           schemeData,
-          year: yearFlag ? year : filterYear ? DEFAULT_YEAR : years[length-1].value,
+          year: years[0].value,
           allYears: years,
-        });
+        })
       }
     }
-  }, [data, indicator]);
+  }, [data]);
 
-  const initalState = {
-    state: queryData.state || '',
-    sabha: queryData.sabha || 'lok',
-    cons: queryData.cons || '',
-    cons_name: queryData.cons_name || '',
-    schemeName: 'Loading...',
-    schemeData: '',
-    year: year || '',
-    allYears: [],
-    unit: '',
-    vizType: 'map',
-  };
-  const [reducerState, dispatch] = React.useReducer(reducer, initalState);
+
 
   return (
     <>
@@ -93,7 +87,7 @@ const TreasurySelected = ({ queryData }) => {
               meta={{
                 ...reducerState,
                 scheme: queryData.scheme,
-                indicator,
+                indicator:reducerState.indicator,
               }}
               dispatch={dispatch}
             />

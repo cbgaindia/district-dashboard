@@ -19,9 +19,9 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   const [mapIndicator, setMapIndicator] = useState(undefined);
   const { state, indicator } = meta;
   const [tableData, setTableData] = useState<any>();
-
-  const { metaReducer } = React.useContext(ConstituencyPage);
-  const { consData } = metaReducer.obj;
+  
+  // const { metaReducer } = React.useContext(ConstituencyPage);
+  // const { consData } = metaReducer.obj;
 
   const [year, setYear] = useState(meta.year);
   const [filteredData, setFilteredData] = useState(
@@ -91,6 +91,17 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
     }
   }, [filteredData, data]);
 
+  const findConstName = (code: string) => {
+    for (const key in consList) {
+      if (Object.prototype.hasOwnProperty.call(consList, key)) {
+        const matchingObj = consList[key].find((obj) => obj.constCode == code);
+          if (matchingObj) {
+          return matchingObj.constName;
+        }
+      }
+    }
+    return null;
+  };
   // changing map chart values on sabha change
   useEffectOnChange(() => {
     setFilteredData(getParameterCaseInsensitive(schemeData, meta.state)[year]);
@@ -98,12 +109,11 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
 
   // changing map chart values on sabha change
   useEffect(() => {
-    if (data && filteredData) {
-
+    if (data && filteredData) {      
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
         value: filteredData[item] || 0,
-        mapName: consData[item]?.district_name_name,
+        mapName: findConstName(item),
       }));
       setMapvalues(tempData);
     }

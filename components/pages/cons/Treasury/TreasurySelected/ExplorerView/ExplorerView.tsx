@@ -42,9 +42,6 @@ const ExplorerView = ({ meta, dispatch }) => {
   const { state, scheme, schemeData, indicator } = meta;
   const { sabha } = meta || 'lok';
 
-  const { metaReducer } = React.useContext(ConstituencyPage);
-
-  const dispatchCons = metaReducer.dispatch;
 
   useEffect(() => {
     handleNewIndicator(indicator);
@@ -56,10 +53,11 @@ const ExplorerView = ({ meta, dispatch }) => {
       if (schemeData.data) {
         if (schemeData.data[val]) {
           const filtered = schemeData.data[val]['state_Obj'];
-          dispatchCons({
-            indicator: val,
-          });
+          // dispatchCons({
+          //   indicator: val,
+          // });
           dispatch({
+            indicator: val,
             unit: schemeData.data[val].unit,
           });
           setFiltered(filtered);
@@ -69,14 +67,15 @@ const ExplorerView = ({ meta, dispatch }) => {
           const filtered = schemeData.data[newVal]['state_Obj'];
           dispatch({
             unit: schemeData.data[newVal].unit,
+            indicator: newVal
           });
           setFiltered(filtered);
-          dispatchCons({
-            indicator: newVal
-          })
+          // dispatchCons({
+          //   indicator: newVal
+          // })
         }
       } else {
-        dispatchCons({
+        dispatch({
           indicator: val,
         });
       }
