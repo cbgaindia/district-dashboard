@@ -43,49 +43,49 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
       const binLength = Math.floor(uniq.length / 5);
       const vizIndicators = binLength
         ? [
-          {
-            max: -999999999,
-            label: `Data not avaialble`,
-            color: '#EBF0EE',
-          },
-          {
-            min: uniq[0],
-            max: uniq[binLength],
-            label: `${uniq[0]} to ${uniq[binLength + 1]}`,
-            color: '#41A8A8',
-          },
-          {
-            min: uniq[binLength + 1],
-            max: uniq[binLength * 2],
-            label: `${uniq[binLength + 1]} to ${uniq[binLength * 2]}`,
-            color: ' #368B8B',
-          },
-          {
-            min: uniq[2 * binLength + 1],
-            max: uniq[binLength * 3],
-            label: `${uniq[binLength * 2]} to ${uniq[binLength * 3]}`,
-            color: '#286767',
-          },
-          {
-            min: uniq[3 * binLength + 1],
-            max: uniq[binLength * 4],
-            label: `${uniq[binLength * 3]} to ${uniq[binLength * 4]}`,
-            color: '#1F5151',
-          },
-          {
-            min: uniq[4 * binLength + 1],
-            max: uniq[uniq.length - 1],
-            label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
-            color: ' #173B3B',
-          },
-        ]
+            {
+              max: -999999999,
+              label: `Data not avaialble`,
+              color: '#EBF0EE',
+            },
+            {
+              min: uniq[0],
+              max: uniq[binLength],
+              label: `${uniq[0]} to ${uniq[binLength + 1]}`,
+              color: '#41A8A8',
+            },
+            {
+              min: uniq[binLength + 1],
+              max: uniq[binLength * 2],
+              label: `${uniq[binLength + 1]} to ${uniq[binLength * 2]}`,
+              color: ' #368B8B',
+            },
+            {
+              min: uniq[2 * binLength + 1],
+              max: uniq[binLength * 3],
+              label: `${uniq[binLength * 2]} to ${uniq[binLength * 3]}`,
+              color: '#286767',
+            },
+            {
+              min: uniq[3 * binLength + 1],
+              max: uniq[binLength * 4],
+              label: `${uniq[binLength * 3]} to ${uniq[binLength * 4]}`,
+              color: '#1F5151',
+            },
+            {
+              min: uniq[4 * binLength + 1],
+              max: uniq[uniq.length - 1],
+              label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
+              color: ' #173B3B',
+            },
+          ]
         : [
-          {
-            value: Infinity,
-            label: `data not found`,
-            color: '#494D44',
-          },
-        ];
+            {
+              value: Infinity,
+              label: `data not found`,
+              color: '#494D44',
+            },
+          ];
       setMapIndicator(vizIndicators);
     }
   }, [filteredData, data]);
@@ -98,10 +98,9 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
   // changing map chart values on sabha change
   useEffect(() => {
     if (data && filteredData) {
- 
       const tempData = Object.keys(filteredData).map((item: any) => ({
         name: item,
-        value: filteredData[item] || 0,
+        value: filteredData[item] || Infinity,
         mapName: consData[item]?.district_name_name,
       }));
       setMapvalues(tempData);
@@ -128,12 +127,12 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
             [tableHeader[0].accessor]:
               consList[capitalize(state)][index]?.constName,
           };
-          const constCode = consList[capitalize(state)][index]?.constCode
+          const constCode = consList[capitalize(state)][index]?.constCode;
           Object.keys(schemeData[state]).forEach((item1, index1) => {
             tempObj[tableHeader[index1 + 1].accessor] =
               schemeData[state][item1][constCode];
           });
-                  
+
           rowData.push(tempObj);
         });
       }
@@ -197,7 +196,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
                   />
                 </YearSelector>
               )}
-                            <ZoomButtons>
+              <ZoomButtons>
                 <button
                   aria-label="Increase Zoom"
                   title="Increase Zoom"
@@ -223,7 +222,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName }) => {
                 data={mapValues}
                 vizIndicators={mapIndicator}
                 val={val}
-              // newMapItem={newMapItem}
+                // newMapItem={newMapItem}
               />
             </>
           )
