@@ -2,6 +2,7 @@ import { Folder } from 'components/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
+import SchemesData from 'utils/schemesData';
 
 function ckanURL(slug) {
   return `https://ckan.civicdatalab.in/dataset/${slug}`;
@@ -30,6 +31,23 @@ const icons = {
 };
 
 const Card = ({ data }) => {
+  
+    const image_slug = {
+    "pmfby-kharif-v3": "pmfby_kharif",
+    "integrated-child-development-services-v3": "icds",
+    "mgnrega-v3": "mgnrega",
+    "mdm-v3": "mdm",
+    "nhm-v3": "nhm",
+    "national-social-assistance-programme-nsap-v3": "nsap",
+    "pmay-v3": "pmay",
+    "pmkisan-v3": "pmkisan",
+    "pradhan-mantri-matru-vandana-yojana-scheme-pmmvy-v3": "pmmvy",
+    "swachh-bharat-mission-gramin-sbmg-v3": "sbmg",
+    "smsa-v3": "smsa",
+    "pmfby-rabi-v3": "pmfby_rabi",
+    "swachh-bharat-mission-urban-sbmu-v3" : "sbmu"
+  }
+
   return (
     <LinkWrapper type={data.type} link={data.slug}>
       <Wrapper>
@@ -40,7 +58,7 @@ const Card = ({ data }) => {
             <Image
               width={110}
               height={110}
-              src={icons[data.icon]}
+               src={data.slug.includes('v3') ? SchemesData[image_slug[data.slug]]?.logo :icons[data.icon]}
               alt={`file format ${data.icon}`}
             />
           )}
@@ -50,6 +68,8 @@ const Card = ({ data }) => {
           <span className="sr-only">external link</span>
         )}
       </Wrapper>
+      
+      
     </LinkWrapper>
   );
 };
