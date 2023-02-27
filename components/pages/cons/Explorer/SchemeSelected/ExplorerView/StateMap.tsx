@@ -74,7 +74,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName, onTableDa
               color: ' #173B3B',
             },
             {
-              min: -9999999999999,
+              value: -9999999999999,
               label: `Data not avaialble`,
               color: 'grey',
             },
@@ -166,7 +166,7 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName, onTableDa
     setTableData(newData);
     onTableDataChange(newData);
   };
-  
+
   return showTable ? (
     tableData ? (
       <Table
