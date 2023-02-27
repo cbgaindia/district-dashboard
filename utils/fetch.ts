@@ -1,6 +1,6 @@
 import { read, utils as xlsxUtil } from 'xlsx';
 import { getParameterCaseInsensitive } from './helper';
-import { DEFAULT_YEAR } from 'config/year' ;
+import { DEFAULT_YEAR } from 'config/year';
 
 export async function fetchQuery(query, value) {
   const queryRes = await fetch(
@@ -111,9 +111,7 @@ export async function updateStateMetadataFetch(state = null) {
   return sheet[0];
 }
 
-export async function updateDistrictMetadataFetch(
-  district_code_lg = null
-) {
+export async function updateDistrictMetadataFetch(district_code_lg = null) {
   // fetch CKAN JSON
   const data = await updatedFetchQuery('schemeType', 'district info');
 
@@ -253,9 +251,7 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
         state_Obj[generateSlug(dataParse[j][0])] = { ...fiscal_year };
       }
       const indicatorSlug =
-        generateSlug(metaObj[`indicator_${i - 5}_common_name`]) ||
-        generateSlug(metaObj[`indicator_${i - 5}_name`]) ||
-        '';
+        generateSlug(metaObj[`indicator_${i - 5}_name`]) || '';
 
       tempObj.metadata.indicators.push(indicatorSlug);
 
@@ -263,14 +259,8 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
         ...tempObj.data,
         [indicatorSlug]: {
           state_Obj,
-          name:
-            metaObj[`indicator_${i - 5}_common_name`] ||
-            metaObj[`indicator_${i - 5}_name`] ||
-            '',
-          description:
-            metaObj[`indicator_${i - 5}_common_description`] ||
-            metaObj[`indicator_${i - 5}_description`] ||
-            '',
+          name: metaObj[`indicator_${i - 5}_name`] || '',
+          description: metaObj[`indicator_${i - 5}_description`] || '',
           note: metaObj[`indicator_${i - 5}_note`] || '',
           slug: indicatorSlug,
           unit: metaObj[`indicator_${i - 5}_unit`] || '',
