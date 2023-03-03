@@ -246,7 +246,7 @@ export const IndicatorMobileWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (min-width: 720px) {
+  @media (min-width: 980px) {
     display: none;
   }
 
