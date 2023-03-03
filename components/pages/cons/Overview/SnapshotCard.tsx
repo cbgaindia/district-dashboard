@@ -7,12 +7,19 @@ import React from 'react';
 import styled from 'styled-components';
 import SchemesData from 'utils/schemesData';
 
+const formatUnit = {
+  crore: 'Cr.',
+  'per cent': '%',
+};
+
 const SnapshotCard = ({
   data,
   indicator,
+  indicatorUnit,
 }: {
   data: any;
   indicator: string;
+  indicatorUnit: string;
 }) => {
   const { toolbar } = React.useContext(ConstituencyPage);
 
@@ -44,7 +51,8 @@ const SnapshotCard = ({
                 <SplitBar val={data.value.district.bar} dataVal={data.value.district.value?.toFixed(2)}  />
 
                 <AverageValue>
-                  {data.value.district.value?.toFixed(2)} Cr.
+                  {data.value.district.value?.toFixed(2)}{' '}
+                  {formatUnit[indicatorUnit]}
                 </AverageValue>
               </div>
             </div>
@@ -54,7 +62,8 @@ const SnapshotCard = ({
                 <SplitBar val={data.value.max.bar} dataVal={data.value.max.value?.toFixed(2)} />
 
                 <AverageValue>
-                  {data.value.max.value?.toFixed(2)} Cr.
+                  {data.value.max.value?.toFixed(2)}{' '}
+                  {formatUnit[indicatorUnit]}
                 </AverageValue>
               </div>
             </div>
@@ -64,7 +73,8 @@ const SnapshotCard = ({
                 <SplitBar val={data.value.min.bar} dataVal={data.value.min.value?.toFixed(2)}/>
 
                 <AverageValue>
-                  {data.value.min.value?.toFixed(2)} Cr.
+                  {data.value.min.value?.toFixed(2)}{' '}
+                  {formatUnit[indicatorUnit]}
                 </AverageValue>
               </div>
             </div>
