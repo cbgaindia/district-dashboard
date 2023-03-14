@@ -40,19 +40,17 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <Head>
-        {/* Global Site Tag (gtag.js) - Google Analytics */}
-        {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
-          <>
-            <Script
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-            />
-            <Script
-              strategy="afterInteractive"
-              id="google-analytics"
-              dangerouslySetInnerHTML={{
-                __html: `
+      {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
+        <>
+          <Script
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+          />
+          <Script
+            strategy="afterInteractive"
+            id="google-analytics"
+            dangerouslySetInnerHTML={{
+              __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -60,11 +58,10 @@ function MyApp({ Component, pageProps }) {
               page_path: window.location.pathname,
             });
           `,
-              }}
-            />
-          </>
-        )}
-      </Head>
+            }}
+          />
+        </>
+      )}
       <Layout>
         <NextNprogress
           color={DEFAULT_THEME.tertiary}
