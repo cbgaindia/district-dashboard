@@ -1,18 +1,32 @@
 import fs from 'fs';
-import { stateSchemeFetch } from 'utils/fetch';
+import {
+  stateSchemeFetch,
+  updatedFetchQuery,
+  generateSlug,
+} from 'utils/fetch';
 
+const baseUrl = 'https://district.openbudgetsindia.org';
 const Sitemap = () => {};
-// try to make it dynamic
-const states = [
-  'bihar',
-  'chhattisgarh',
-  'jharkhand',
-  'maharashtra',
-  'odisha',
-  'uttar-pradesh',
-];
 
+function deSlug(str) {
+  const re = /(\b[a-z](?!\s))/g;
+  const capital = str.replace(re, function (x) {
+    return x.toUpperCase();
+  });
+
+  return capital.replace('-', ' ');
+}
 export const getServerSideProps = async function ({ res }) {
+  // get JSON URL
+  const jsonUrl = await updatedFetchQuery('schemeType', 'all districts')
+    .then((res) => res[0].resources.filter((e) => e.format == 'JSON')[0].url)
+    .catch((e) => console.error(e));
+
+  // fetch JSON data
+  const jsonData = await fetch(jsonUrl)
+    .then((res) => res.json())
+    .catch((e) => console.error(e));
+
   const stateData = await stateSchemeFetch();
   const staticPages = fs
     .readdirSync('pages')
@@ -23,24 +37,30 @@ export const getServerSideProps = async function ({ res }) {
         '_error.tsx',
         'sitemap.xml.js',
         'index.tsx',
-        'state',
+        '[state]',
         'explorer',
       ].includes(staticPage);
     })
     .map((staticPagePath) => {
-      return `constituencyv2.openbudgetsindia.org/${staticPagePath}`;
+      return `${baseUrl}/${staticPagePath}`; // Add Static pages like resources, about
     });
-  staticPages.unshift(`constituencyv2.openbudgetsindia.org/`);
-  states.forEach((scheme) =>
-    staticPages.push(`constituencyv2.openbudgetsindia.org/${scheme}`)
-  );
+  staticPages.unshift(baseUrl); // Remove duplicate of base url
 
-  Object.keys(stateData).forEach((state) => {
-    stateData[state].forEach((scheme) =>
+  Object.keys(jsonData).forEach((state) => {
+    const slugged = generateSlug(state);
+    staticPages.push(`${baseUrl}/${slugged}`);
+
+    Object.values(jsonData[state]).forEach((dist) => {
       staticPages.push(
-        `constituencyv2.openbudgetsindia.org/explorer?state=${state}&amp;scheme=${scheme.scheme_slug}`
-      )
-    );
+        `${baseUrl}/${slugged}/${dist.district_code_lg}` // Add District page for each state
+      );
+
+      stateData[deSlug(state)].forEach((scheme) =>
+        staticPages.push(
+          `${baseUrl}/${slugged}/${dist.district_code_lg}/scheme=${scheme.scheme_slug}` // Add Scheme page for each District
+        )
+      );
+    });
   });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
