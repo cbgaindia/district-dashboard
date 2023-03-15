@@ -54,12 +54,6 @@ export const getServerSideProps = async function ({ res }) {
       staticPages.push(
         `${baseUrl}/${slugged}/${dist.district_code_lg}` // Add District page for each state
       );
-
-      stateData[deSlug(state)].forEach((scheme) =>
-        staticPages.push(
-          `${baseUrl}/${slugged}/${dist.district_code_lg}/scheme=${scheme.scheme_slug}` // Add Scheme page for each District
-        )
-      );
     });
   });
 
