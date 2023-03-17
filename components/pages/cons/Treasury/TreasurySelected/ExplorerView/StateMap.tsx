@@ -32,6 +32,10 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName, onTableDa
 
   const { data, isLoading } = swrFetch(`/assets/maps/${meta.state}.json`);
 
+  const twoDecimals = (num) => {
+    return Number(num.toString().match(/^-?\d+(?:\.\d{0,2})?/));
+  };
+  
   // preparing indicator data for echarts component
   useEffect(() => {
     if (filteredData) {
@@ -40,55 +44,87 @@ const StateMap = ({ meta, schemeData, showTable, consList, schemeName, onTableDa
         return a - b;
       });
       const uniq = [...new Set(stateData)];
-      const binLength = Math.floor(uniq.length / 5);
-      const vizIndicators = binLength
-        ? [
-            {
-              value: -9999999999999,
-              label: `Data not avaialble`,
-              color: '#494D44',
-            },
-            {
-              min: uniq[0],
-              max: uniq[binLength],
-              label: `${uniq[0]} to ${uniq[binLength + 1]}`,
-              color: '#41A8A8',
-            },
-            {
-              min: uniq[binLength + 1],
-              max: uniq[binLength * 2],
-              label: `${uniq[binLength + 1]} to ${uniq[binLength * 2]}`,
-              color: ' #368B8B',
-            },
-            {
-              min: uniq[2 * binLength + 1],
-              max: uniq[binLength * 3],
-              label: `${uniq[binLength * 2]} to ${uniq[binLength * 3]}`,
-              color: '#286767',
-            },
-            {
-              min: uniq[3 * binLength + 1],
-              max: uniq[binLength * 4],
-              label: `${uniq[binLength * 3]} to ${uniq[binLength * 4]}`,
-              color: '#1F5151',
-            },
-            {
-              min: uniq[4 * binLength + 1],
-              max: uniq[uniq.length - 1],
-              label: `${uniq[binLength * 4]} to ${uniq[uniq.length - 1]}`,
-              color: ' #173B3B',
-            },
-          ]
-        : [
-            {
-              value: -9999999999999,
-              label: `data not found`,
-              color: '#494D44',
-            },
-          ];
-      setMapIndicator(vizIndicators);
+      const length = uniq.length;
+
+      if (length > 4) {
+        const a = uniq[0];
+        const e = uniq[length - 1];
+
+        const diff = e - a;
+
+        let div = diff / 4;
+        let b = twoDecimals(a + div);
+        let c = twoDecimals(b + div);
+        let d = twoDecimals(c + div);
+
+        let binLength = Math.floor(uniq.length / 4);
+        const vizIndicators = binLength
+          ? [
+              {
+                min: a,
+                max: b,
+                label: `upto to ${b}`,
+                color: '#41A8A8',
+              },
+              {
+                min: b,
+                max: c,
+                label: `${b} to ${c}`,
+                color: '#368B8B',
+              },
+              {
+                min: c,
+                max: d,
+                label: `${c} to ${d}`,
+                color: '#286767',
+              },
+              {
+                min: d,
+                max: e,
+                label: `${d} and above`,
+                color:'#173B3B',
+              },
+              {
+                value: -9999999999,
+                label: `Data Not Available`,
+                color: '#494D44',
+              },
+            ]
+          : [
+              {
+                value: -9999999999,
+                label: `Data Not Found`,
+                color: '#494D44',
+              },
+            ];
+        setMapIndicator(vizIndicators);
+      } else {
+        const vizIndicators = [];
+        for (let i = 0; i < uniq.length; i++) {
+          vizIndicators.push({
+            min: uniq[i],
+            max: uniq[i],
+            label: `${uniq[i]}`,
+            color:
+              i === 0
+                ? '#41A8A8'
+                : i === 1
+                ? '#368B8B'
+                : i === 2
+                ? '#286767'
+                : '#173B3B',
+          });
+        }
+        vizIndicators.push({
+          value: -999999999,
+          label: `Data Not Available`,
+          color: '#494D44',
+        });
+        setMapIndicator(vizIndicators);
+      }
     }
   }, [filteredData, data]);
+
 
   const findConstName = (code: string) => {
     for (const key in consList) {
