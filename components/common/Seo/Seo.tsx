@@ -11,7 +11,7 @@ const Seo: React.FC<{ seo?: any }> = ({ seo }) => {
       ? seo.description
       : 'Find downloadable data, visualisations and other useful information related to a number of schemes run by the Union and State GovernmentsFind downloadable data, visualisations and other useful information related to a number of schemes run by the Union and State Governments.';
 
-  const url = `https://constituencyv2.openbudgetsindia.org`;
+  const url = `https://district.openbudgetsindia.org`;
   return (
     <>
       <Head>
@@ -43,11 +43,11 @@ const Seo: React.FC<{ seo?: any }> = ({ seo }) => {
         {/* Image */}
         <meta
           property="og:image"
-          content={`${url}/assets/images/constituency_home.png`}
+          content={`${url}/assets/images/district_home.png`}
         />
         <meta
           property="twitter:image"
-          content={`${url}/assets/images/constituency_home.png`}
+          content={`${url}/assets/images/district_home.png`}
         />
 
         <meta name="application-name" content="District Dashboard" />
