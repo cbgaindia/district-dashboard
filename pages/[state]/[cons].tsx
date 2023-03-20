@@ -29,10 +29,6 @@ const Explorer = dynamic(
   }
 );
 
-const Seo = dynamic(() => import('components/common/Seo/Seo'), {
-  ssr: false,
-});
-
 import { Treasury } from 'components/pages/cons/Treasury';
 
 type Props = {
@@ -54,7 +50,6 @@ const ConsPage: React.FC<Props> = ({
   stateMetadata,
   stateScheme,
   data,
-  remarks,
   districtJson,
   district,
 }) => {
@@ -73,8 +68,6 @@ const ConsPage: React.FC<Props> = ({
   );
   const [view, setView] = useState('overview');
   const [metaReducer, dispatch] = React.useReducer(reducer, initialProps);
-
-  const [open, setOpen] = React.useState(false);
   const cons_name = district;
 
   async function handleToolbarSwitch(e: string, cardIndicator = null) {
@@ -137,7 +130,6 @@ const ConsPage: React.FC<Props> = ({
               queryData={{ ...router.query, cons_name }}
               schemeList={stateScheme}
               data={data}
-              //remarks={remarks}
             />
           </ConstituencyPage.Provider>
         ),
@@ -171,9 +163,7 @@ const ConsPage: React.FC<Props> = ({
               metaReducer: { obj: metaReducer, dispatch },
             }}
           >
-            <Treasury 
-             queryData={{ ...router.query, cons_name }}
-            />
+            <Treasury queryData={{ ...router.query, cons_name }} />
           </ConstituencyPage.Provider>
         ),
       },
@@ -181,16 +171,8 @@ const ConsPage: React.FC<Props> = ({
     [stateMetadata, metaReducer]
   );
 
-  const seo = {
-    title: `${capitalize(cons_name)} . ${capitalize(
-      state
-    )} - District Dashboard`,
-    description: `Explore scheme-wise fiscal information at the level of Lok Sabha and Vidhan Sabha constituencies in the state of ${state}`,
-  };
-
   return (
     <>
-      <Seo seo={seo} />
       {
         <>
           <main className="container">
@@ -220,14 +202,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   const queryValue: any = query || {};
-  // if (!['vidhan', 'lok'].includes(queryValue.sabha)) return { notFound: true };
-
   const [stateScheme, stateMetadata, stateData] = await Promise.all([
     stateSchemeFetch(queryValue.state.replace(/-/g, ' ')),
     updateStateMetadataFetch(queryValue.state.replace(/-/g, ' ')),
     stateDataFetch(queryValue.state),
   ]);
-  
+
   const updatedJsonData: any = await updatedFetchJSON('all districts');
   const state_format =
     queryValue.state == 'uttar-pradesh'
@@ -237,7 +217,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const district = updatedJsonData[state_format].find(
     (item) => item.district_code_lg == queryValue.cons
   )?.district;
-  
+
   const districtJson: any = await updateDistrictMetadataFetch(queryValue.cons);
 
   if (!(stateMetadata && stateScheme && queryValue.cons))
@@ -258,7 +238,12 @@ export const getServerSideProps: GetServerSideProps = async ({
         consData: stateData['district_name_data'],
         stateAvg: stateData['state_avg'],
       },
-      // remarks,
+      meta: {
+        title: `${capitalize(district || '')} . ${capitalize(
+          queryValue.state
+        )} - District Dashboard`,
+        description: `Explore scheme-wise fiscal information at the level of Lok Sabha and Vidhan Sabha constituencies in the state of ${queryValue.state}`,
+      },
     },
   };
 };

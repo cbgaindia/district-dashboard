@@ -1,6 +1,7 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 import styled from 'styled-components';
+import { GetStaticProps } from 'next';
 
 const PartnerCard = dynamic(
   () => import('components/pages/about/PartnerCard'),
@@ -8,10 +9,6 @@ const PartnerCard = dynamic(
     ssr: false,
   }
 );
-
-const Seo = dynamic(() => import('components/common/Seo/Seo'), {
-  ssr: false,
-});
 
 const About = () => {
   const headerData = {
@@ -54,14 +51,8 @@ const About = () => {
     },
   ];
 
-  const seo = {
-    title: 'About - District Dashboard',
-    description: 'Co-created by CBGA and CivicDataLab',
-  };
-
   return (
     <Wrapper className="container">
-      <Seo seo={seo} />
       <div>
         <h2>{headerData.title}</h2>
         <Description>
@@ -149,3 +140,14 @@ const Cards = styled.ul`
     }
   }
 `;
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      meta: {
+        title: 'About - District Dashboard',
+        description: 'Co-created by CBGA and CivicDataLab',
+      },
+    },
+  };
+};

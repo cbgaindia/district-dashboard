@@ -1,22 +1,11 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
-import dynamic from 'next/dynamic';
-import styled from 'styled-components';
-import { resourcePages } from 'data/resources';
 import { CardsList } from 'components/pages/resources/CardsList';
-
-const Seo = dynamic(() => import('components/common/Seo/Seo'), {
-  ssr: false,
-});
+import { resourcePages } from 'data/resources';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import styled from 'styled-components';
 
 const Resource = ({ data }) => {
-  const seo = {
-    title: `${data.title} | Resources - District Dashboard`,
-    description: 'Co-created by CBGA and CivicDataLab',
-  };
-
   return (
     <Wrapper className="container">
-      <Seo seo={seo} />
       <h2>{data.title}</h2>
 
       <CardsList data={data.links} />
@@ -55,6 +44,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       data: resourcePages[resource],
+      meta: {
+        title: `${resourcePages[resource].title} | Resources - District Dashboard`,
+        description: 'Co-created by CBGA and CivicDataLab',
+      },
     },
   };
 };

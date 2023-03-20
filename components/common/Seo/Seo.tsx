@@ -1,9 +1,6 @@
 import Head from 'next/head';
-// import { useRouter } from 'next/router';
 
 const Seo: React.FC<{ seo?: any }> = ({ seo }) => {
-  // const router = useRouter();
-
   const title =
     seo && seo.title ? seo.title : 'District Dashboard | Open Budgets India';
   const description =

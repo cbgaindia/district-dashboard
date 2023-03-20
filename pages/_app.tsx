@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import Router from 'next/router';
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
-import Script from 'next/script';
 import { DEFAULT_THEME } from 'config/theme';
-import { pageview } from 'utils/ga';
+import dynamic from 'next/dynamic';
+import Router from 'next/router';
+import Script from 'next/script';
+import { useEffect } from 'react';
 import { GlobalStyles } from 'styles/GlobalStyles';
+import { pageview } from 'utils/ga';
+import { Seo } from 'components/common';
 
 const Layout = dynamic(() => import('config/layout'), {
   ssr: false,
@@ -38,6 +38,13 @@ function MyApp({ Component, pageProps }) {
     };
   });
 
+  const seo = {
+    title: pageProps?.meta?.title || 'Welcome - District Dashboard',
+    description:
+      pageProps?.meta?.description ||
+      'A unique, one-of-its-kind dashboard that opens up district-wise fiscal information for several centrally sponsored and central sector schemes.',
+  };
+
   return (
     <>
       {process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS && (
@@ -62,6 +69,8 @@ function MyApp({ Component, pageProps }) {
           />
         </>
       )}
+      <Seo seo={seo} />
+
       <Layout>
         <NextNprogress
           color={DEFAULT_THEME.tertiary}

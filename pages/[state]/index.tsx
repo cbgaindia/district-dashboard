@@ -1,15 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 
 import Header from 'components/pages/state/Header';
 import StateList from 'components/pages/state/StateList/StateList';
 import { updatedFetchJSON, updateStateMetadataFetch } from 'utils/fetch';
 import { capitalize, getParameterCaseInsensitive } from 'utils/helper';
-
-const Seo = dynamic(() => import('components/common/Seo/Seo'), {
-  ssr: false,
-});
 
 type Props = {
   pathName: string;
@@ -19,27 +14,17 @@ type Props = {
 
 const State: React.FC<Props> = ({ pathName, constList, stateData }) => {
   const [currentLokCons, setCurrentLokCons] = useState<any>([]);
-  // const [currentVidhanCons, setCurrentVidhanCons] = useState<any>([]);
   const state = pathName;
 
   useEffect(() => {
-    // get constituencies of current state
     if (constList) {
-      //  const vidhan = getParameterCaseInsensitive(constList?.vidhan, state);
       const lok = getParameterCaseInsensitive(constList?.lok, state);
-      //  setCurrentVidhanCons(vidhan);
       setCurrentLokCons(lok);
     }
   }, [constList]);
 
-  const seo = {
-    title: `${capitalize(state.replaceAll('-', ' '))} - District Dashboard`,
-    description: `Explore scheme-wise fiscal information at the level of Lok Sabha and Vidhan Sabha constituencies in the state of ${state}`,
-  };
-
   return (
     <>
-      <Seo seo={seo} />
       {constList && (
         <>
           <main className="container">
@@ -47,7 +32,6 @@ const State: React.FC<Props> = ({ pathName, constList, stateData }) => {
             <StateList
               data={{
                 lok: currentLokCons,
-                //vidhan: currentVidhanCons,
                 state,
               }}
             />
@@ -87,7 +71,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
               [state.toLowerCase()]:
                 updatedJsonData[state[0].toUpperCase() + state.substring(1)],
             },
-      //   vidhan: { [state]: jsonData.vidhan[state] },
     };
 
     return finalJSON
@@ -96,6 +79,12 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
             pathName: state,
             constList: finalJSON,
             stateData,
+            meta: {
+              title: `${capitalize(
+                state.replaceAll('-', ' ')
+              )} - District Dashboard`,
+              description: `Explore scheme-wise fiscal information at the level of Lok Sabha and Vidhan Sabha constituencies in the state of ${state}`,
+            },
           },
         }
       : { notFound: true };
