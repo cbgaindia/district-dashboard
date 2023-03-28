@@ -226,7 +226,7 @@ export async function newSchemeDataFetch(id, schemeObj = null) {
       source: metaObj['data_source'] || '',
       frequency: metaObj.frequency || '',
       methodology: metaObj.methodology || '',
-      remarks: metaObj.frequency || '',
+      remarks: metaObj.remarks || '',
       slug,
       indicators: [],
       consList: uniqueConstList || [],

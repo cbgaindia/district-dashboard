@@ -166,6 +166,22 @@ const EditorialNotes = ({ schemeData }) => {
             </NotesInidicator>
           ))}
       </div>
+      {schemeData.metadata?.methodology &&
+        <NotesInidicator key={`methodology`}>
+          <NotesTitle>
+            <h3>Methodology </h3>
+          </NotesTitle>
+          <p>{schemeData.metadata?.methodology}</p>
+        </NotesInidicator>
+      }
+      {schemeData.metadata?.remarks &&
+        <NotesInidicator key={`remarks`}>
+          <NotesTitle>
+            <h3>Remarks </h3>
+          </NotesTitle>
+          <p>{schemeData.metadata?.remarks}</p>
+        </NotesInidicator>
+      }
     </SchemeNotes>
   );
 };
