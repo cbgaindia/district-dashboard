@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { Button } from 'components/actions/Button';
 import Modal from 'components/actions/Modal';
 import { sectionCollapse } from 'utils/helper';
+import { ALL_DISTRICTS_FACTSHEET as factsheet } from 'config/factsheet';
 
 const MobileNav = ({ data }) => {
   const [navIsOpen, setNavIsOpen] = useState(false);
@@ -124,7 +125,7 @@ const MobileNav = ({ data }) => {
                 </li>
               ))}
             <MenuItem
-              href='http://52.212.152.131:3000/'
+              href={factsheet.link}
               className={'navbar__item--active'}
             >
                District Factsheets

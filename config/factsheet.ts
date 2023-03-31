@@ -24,3 +24,7 @@ export const FACTSHEET_DISTRICT = [
         link : "https://districtfactsheets.openbudgetsindia.org/saharsa-bihar"
     },
 ]
+
+export const ALL_DISTRICTS_FACTSHEET = {
+    link : "https://districtfactsheets.openbudgetsindia.org"
+}

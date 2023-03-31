@@ -7,6 +7,7 @@ import { IconDropdown, ArrowTail } from 'components/icons';
 import styled from 'styled-components';
 import { submenuHover, submenuClick } from './navbar.helper';
 import { Button } from 'components/actions';
+import { ALL_DISTRICTS_FACTSHEET as factsheet } from 'config/factsheet';
 
 const Nav = ({ data }) => {
   const router = useRouter();
@@ -116,7 +117,7 @@ const Nav = ({ data }) => {
                 })}
                 <Button
                   kind='secondary'
-                  href='http://52.212.152.131:3000/'
+                  href={factsheet.link}
                 >
                   District Factsheets
                 </Button>
