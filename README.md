@@ -11,6 +11,8 @@
 </p>
 <p align="center">A unique, one-of-its-kind dashboard that opens up district-wise fiscal information for several centrally sponsored and central sector schemes.</p>
 
+- [Check this out about Samriddhi](https://imgur.com/a/eRqJXGv)
+- [Check this too](https://tinyurl.com/samfuk)
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Guide](#guide)
