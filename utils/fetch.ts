@@ -12,7 +12,7 @@ export async function fetchQuery(query, value) {
 
 export async function updatedFetchQuery(query, value) {
   const queryRes = await fetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=${query}:"${value}" AND organization:district-dashboard AND private:false&rows=1000`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=${query}:"${value}" AND organization:district-dashboard-all AND private:false&rows=1000`
   ).then((res) => res.json());
 
   return queryRes.result.results;
@@ -133,7 +133,7 @@ export async function updateDistrictMetadataFetch(district_code_lg = null) {
 
 export async function stateDataFetch(state) {
   const res: any = await fetch(
-    `https://ckan.civicdatalab.in/api/3/action/package_search?fq=slug:"${state}-district-dashboard" AND organization:district-v1 AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${state}-district-dashboard" AND organization:district-dashboard AND private:false`
   )
     .then((res) => res.json())
     .then((res) => res.result.results[0])

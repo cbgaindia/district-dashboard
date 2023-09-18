@@ -15,7 +15,7 @@ const reducer = (state: any, action: any) => {
 const TreasurySelected = ({ queryData }) => {
 
   const { data: schemeRes } = swrFetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:treasury AND organization:district-dashboard AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:treasury AND organization:district-dashboard-all AND private:false`
   );
   const schemeObj = schemeRes?.result.results[0];
 

@@ -18,7 +18,7 @@ const SchemeSelected = ({ queryData, schemeList }) => {
   const dispatchCons = metaReducer.dispatch;
 
   const { data: schemeRes } = swrFetch(
-    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${queryData.scheme}" AND organization:district-dashboard AND private:false`
+    `${process.env.NEXT_PUBLIC_CKAN_URL}/package_search?fq=slug:"${queryData.scheme}" AND organization:district-dashboard-all AND private:false`
   );
   const schemeObj = schemeRes?.result.results[0];
 
