@@ -10,6 +10,7 @@ import Source from '../Source';
 import SnapshotCard from './SnapshotCard';
 import { yearOptions } from 'utils/fetch';
 import { DEFAULT_YEAR } from 'config/year';
+import { FOOTER } from 'config/note'
 
 type Props = {
   queryData: any;
@@ -212,6 +213,11 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
               }
             />
           </SnapshotFooter>
+          <SnapshotFooter>
+            <FooterNote>
+              <p>{FOOTER.note}</p> 
+            </FooterNote>
+          </SnapshotFooter>
         </SnapshotSchemes>
       </SnapshotWrapper>
     </section>
@@ -276,6 +282,19 @@ const SnapshotFooter = styled.div`
   border-radius: 4px;
   border: var(--border-2);
   margin-top: 16px;
+`;
+
+const FooterNote = styled.div`
+   display: flex;
+   flex-wrap:wrap;
+   align-items: flex-start;
+   gap: 16px;
+   padding: 24px;
+
+   p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+   }
 `;
 
 const SnapshotSchemeList = styled.ul`
