@@ -215,7 +215,7 @@ const Snapshot = ({ queryData, schemeList, consData, stateAvg }: Props) => {
           </SnapshotFooter>
           <SnapshotFooter>
             <FooterNote>
-              <p>{FOOTER.note}</p> 
+              <p> <strong>Note: </strong>{FOOTER.note}</p> 
             </FooterNote>
           </SnapshotFooter>
         </SnapshotSchemes>
